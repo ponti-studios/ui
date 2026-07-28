@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.3](https://github.com/ponti-studios/ui/compare/ui-v0.4.2...ui-v0.4.3) (2026-07-28)
+
+
+### Bug Fixes
+
+* add missing ui- utility classes (flat-card, data-label, data-value, eyebrow) ([81c1fc5](https://github.com/ponti-studios/ui/commit/81c1fc51695b827db673da1f71c6dc6e1960faea))
+
 ## [0.4.2](https://github.com/ponti-studios/labs/compare/ui-v0.4.1...ui-v0.4.2) (2026-07-27)
 
 

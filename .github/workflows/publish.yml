@@ -16,7 +16,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  release:
+  release-please:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     outputs:
@@ -28,9 +28,36 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
+  ci:
+    needs: release-please
+    if: |
+      needs.release-please.outputs.release_created == 'true' ||
+      github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ needs.release-please.outputs.tag_name || inputs.ref }}
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          cache: "pnpm"
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm build
+
   publish:
-    needs: release
-    if: ${{ needs.release.outputs.release_created == 'true' }}
+    needs: ci
+    if: |
+      success() && (
+        needs.release-please.outputs.release_created == 'true' ||
+        github.event_name == 'workflow_dispatch'
+      )
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -39,75 +66,18 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
-          ref: ${{ needs.release.outputs.tag_name }}
+          ref: ${{ needs.release-please.outputs.tag_name || inputs.ref }}
           fetch-depth: 0
-
       - uses: pnpm/action-setup@v6
         with:
           run_install: false
-
       - uses: actions/setup-node@v7
         with:
-          node-version: "24.14.1"
+          node-version: "24"
           cache: "pnpm"
           registry-url: "https://registry.npmjs.org"
-
       - run: pnpm install --frozen-lockfile
-
-      - name: Verify release tag
-        env:
-          RELEASE_TAG: ${{ needs.release.outputs.tag_name }}
-        run: |
-          VERSION="$(node -p 'require("./package.json").version')"
-          test "$RELEASE_TAG" = "v$VERSION"
-          git fetch --tags origin
-          test -n "$(git rev-parse --verify "refs/tags/$RELEASE_TAG")"
-
-      - name: Publish
-        run: npm publish --provenance --access public
-
-      - name: Verify
-        run: |
-          VERSION="$(node -p 'require("./package.json").version')"
-          for i in $(seq 1 10); do
-            RESOLVED="$(npm view "@ponti-studios/ui@$VERSION" version --registry=https://registry.npmjs.org 2>/dev/null || true)"
-            if [ "$RESOLVED" = "$VERSION" ]; then
-              echo "Resolved @ponti-studios/ui@$VERSION on attempt $i"
-              exit 0
-            fi
-            sleep 10
-          done
-          echo "::error::@ponti-studios/ui@$VERSION not resolvable after 10 attempts"
-          exit 1
-
-  publish-manual:
-    if: ${{ github.event_name == 'workflow_dispatch' }}
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    permissions:
-      contents: read
-      id-token: write
-    steps:
-      - uses: actions/checkout@v6
-        with:
-          ref: ${{ inputs.ref }}
-          fetch-depth: 0
-
-      - uses: pnpm/action-setup@v6
-        with:
-          run_install: false
-
-      - uses: actions/setup-node@v7
-        with:
-          node-version: "24.14.1"
-          cache: "pnpm"
-          registry-url: "https://registry.npmjs.org"
-
-      - run: pnpm install --frozen-lockfile
-
-      - name: Publish
-        run: npm publish --provenance --access public
-
+      - run: npm publish --provenance --access public
       - name: Verify
         run: |
           VERSION="$(node -p 'require("./package.json").version')"

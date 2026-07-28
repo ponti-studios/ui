@@ -128,6 +128,22 @@
   @apply flex min-h-9 flex-col justify-center gap-1;
 }
 
+.ui-flat-card {
+  @apply bg-card border-border rounded-md border p-3;
+}
+
+.ui-data-label {
+  @apply text-muted-foreground text-xs font-medium uppercase tracking-wider;
+}
+
+.ui-data-value {
+  @apply text-foreground text-base font-semibold tabular-nums;
+}
+
+.ui-eyebrow {
+  @apply text-muted-foreground text-xs font-medium uppercase tracking-widest;
+}
+
 @layer base {
   :root {
     color-scheme: light;

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.4](https://github.com/ponti-studios/ui/compare/ui-v0.4.3...ui-v0.4.4) (2026-07-28)
+
+
+### Bug Fixes
+
+* rename publish workflow to match Trusted Publisher config ([d439add](https://github.com/ponti-studios/ui/commit/d439add1d67e2dda799701782f3feccdea75524f))
+
 ## [0.4.3](https://github.com/ponti-studios/ui/compare/ui-v0.4.2...ui-v0.4.3) (2026-07-28)
 
 

@@ -1,0 +1,7 @@
+{
+  "release-type": "node",
+  "include-v-in-tag": true,
+  "packages": {
+    ".": {}
+  }
+}

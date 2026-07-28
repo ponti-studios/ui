@@ -82,6 +82,7 @@
     "dev": "vite",
     "storybook": "style-dictionary build --config src/styles/tokens/style-dictionary.dark-storybook.json && storybook dev -p 6006",
     "check:source": "node src/styles/tokens/scripts/check-source.mjs",
+    "test": "vitest --run --config vitest.config.ts",
     "test:a11y": "vitest --run --config vitest.config.ts",
     "tokens:build": "style-dictionary build --config src/styles/tokens/style-dictionary.foundations.json && style-dictionary build --config src/styles/tokens/style-dictionary.light.json && style-dictionary build --config src/styles/tokens/style-dictionary.dark.json && style-dictionary build --config src/styles/tokens/style-dictionary.dark-storybook.json",
     "tokens:check": "pnpm run tokens:build && node src/styles/tokens/scripts/check-foundations.mjs && git diff --exit-code -- src/styles/tokens/generated",

@@ -1,4 +1,19 @@
-@import "tailwindcss";
+/*
+ * DESIGN SYSTEM STYLESHEET — @ponti-studios/ui
+ *
+ * This file provides the design tokens and shared component styles consumed
+ * by your project. It does NOT import Tailwind CSS — your project owns that.
+ *
+ * Required in your project's entry CSS BEFORE this import:
+ *
+ *   @import "tailwindcss";
+ *   @import "@ponti-studios/ui/styles.css";
+ *
+ * If you omit the Tailwind import you may see missing CSS variables
+ * (e.g., --tw-shadow-color) or utilities that fail to resolve.
+ */
+
+@reference "tailwindcss";
 @import "./tokens/generated/foundations.css";
 @import "./tokens/generated/light.css";
 @import "./tokens/generated/dark.css" (prefers-color-scheme: dark);

@@ -52,10 +52,12 @@ CI consumers should use a secret-backed npm token with read access.
 This package has no build output — every `exports` entry resolves to a file under `src/`. Consumers are expected to transpile the package themselves (Vite, Metro, Next, etc. all do this for workspace/npm packages by default). Tailwind v4 class detection for consumers of `./styles.css` requires an `@source` directive pointing at the installed package's `src/`, e.g.
 
 ```css
+@import "tailwindcss";
+@import "@ponti-studios/ui/styles.css";
 @source "../../../node_modules/@ponti-studios/ui/src";
 ```
 
-Bundling the package would break that detection, since Tailwind can't scan generated/minified output for class names. `pnpm run build` only type-checks; it does not emit JS.
+**Important:** `./styles.css` uses `@reference "tailwindcss"` (it does not import Tailwind itself). Your project owns the `@import "tailwindcss"` — place it before the UI stylesheet. Omitting it will cause missing CSS variables (e.g. `--tw-shadow-color`) and unresolved utilities.
 
 ### `./native` subpath
 

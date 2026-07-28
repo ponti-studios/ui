@@ -74,7 +74,7 @@ export const ScreenshotsGallery: Story = {
             className="flex aspect-video w-72 shrink-0 items-center justify-center overflow-hidden rounded-xl border"
             style={{ backgroundColor: item.bg }}
           >
-            <span className="text-foreground/70 text-sm">{item.label}</span>
+            <span className="text-foreground text-sm">{item.label}</span>
           </div>
         ))}
       </ScrollArea>

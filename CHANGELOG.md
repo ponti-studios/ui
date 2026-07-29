@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/ponti-studios/ui/compare/ui-v0.5.0...ui-v0.6.0) (2026-07-29)
+
+
+### Features
+
+* update publish workflow to trigger on CI completion and streamline job dependencies ([3bb2bd8](https://github.com/ponti-studios/ui/commit/3bb2bd8c37e99dd7e15b825c1715a70fbf2274bb))
+
 ## [0.5.0](https://github.com/ponti-studios/ui/compare/ui-v0.4.4...ui-v0.5.0) (2026-07-29)
 
 

@@ -62,7 +62,7 @@ jobs:
     timeout-minutes: 10
     permissions:
       contents: read
-      id-token: write
+      packages: write
     steps:
       - uses: actions/checkout@v6
         with:
@@ -75,19 +75,8 @@ jobs:
         with:
           node-version: "24"
           cache: "pnpm"
-          registry-url: "https://registry.npmjs.org"
+          registry-url: "https://npm.pkg.github.com"
       - run: pnpm install --frozen-lockfile
-      - run: npm publish --provenance --access public
-      - name: Verify
-        run: |
-          VERSION="$(node -p 'require("./package.json").version')"
-          for i in $(seq 1 10); do
-            RESOLVED="$(npm view "@ponti-studios/ui@$VERSION" version --registry=https://registry.npmjs.org 2>/dev/null || true)"
-            if [ "$RESOLVED" = "$VERSION" ]; then
-              echo "Resolved @ponti-studios/ui@$VERSION on attempt $i"
-              exit 0
-            fi
-            sleep 10
-          done
-          echo "::error::@ponti-studios/ui@$VERSION not resolvable after 10 attempts"
-          exit 1
+      - run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,6 +1,6 @@
 # @ponti-studios/ui
 
-The canonical Ponti Studios UI package. It is published from this repository to npm.
+The canonical Ponti Studios UI package. It is published from this repository to GitHub Packages.
 
 ## Design
 
@@ -13,17 +13,16 @@ The design system is documented in `docs/`:
 
 ## Release
 
-Releases are owned by [release-please](https://github.com/googleapis/release-please), not by hand-edited version numbers or manually pushed tags. The workflow is defined once, in `.github/workflows/publish-ui.yml`, and has three jobs:
+Releases are owned by [release-please](https://github.com/googleapis/release-please), not by hand-edited version numbers or manually pushed tags. The `.github/workflows/publish.yml` workflow runs after a successful `validate` push to `main`:
 
-1. **`release-ui`** — runs on every push to `main`. It scans commits under `packages/ui/` since the last release and keeps a standing pull request, `chore(main): release ui X.Y.Z`, up to date: `packages/ui/package.json`'s `version`, `.release-please-manifest.json`, and `packages/ui/CHANGELOG.md` are all written by this PR, never by a person. **Never hand-edit the `version` field in `packages/ui/package.json`** — the next push will regenerate the release PR from the real commit history and overwrite whatever you set.
-2. **`publish-ui`** — gated on `release-ui`'s `release_created` output, i.e. it only runs the push immediately after the release PR is *merged*. Merging that PR is what creates the `ui-v<version>` tag and triggers this job. It checks out that exact tag, re-verifies the tag matches `package.json`'s version and `HEAD`, runs `npm publish --provenance --access public`, then confirms the version resolves on the registry.
-3. **`publish-ui-manual`** — a `workflow_dispatch` break-glass path that checks out an arbitrary ref and publishes whatever version is in `package.json` there, with none of `publish-ui`'s tag/version consistency checks. Only use this to recover from a `publish-ui` run that failed for a reason unrelated to versioning (e.g. a broken `prepack` step) after a real release PR already merged — never as a way to skip release-please.
+1. **`release-please`** — maintains a root-package release PR, updating `package.json`, `.release-please-manifest.json`, and `CHANGELOG.md` from Conventional Commit history.
+2. **`publish`** — when that release PR is merged, checks out the exact release tag and publishes it to GitHub Packages. `workflow_dispatch` is the break-glass recovery path for a previously created release tag.
 
 **So the actual release flow is:**
 
-1. Land commits under `packages/ui/` using [Conventional Commits](https://www.conventionalcommits.org/) — the version bump is computed from the commit type: `fix:` → patch, `feat:` → minor, `feat!:`/a `BREAKING CHANGE:` footer → major. This is the *only* way to control the bump; there is no manual override.
-2. Once on `main`, find or wait for the `chore(main): release ui X.Y.Z` PR that `release-ui` opens/updates.
-3. Review and merge it. That merge creates the `ui-v<version>` tag and triggers `publish-ui` automatically. Nothing further to push or tag by hand.
+1. Land commits using [Conventional Commits](https://www.conventionalcommits.org/) — `fix:` → patch, `feat:` → minor, and `feat!:` or a `BREAKING CHANGE:` footer → major. Use `fix:` when the intended release is a patch.
+2. Once on `main`, find or wait for the `chore(main): release ui X.Y.Z` PR that Release Please opens or updates.
+3. Review and merge it. That merge creates the `ui-v<version>` tag; after validation succeeds, the release workflow publishes that exact tag automatically.
 
 `prepack` (`tokens:check && check:source && typecheck`) runs as part of `pnpm install`/publish tooling and is the last gate before anything reaches npm — see "Generated files" below for the failure mode that most commonly trips it.
 
@@ -36,13 +35,13 @@ Releases are owned by [release-please](https://github.com/googleapis/release-ple
 Configure the npm registry in the consumer repository:
 
 ```ini
-@ponti-studios:registry=https://registry.npmjs.org
+@ponti-studios:registry=https://npm.pkg.github.com
 ```
 
 Consumers that need authentication should configure a token outside the committed project `.npmrc`:
 
 ```bash
-pnpm config set --location=user //registry.npmjs.org/:_authToken "$NODE_AUTH_TOKEN"
+pnpm config set --location=user //npm.pkg.github.com/:_authToken "$NODE_AUTH_TOKEN"
 ```
 
 CI consumers should use a secret-backed npm token with read access.

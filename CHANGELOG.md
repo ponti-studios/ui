@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/ponti-studios/ui/compare/ui-v0.4.4...ui-v0.5.0) (2026-07-29)
+
+
+### Features
+
+* add preview.css for Tailwind CSS imports and update input component styles ([3a79524](https://github.com/ponti-studios/ui/commit/3a7952470f745473e5e96a6e01f46b274af3f2d0))
+
 ## [0.4.4](https://github.com/ponti-studios/ui/compare/ui-v0.4.3...ui-v0.4.4) (2026-07-28)
 
 

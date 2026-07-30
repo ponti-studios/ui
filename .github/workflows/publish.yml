@@ -45,7 +45,7 @@ jobs:
     timeout-minutes: 10
     permissions:
       contents: read
-      packages: write
+      id-token: write
     steps:
       - uses: actions/checkout@v6
         with:
@@ -58,8 +58,5 @@ jobs:
         with:
           node-version: "24"
           cache: "pnpm"
-          registry-url: "https://npm.pkg.github.com"
       - run: pnpm install --frozen-lockfile
-      - run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: npm publish --provenance --access public

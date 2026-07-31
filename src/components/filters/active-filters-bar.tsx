@@ -25,7 +25,6 @@ export function ActiveFiltersBar({ filters, className, onClearAll }: ActiveFilte
 
   return (
     <div
-      role="list"
       className={cn(
         "flex w-full items-center h-10 gap-2 rounded-lg border border-border pr-0",
         className,
@@ -34,7 +33,10 @@ export function ActiveFiltersBar({ filters, className, onClearAll }: ActiveFilte
       <span className="text-muted-foreground shrink-0 self-stretch flex items-center text-sm border-r px-4">
         Filters
       </span>
-      <div className="flex flex-1 min-w-0 items-center gap-2 overflow-x-auto scroll-fade-x pl-4 py-1.5">
+      <div
+        role="list"
+        className="flex flex-1 min-w-0 items-center gap-2 overflow-x-auto scroll-fade-x pl-4 py-1.5"
+      >
         {filters.map((filter) => (
           <FilterChip
             key={filter.id}

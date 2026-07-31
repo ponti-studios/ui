@@ -108,8 +108,7 @@ export const WithClassName: Story = {
     className: 'mt-4',
   },
   play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const list = canvas.getByRole('list');
-    await expect(list).toHaveClass('mt-4');
+    const container = canvasElement.querySelector('.mt-4');
+    await expect(container).not.toBeNull();
   },
 };

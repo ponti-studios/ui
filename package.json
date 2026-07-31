@@ -34,6 +34,10 @@
       "types": "./src/components/feedback/index.ts",
       "import": "./src/components/feedback/index.ts"
     },
+    "./filters": {
+      "types": "./src/components/filters/index.ts",
+      "import": "./src/components/filters/index.ts"
+    },
     "./overlays": {
       "types": "./src/components/overlays/index.ts",
       "import": "./src/components/overlays/index.ts"

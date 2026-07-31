@@ -50,6 +50,7 @@ const preview: Preview = {
           "Primitives",
           "Forms",
           "Feedback",
+          "Filters",
           "Navigation",
           "Patterns",
           "Surfaces",

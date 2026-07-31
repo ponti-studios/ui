@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 interface UseFilterStateOptions<T> {
   initialFilters: T;
   onFiltersChange?: (filters: T) => void;
-  debounceMs?: number; // For search-like filters
+  debounceMs?: number;
 }
 
 export function useFilterState<T extends Record<string, unknown>>(
@@ -12,24 +12,30 @@ export function useFilterState<T extends Record<string, unknown>>(
   const { initialFilters, onFiltersChange, debounceMs } = options;
   const [filters, setFiltersState] = useState<T>(initialFilters);
   const debounceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const onFiltersChangeRef = useRef(onFiltersChange);
+  onFiltersChangeRef.current = onFiltersChange;
 
   const setFilters = useCallback(
     (newFilters: T | ((prev: T) => T)) => {
-      const updatedFilters = typeof newFilters === "function" ? newFilters(filters) : newFilters;
-      setFiltersState(updatedFilters);
+      setFiltersState((prev) => {
+        const updatedFilters =
+          typeof newFilters === "function" ? newFilters(prev) : newFilters;
 
-      if (debounceMs && debounceMs > 0) {
-        if (debounceTimerRef.current) {
-          clearTimeout(debounceTimerRef.current);
+        if (debounceMs && debounceMs > 0) {
+          if (debounceTimerRef.current) {
+            clearTimeout(debounceTimerRef.current);
+          }
+          debounceTimerRef.current = setTimeout(() => {
+            onFiltersChangeRef.current?.(updatedFilters);
+          }, debounceMs);
+        } else {
+          onFiltersChangeRef.current?.(updatedFilters);
         }
-        debounceTimerRef.current = setTimeout(() => {
-          onFiltersChange?.(updatedFilters);
-        }, debounceMs);
-      } else {
-        onFiltersChange?.(updatedFilters);
-      }
+
+        return updatedFilters;
+      });
     },
-    [filters, onFiltersChange, debounceMs],
+    [debounceMs],
   );
 
   const updateFilter = useCallback(
@@ -41,15 +47,9 @@ export function useFilterState<T extends Record<string, unknown>>(
 
   const clearFilters = useCallback(() => {
     setFiltersState(initialFilters);
-    onFiltersChange?.(initialFilters);
-  }, [initialFilters, onFiltersChange]);
+    onFiltersChangeRef.current?.(initialFilters);
+  }, [initialFilters]);
 
-  const resetFilters = useCallback(() => {
-    setFiltersState(initialFilters);
-    onFiltersChange?.(initialFilters);
-  }, [initialFilters, onFiltersChange]);
-
-  // Cleanup debounce timer on unmount
   useEffect(() => {
     return () => {
       if (debounceTimerRef.current) {
@@ -63,6 +63,5 @@ export function useFilterState<T extends Record<string, unknown>>(
     setFilters,
     updateFilter,
     clearFilters,
-    resetFilters,
   };
 }

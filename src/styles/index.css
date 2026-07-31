@@ -90,6 +90,37 @@
 @utility min-h-screen-dynamic {
   min-height: 100dvh;
 }
+/* ── scroll-fade ──
+ * Progressive opacity mask on scroll-container edges.
+ * Uses CSS custom properties so consumers can override the fade size
+ * or disable the mask without a class order dependency:
+ *
+ *   <div class="scroll-fade-x overflow-x-auto [--scroll-fade-size:24px]">
+ *   <div class="scroll-fade-y overflow-y-auto scroll-fade-none md:scroll-fade">
+ *
+ * Default fade size: 16 px  (scoped to the element via inline var).
+ * Disable with scroll-fade-none (sets --scroll-fade-mask: none). */
+@utility scroll-fade-x {
+  mask-image: var(--scroll-fade-mask, linear-gradient(to right, transparent, black var(--scroll-fade-size, 16px), black calc(100% - var(--scroll-fade-size, 16px)), transparent));
+}
+@utility scroll-fade-y {
+  mask-image: var(--scroll-fade-mask, linear-gradient(to bottom, transparent, black var(--scroll-fade-size, 16px), black calc(100% - var(--scroll-fade-size, 16px)), transparent));
+}
+@utility scroll-fade-l {
+  mask-image: var(--scroll-fade-mask, linear-gradient(to right, transparent, black var(--scroll-fade-size, 16px)));
+}
+@utility scroll-fade-r {
+  mask-image: var(--scroll-fade-mask, linear-gradient(to left, transparent, black var(--scroll-fade-size, 16px)));
+}
+@utility scroll-fade-t {
+  mask-image: var(--scroll-fade-mask, linear-gradient(to bottom, transparent, black var(--scroll-fade-size, 16px)));
+}
+@utility scroll-fade-b {
+  mask-image: var(--scroll-fade-mask, linear-gradient(to top, transparent, black var(--scroll-fade-size, 16px)));
+}
+@utility scroll-fade-none {
+  --scroll-fade-mask: none;
+}
 @utility h-screen {
   height: 100vh;
   height: 100dvh;

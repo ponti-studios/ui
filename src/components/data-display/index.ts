@@ -1,6 +1,8 @@
 export { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./accordion";
-export { FilterChip } from "./filter-chip";
-export type { FilterChipProps } from "./filter-chip";
+export { ActiveFiltersBar } from "../filters/active-filters-bar";
+export type { ActiveFilter, ActiveFiltersBarProps } from "../filters/active-filters-bar";
+export { FilterChip } from "../filters/filter-chip";
+export type { FilterChipProps } from "../filters/filter-chip";
 export { MetricCard } from "./metric-card";
 export { SortControls } from "./sort-controls";
 export type { SortControlsProps } from "./sort-controls";

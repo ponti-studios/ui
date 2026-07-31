@@ -129,7 +129,7 @@ Falls back gracefully when the status is null or undefined.
 
 - **States:** default (dashed `--border-default` border, `--muted` background), `dragActive` (`--primary` border, `--primary` background at 5% opacity), `isImporting` (pointer-events-none).
 
-### EntitySelect, DateMonthSelect, GroupBySelect, PasskeyManagement
+### DateMonthSelect, GroupBySelect, PasskeyManagement
 
 Utility form controls. See `@ponti-studios/ui` source for full contracts.
 Do not build a custom version when the package already exports one.

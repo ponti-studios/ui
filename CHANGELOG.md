@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.7.0](https://github.com/ponti-studios/ui/compare/ui-v0.6.0...ui-v0.7.0) (2026-07-31)
+
+
+### Features
+
+* add filters module with FilterSelect, Filters, SearchFilterBar ([160ec85](https://github.com/ponti-studios/ui/commit/160ec854caddc9c5e37c12856748a3a3a632bda8))
+
+
+### Bug Fixes
+
+* resolve aria-required-children violation in ActiveFiltersBar ([a4eba9b](https://github.com/ponti-studios/ui/commit/a4eba9bc9f887abd391f2a66fd0d17d59148fe24))
+
 ## [0.6.0](https://github.com/ponti-studios/ui/compare/ui-v0.5.0...ui-v0.6.0) (2026-07-29)
 
 

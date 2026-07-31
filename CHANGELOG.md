@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.1](https://github.com/ponti-studios/ui/compare/ui-v0.7.0...ui-v0.7.1) (2026-07-31)
+
+
+### Bug Fixes
+
+* stabilize getServerSnapshot references in useSyncExternalStore calls ([7bb473f](https://github.com/ponti-studios/ui/commit/7bb473f3526139db54b1be34368ee3c77eb48297))
+
 ## [0.7.0](https://github.com/ponti-studios/ui/compare/ui-v0.6.0...ui-v0.7.0) (2026-07-31)
 
 

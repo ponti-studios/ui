@@ -44,7 +44,7 @@ export function FilterSelect({
   );
 
   return (
-    <div className={cn("space-y-2 min-w-36", className)}>
+    <div className={cn("space-y-2 min-w-36 bg-background", className)}>
       <Label htmlFor={selectId}>{label}</Label>
       <Select value={value} onValueChange={onChange} items={items}>
         <SelectTrigger

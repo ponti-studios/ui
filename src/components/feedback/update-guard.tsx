@@ -158,6 +158,10 @@ function getOnlineSnapshot() {
   return navigator.onLine;
 }
 
+function getOnlineServerSnapshot() {
+  return true;
+}
+
 export interface UpdateGuardCopy {
   offlineReady?: string;
   newContentAvailable?: string;
@@ -192,7 +196,7 @@ function UpdateGuardClient({
     updateServiceWorker,
   } = useRegisterSW({ serviceWorkerPath });
 
-  const isOnline = useSyncExternalStore(subscribeOnline, getOnlineSnapshot, () => true);
+  const isOnline = useSyncExternalStore(subscribeOnline, getOnlineSnapshot, getOnlineServerSnapshot);
 
   const closePrompt = () => {
     setOfflineReady(false);

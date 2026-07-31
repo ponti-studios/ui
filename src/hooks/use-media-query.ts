@@ -29,6 +29,10 @@ function mediaQuery(query: string, options?: MediaQueryOptions) {
   return mql.matches;
 }
 
+function getServerSnapshot() {
+  return false;
+}
+
 /**
  * Listens for changes to a media query and returns a boolean indicating whether the query matches.
  * @param query - The media query string to listen for.
@@ -61,5 +65,5 @@ export function useMediaQuery(query: string) {
     return mediaQuery(query);
   }, [query]);
 
-  return useSyncExternalStore(subscribe, getSnapshot, () => false);
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }

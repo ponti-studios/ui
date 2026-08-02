@@ -1,6 +1,7 @@
 import { Calendar } from "lucide-react";
 import { useMemo } from "react";
 
+import { cn } from "@/index";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./select";
 
 interface MonthOption {
@@ -40,13 +41,21 @@ export function DateMonthSelect({
   }, [monthsBack]);
 
   return (
-    <div className="flex items-center gap-2">
-      <Calendar className="size-4" />
+    <div className="flex items-center">
+      <div className="flex items-center justify-center size-10 border rounded-l-xl bg-surface-2 text-text-1">
+        <Calendar className="size-4" />
+      </div>
       <Select
         value={selectedMonthYear}
         onValueChange={(v: string | null) => v != null && onMonthChange(v)}
       >
-        <SelectTrigger className={className} aria-label={placeholder}>
+        <SelectTrigger
+          className={cn(
+            "rounded-r-xl rounded-l-none min-h-10 max-h-10 bg-surface-2 text-text-1 border-l-0",
+            className,
+          )}
+          aria-label={placeholder}
+        >
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent>

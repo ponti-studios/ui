@@ -35,7 +35,7 @@ export const Default: Story = {
 };
 
 export const SinglePage: Story = {
-  name: "Single page (renders nothing)",
+  name: "Single page (disabled controls)",
   args: { ...baseArgs, totalPages: 1 },
   render: () => <PaginationPreview totalPages={1} />,
 };

@@ -8,41 +8,37 @@ export interface PaginationControlsProps {
   onPageChange: (page: number) => void;
 }
 
-/** Zero-indexed prev/next pagination control. Renders nothing for a single page. */
+/** Zero-indexed prev/next pagination control. */
 export function PaginationControls({
   currentPage,
   totalPages,
   onPageChange,
 }: PaginationControlsProps) {
-  if (totalPages <= 1) {
-    return null;
-  }
-
   return (
-    <div className="text-muted-foreground flex items-center justify-end gap-2 text-sm">
+    <div className="border-border bg-background text-foreground inline-flex items-center overflow-hidden rounded-full border text-sm">
       <Button
         type="button"
         variant="outline"
-        size="sm"
-        className="border-dashed"
+        size="icon"
+        className="rounded-none border-0 border-r bg-transparent shadow-none"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 0}
+        aria-label="Previous page"
       >
         <ChevronLeft className="size-4" aria-hidden />
-        Previous
       </Button>
-      <span className="text-foreground text-xs">
-        Page {currentPage + 1} of {totalPages}
+      <span className="min-w-20 px-3 text-center text-xs tabular-nums">
+        {currentPage + 1} of {totalPages}
       </span>
       <Button
         type="button"
         variant="outline"
-        size="sm"
-        className="border-dashed"
+        size="icon"
+        className="rounded-none border-0 border-l bg-transparent shadow-none"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage >= totalPages - 1}
+        aria-label="Next page"
       >
-        Next
         <ChevronRight className="size-4" aria-hidden />
       </Button>
     </div>

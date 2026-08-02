@@ -1,9 +1,9 @@
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 
-import { Button } from "../primitives/button";
 import { Calendar } from "../forms/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "../overlays/popover";
+import { Button } from "../primitives/button";
 
 export interface DatePickerProps {
   value: Date | undefined;
@@ -40,17 +40,21 @@ export function DatePicker({
         </label>
       ) : null}
       <Popover>
-        <PopoverTrigger asChild>
-          <Button
-            id={id}
-            variant={variant}
-            disabled={disabled}
-            className="bg-muted placeholder:text-muted-foreground w-full justify-start text-left font-normal"
-          >
-            <CalendarIcon className="mr-2 size-4" />
-            {value ? format(value, dateFormat) : <span>{placeholder}</span>}
-          </Button>
-        </PopoverTrigger>
+        <div className="flex w-full items-center">
+          <div className="border-border bg-surface-2 text-text-1 flex size-10 shrink-0 items-center justify-center rounded-l-xl border">
+            <CalendarIcon className="size-4" aria-hidden />
+          </div>
+          <PopoverTrigger asChild>
+            <Button
+              id={id}
+              variant={variant}
+              disabled={disabled}
+              className="border-border bg-surface-2 text-text-1 placeholder:text-muted-foreground min-h-10 max-h-10 w-full justify-start rounded-l-none rounded-r-xl border-l-0 text-left font-normal"
+            >
+              {value ? format(value, dateFormat) : <span>{placeholder}</span>}
+            </Button>
+          </PopoverTrigger>
+        </div>
         <PopoverContent className="bg-popover w-auto p-0" align={popoverAlign}>
           <Calendar mode="single" selected={value} onSelect={onSelect} />
         </PopoverContent>

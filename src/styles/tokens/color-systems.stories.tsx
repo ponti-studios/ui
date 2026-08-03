@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { Button } from "../../components/primitives/button";
+import { colors } from "./css-vars";
 import { colorTokenNames } from "./index";
 
 const meta: Meta = { title: "Foundations/Colors", parameters: { layout: "fullscreen" } };
@@ -28,7 +29,7 @@ export const SystemAppearance: Story = {
           <div
             key={token}
             className="border-border grid min-h-20 content-end rounded-md border p-3"
-            style={{ backgroundColor: `var(--color-${token})` }}
+            style={{ backgroundColor: colors[token] }}
           >
             <span className="bg-background text-foreground w-fit rounded px-1 font-mono text-xs">
               {token}

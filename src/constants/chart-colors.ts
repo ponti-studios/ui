@@ -4,15 +4,15 @@
  */
 
 export const CHART_COLORS = {
-  chart1: "var(--color-chart-1)",
-  chart2: "var(--color-chart-2)",
-  chart3: "var(--color-chart-3)",
-  chart4: "var(--color-chart-4)",
-  chart5: "var(--color-chart-5)",
+  chart1: "var(--chart-1)",
+  chart2: "var(--chart-2)",
+  chart3: "var(--chart-3)",
+  chart4: "var(--chart-4)",
+  chart5: "var(--chart-5)",
 
-  positive: "var(--color-chart-positive)",
-  negative: "var(--color-chart-negative)",
-  neutral: "var(--color-chart-neutral)",
+  positive: "var(--chart-positive)",
+  negative: "var(--chart-negative)",
+  neutral: "var(--chart-neutral)",
 
   background: "var(--color-background)",
   grid: "var(--color-border)",
@@ -28,12 +28,12 @@ export const CHART_COLORS = {
 } as const;
 
 export const CHART_CSS_VARS = {
-  positive: "var(--color-chart-positive)",
-  negative: "var(--color-chart-negative)",
-  neutral: "var(--color-chart-neutral)",
-  chart1: "var(--color-chart-1)",
-  chart2: "var(--color-chart-2)",
-  chart3: "var(--color-chart-3)",
-  chart4: "var(--color-chart-4)",
-  chart5: "var(--color-chart-5)",
+  positive: "var(--chart-positive)",
+  negative: "var(--chart-negative)",
+  neutral: "var(--chart-neutral)",
+  chart1: "var(--chart-1)",
+  chart2: "var(--chart-2)",
+  chart3: "var(--chart-3)",
+  chart4: "var(--chart-4)",
+  chart5: "var(--chart-5)",
 } as const;

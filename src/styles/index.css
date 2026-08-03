@@ -19,6 +19,30 @@
 @import "./tokens/generated/dark.css" (prefers-color-scheme: dark);
 @import "./animations.css";
 
+@theme {
+  --animate-accordion-down: accordion-down 200ms ease-out;
+  --animate-accordion-up: accordion-up 200ms ease-out;
+  --animate-in: fade-in 150ms ease-out, zoom-in 150ms ease-out;
+  --animate-out: fade-out 120ms ease-in, zoom-out 120ms ease-in;
+  --animate-fade-in: fade-in 150ms ease-out;
+  --animate-fade-out: fade-out 120ms ease-in;
+  --animate-zoom-in: zoom-in 150ms ease-out;
+  --animate-zoom-out: zoom-out 120ms ease-in;
+}
+
+@utility fade-in-0 {
+  animation-name: fade-in;
+}
+@utility fade-out-0 {
+  animation-name: fade-out;
+}
+@utility zoom-in-95 {
+  animation-name: zoom-in;
+}
+@utility zoom-out-95 {
+  animation-name: zoom-out;
+}
+
 /* shadcn New York semantic contract. Values are generated from the DTCG
  * source; this file only names the roles consumed by web components. */
 @theme inline {
@@ -101,22 +125,52 @@
  * Default fade size: 16 px  (scoped to the element via inline var).
  * Disable with scroll-fade-none (sets --scroll-fade-mask: none). */
 @utility scroll-fade-x {
-  mask-image: var(--scroll-fade-mask, linear-gradient(to right, transparent, black var(--scroll-fade-size, 16px), black calc(100% - var(--scroll-fade-size, 16px)), transparent));
+  mask-image: var(
+    --scroll-fade-mask,
+    linear-gradient(
+      to right,
+      transparent,
+      black var(--scroll-fade-size, 16px),
+      black calc(100% - var(--scroll-fade-size, 16px)),
+      transparent
+    )
+  );
 }
 @utility scroll-fade-y {
-  mask-image: var(--scroll-fade-mask, linear-gradient(to bottom, transparent, black var(--scroll-fade-size, 16px), black calc(100% - var(--scroll-fade-size, 16px)), transparent));
+  mask-image: var(
+    --scroll-fade-mask,
+    linear-gradient(
+      to bottom,
+      transparent,
+      black var(--scroll-fade-size, 16px),
+      black calc(100% - var(--scroll-fade-size, 16px)),
+      transparent
+    )
+  );
 }
 @utility scroll-fade-l {
-  mask-image: var(--scroll-fade-mask, linear-gradient(to right, transparent, black var(--scroll-fade-size, 16px)));
+  mask-image: var(
+    --scroll-fade-mask,
+    linear-gradient(to right, transparent, black var(--scroll-fade-size, 16px))
+  );
 }
 @utility scroll-fade-r {
-  mask-image: var(--scroll-fade-mask, linear-gradient(to left, transparent, black var(--scroll-fade-size, 16px)));
+  mask-image: var(
+    --scroll-fade-mask,
+    linear-gradient(to left, transparent, black var(--scroll-fade-size, 16px))
+  );
 }
 @utility scroll-fade-t {
-  mask-image: var(--scroll-fade-mask, linear-gradient(to bottom, transparent, black var(--scroll-fade-size, 16px)));
+  mask-image: var(
+    --scroll-fade-mask,
+    linear-gradient(to bottom, transparent, black var(--scroll-fade-size, 16px))
+  );
 }
 @utility scroll-fade-b {
-  mask-image: var(--scroll-fade-mask, linear-gradient(to top, transparent, black var(--scroll-fade-size, 16px)));
+  mask-image: var(
+    --scroll-fade-mask,
+    linear-gradient(to top, transparent, black var(--scroll-fade-size, 16px))
+  );
 }
 @utility scroll-fade-none {
   --scroll-fade-mask: none;

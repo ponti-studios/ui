@@ -68,17 +68,11 @@ export function PasskeyManagement({
   return (
     <section aria-labelledby="passkey-heading" className="space-y-4">
       <div className="flex items-center justify-between">
-        <div>
-          <h2 id="passkey-heading" className="text-foreground text-sm font-medium">
-            Passkeys
-          </h2>
-          <p className="text-muted-foreground text-sm">
-            Sign in without a password using biometrics or a security key.
-          </p>
-        </div>
+        <h2 id="passkey-heading" className="text-foreground text-sm font-medium">
+          Passkeys
+        </h2>
         <Button
           type="button"
-          variant="outline"
           size="sm"
           onClick={() => void handleAdd()}
           disabled={adding}
@@ -107,7 +101,7 @@ export function PasskeyManagement({
           {passkeys.map((pk) => (
             <li
               key={pk.id}
-              className="border-border flex items-center justify-between border px-4 py-3 text-sm"
+              className="border-border rounded flex items-center justify-between border px-4 py-3 text-sm"
             >
               <div className="flex items-center gap-3">
                 <KeyRound className="text-muted-foreground size-4 shrink-0" aria-hidden />

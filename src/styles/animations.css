@@ -51,28 +51,6 @@
   }
 }
 
-.animate-in {
-  animation:
-    fade-in 150ms ease-out,
-    zoom-in 150ms ease-out;
-}
-.animate-out {
-  animation:
-    fade-out 120ms ease-in,
-    zoom-out 120ms ease-in;
-}
-.fade-in-0 {
-  animation-name: fade-in;
-}
-.fade-out-0 {
-  animation-name: fade-out;
-}
-.zoom-in-95 {
-  animation-name: zoom-in;
-}
-.zoom-out-95 {
-  animation-name: zoom-out;
-}
 .data-open\:animate-in[data-open],
 .data-open\:animate-in[data-state="open"] {
   animation:

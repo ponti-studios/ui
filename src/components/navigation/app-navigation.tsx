@@ -1,8 +1,10 @@
 import { Menu } from "lucide-react";
+import type { ComponentPropsWithoutRef } from "react";
 import * as React from "react";
 
-import { Button } from "../primitives/button";
+import { cn } from "../../lib/utils";
 import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from "../overlays/sheet";
+import { Button } from "../primitives/button";
 
 export interface AppNavigationLink {
   href: string;
@@ -24,15 +26,47 @@ export interface AppNavigationProps {
   ariaLabel?: string;
   /** Current pathname used to highlight the active link. */
   activeHref?: string;
-  /** A router link component. Native anchors are used when omitted. */
-  linkComponent?: React.ElementType;
-  /** The prop used by the link component for its destination. */
-  linkProp?: "href" | "to";
-  /** Props shared by every link, such as a router's prefetch hint. */
-  linkProps?: Record<string, unknown>;
 }
 
-export function AppNavigation({
+interface NavigationLinkOwnProps {
+  active?: boolean;
+  brand?: boolean;
+}
+
+export type NavigationLinkProps = NavigationLinkOwnProps &
+  Omit<ComponentPropsWithoutRef<"a">, keyof NavigationLinkOwnProps>;
+
+function NavigationLink({
+  children,
+  active = false,
+  brand = false,
+  className,
+  ...props
+}: NavigationLinkProps) {
+  return (
+    <a
+      {...props}
+      className={cn(
+        "inline-flex h-9 max-h-9 shrink-0 items-center px-3 py-2 text-sm font-medium",
+        !brand && "hover:bg-muted hover:text-muted-foreground",
+        className,
+      )}
+      aria-current={active ? "page" : undefined}
+    >
+      {children}
+    </a>
+  );
+}
+
+function NavigationCta({ href, label }: AppNavigationCta) {
+  return (
+    <Button asChild size="md">
+      <a href={href}>{label}</a>
+    </Button>
+  );
+}
+
+function NavigationRoot({
   brand,
   brandHref = "/",
   endContent,
@@ -40,9 +74,6 @@ export function AppNavigation({
   cta,
   ariaLabel = "Primary navigation",
   activeHref,
-  linkComponent: LinkComponent = "a",
-  linkProp = "href",
-  linkProps,
 }: AppNavigationProps) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -53,55 +84,25 @@ export function AppNavigation({
     return href !== "/" && activeHref.startsWith(`${href}/`);
   };
 
-  const createLink = ({
-    href,
-    children,
-    active = false,
-    variant,
-    brand = false,
-  }: {
-    href: string;
-    children: React.ReactNode;
-    active?: boolean;
-    variant?: AppNavigationCta["variant"];
-    brand?: boolean;
-  }) =>
-    React.createElement(
-      LinkComponent,
-      {
-        ...linkProps,
-        ...(linkProp === "to" ? { to: href } : { href }),
-        className: brand
-          ? "inline-flex min-h-9 shrink-0 items-center rounded-md px-3 py-2 text-sm font-medium"
-          : variant
-            ? "inline-flex min-h-9 shrink-0 items-center justify-center rounded-md px-3 py-2 text-sm font-medium"
-            : "inline-flex min-h-9 shrink-0 items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-muted hover:text-muted-foreground",
-        "aria-current": active ? "page" : undefined,
-        "data-variant": variant,
-      },
-      children,
-    );
-
   return (
-    <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 flex w-full justify-center border-b px-4 backdrop-blur">
+    <header className="bg-background/95 supports-backdrop-filter:bg-background/60 sticky top-0 z-50 flex w-full justify-center border-b px-4 backdrop-blur">
       <nav className="w-full max-w-7xl" aria-label={ariaLabel}>
         <div className="flex min-h-14 items-center justify-between gap-6">
           <div className="flex min-w-0 items-center">
-            {brand && createLink({ href: brandHref, children: brand, brand: true })}
+            {brand && (
+              <NavigationLink href={brandHref} brand>
+                {brand}
+              </NavigationLink>
+            )}
           </div>
 
           <div className="ml-auto hidden min-w-0 items-center gap-1 sm:flex">
             {links?.map((link) => (
-              <React.Fragment key={link.href}>
-                {createLink({ href: link.href, children: link.label, active: isActive(link.href) })}
-              </React.Fragment>
+              <NavigationLink key={link.href} href={link.href} active={isActive(link.href)}>
+                {link.label}
+              </NavigationLink>
             ))}
-            {cta &&
-              createLink({
-                href: cta.href,
-                children: cta.label,
-                variant: cta.variant ?? "default",
-              })}
+            {cta && <NavigationCta {...cta} />}
             {endContent}
           </div>
 
@@ -122,11 +123,9 @@ export function AppNavigation({
                 <div className="mt-8 flex flex-1 flex-col gap-1">
                   {links?.map((link) => (
                     <SheetClose asChild key={link.href}>
-                      {createLink({
-                        href: link.href,
-                        children: link.label,
-                        active: isActive(link.href),
-                      })}
+                      <NavigationLink href={link.href} active={isActive(link.href)}>
+                        {link.label}
+                      </NavigationLink>
                     </SheetClose>
                   ))}
                 </div>
@@ -135,11 +134,7 @@ export function AppNavigation({
                   <div className="flex flex-col gap-4 border-t pt-4">
                     {cta && (
                       <SheetClose asChild>
-                        {createLink({
-                          href: cta.href,
-                          children: cta.label,
-                          variant: cta.variant ?? "default",
-                        })}
+                        <NavigationCta {...cta} />
                       </SheetClose>
                     )}
                     {endContent && <div className="flex items-center gap-3">{endContent}</div>}
@@ -153,3 +148,14 @@ export function AppNavigation({
     </header>
   );
 }
+
+type NavigationComponent = typeof NavigationRoot & {
+  Link: typeof NavigationLink;
+};
+
+export const Navigation: NavigationComponent = Object.assign(NavigationRoot, {
+  Link: NavigationLink,
+});
+
+/** @deprecated Use `Navigation` instead. */
+export const AppNavigation = Navigation;

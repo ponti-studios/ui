@@ -11,6 +11,19 @@ The design system is documented in `docs/`:
 - [Patterns](./docs/patterns.md) — screen composition rules
 - [Review gates](./docs/review-gates.md) — pass/fail review criteria
 
+## Development
+
+Common development workflows are available through the `Makefile`:
+
+```bash
+make check          # tokens, source contracts, and typecheck
+make tokens-build   # regenerate token artifacts
+make storybook      # build Storybook themes and start Storybook
+make test-a11y      # run light and dark accessibility tests
+```
+
+The existing `pnpm run` scripts delegate to these targets for compatibility.
+
 ## Release
 
 Releases are owned by [release-please](https://github.com/googleapis/release-please), not by hand-edited version numbers or manually pushed tags. The `.github/workflows/publish.yml` workflow runs after a successful `validate` push to `main`:

@@ -11,7 +11,6 @@ const meta: Meta<typeof AppNavigation> = {
     layout: "fullscreen",
   },
 };
-
 export default meta;
 type Story = StoryObj<typeof meta>;
 

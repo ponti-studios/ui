@@ -82,20 +82,20 @@
     "registry": "https://registry.npmjs.org"
   },
   "scripts": {
-    "build": "tsc --noEmit",
+    "build": "make build",
     "dev": "vite",
-    "storybook": "style-dictionary build --config src/styles/tokens/style-dictionary.light-storybook.json && style-dictionary build --config src/styles/tokens/style-dictionary.dark-storybook.json && storybook dev -p 6006",
-    "check:source": "node src/styles/tokens/scripts/check-source.mjs",
-    "test": "vitest --run --config vitest.config.ts",
-    "test:a11y": "pnpm run test:a11y:light && pnpm run test:a11y:dark",
-    "test:a11y:light": "VITE_STORYBOOK_THEME=light vitest --run --config vitest.config.ts",
-    "test:a11y:dark": "VITE_STORYBOOK_THEME=dark vitest --run --config vitest.config.ts",
-    "tokens:build": "style-dictionary build --config src/styles/tokens/style-dictionary.foundations.json && style-dictionary build --config src/styles/tokens/style-dictionary.light.json && style-dictionary build --config src/styles/tokens/style-dictionary.dark.json && style-dictionary build --config src/styles/tokens/style-dictionary.light-storybook.json && style-dictionary build --config src/styles/tokens/style-dictionary.dark-storybook.json",
-    "tokens:check": "pnpm run tokens:build && node src/styles/tokens/scripts/check-foundations.mjs && git diff --exit-code -- src/styles/tokens/generated",
-    "typecheck": "tsc --noEmit",
-    "lint": "oxlint src --fix",
-    "format": "oxfmt src --write",
-    "prepack": "pnpm run tokens:check && pnpm run check:source && pnpm run typecheck"
+    "storybook": "make storybook",
+    "check:source": "make check-source",
+    "test": "make test",
+    "test:a11y": "make test-a11y",
+    "test:a11y:light": "make test-a11y-light",
+    "test:a11y:dark": "make test-a11y-dark",
+    "tokens:build": "make tokens-build",
+    "tokens:check": "make tokens-check",
+    "typecheck": "make typecheck",
+    "lint": "make lint",
+    "format": "make format",
+    "prepack": "make prepack"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",

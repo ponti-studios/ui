@@ -48,10 +48,10 @@ export function SortControls({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-80 space-y-2 p-2">
-        <DropdownMenuLabel>Define Sort Order</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-
         <DropdownMenuGroup className="space-y-1">
+          <DropdownMenuLabel>Define Sort Order</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+
           {sortOptions.map((sort, index) => {
             const usedFields = sortOptions
               .filter((_, i) => i !== index)

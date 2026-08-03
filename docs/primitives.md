@@ -233,12 +233,18 @@ or service-worker lifecycle UI when the package provides them.
 - **Props:** `currentPage` (zero-indexed), `totalPages`, `onPageChange`.
 - Single page: renders nothing. Multiple pages: Previous/Next with page counter. Uses outline Button, size `sm`, dashed border.
 
-### RouteLink
-
-Polymorphic link component. Accepts an `as` prop for the router's link
-component. Fires `onNavigate` callback before click.
-
 ### AppNavigation
+
+`Navigation` exposes an anchor-only `Navigation.Link` for consistent navigation styling:
+
+```tsx
+<Navigation.Link href="/dashboard">
+  Dashboard
+</Navigation.Link>
+```
+
+`AppNavigation` remains available as a compatibility alias. `Navigation.Link`
+always renders a native anchor.
 
 - **Props:** `brand`, `brandHref`, `links[]`, `cta`, `endContent`, `activeHref`.
 - **Layout:** `sticky top-0`, `--background` at 95% opacity, `backdrop-blur`, `--border-default` border-bottom. Mobile: Sheet-based hamburger menu.

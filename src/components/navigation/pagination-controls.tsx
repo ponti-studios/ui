@@ -15,7 +15,7 @@ export function PaginationControls({
   onPageChange,
 }: PaginationControlsProps) {
   return (
-    <div className="border-border bg-background text-foreground inline-flex items-center overflow-hidden rounded-full border text-sm">
+    <div className="border-border bg-background text-foreground inline-flex w-fit shrink-0 items-center self-start overflow-hidden rounded-full border text-sm">
       <Button
         type="button"
         variant="outline"

@@ -43,14 +43,16 @@
   animation-name: zoom-out;
 }
 
-/* shadcn New York semantic contract. Values are generated from the DTCG
- * source; this file only names the roles consumed by web components. */
+/* 
+  Values are generated from the DTCG source; 
+  this file only names the roles consumed by web components. 
+*/
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--text-primary);
   --color-card: var(--card);
   --color-card-foreground: var(--text-primary);
-  --color-popover: var(--popover);
+  --color-popover: var(--background);
   --color-popover-foreground: var(--text-primary);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);

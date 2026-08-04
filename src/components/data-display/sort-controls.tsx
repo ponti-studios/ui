@@ -5,7 +5,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
@@ -57,10 +56,9 @@ export function SortControls({
               .filter((_, i) => i !== index)
               .map((option) => option.field);
             return (
-              <DropdownMenuItem
+              <div
                 key={sort.field}
-                onSelect={(e) => e.preventDefault()}
-                className={`p-0 focus:bg-transparent ${index === focusedSortIndex ? "bg-muted" : ""}`}
+                className={`rounded-sm ${index === focusedSortIndex ? "bg-muted" : ""}`}
               >
                 <SortRow
                   sortOption={sort}
@@ -70,27 +68,26 @@ export function SortControls({
                   updateSortOption={updateSortOption}
                   removeSortOption={removeSortOption}
                 />
-              </DropdownMenuItem>
+              </div>
             );
           })}
         </DropdownMenuGroup>
         {availableFieldsToAdd.length > 0 && (
           <>
             <DropdownMenuSeparator />
-            <DropdownMenuItem
-              onSelect={(e) => {
-                e.preventDefault();
+            <button
+              type="button"
+              onClick={() => {
                 const firstAvailable = availableFieldsToAdd[0];
                 if (firstAvailable) {
                   addSortOption({ field: firstAvailable, direction: "desc" });
                 }
               }}
-              disabled={availableFieldsToAdd.length === 0}
-              className="mt-1"
+              className="hover:bg-muted focus-visible:ring-ring mt-1 flex w-full cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none select-none focus-visible:ring-2 focus-visible:ring-offset-2"
             >
               <PlusCircle className="mr-2 size-4" />
               Add Sort Criterion
-            </DropdownMenuItem>
+            </button>
           </>
         )}
       </DropdownMenuContent>

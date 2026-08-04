@@ -1,7 +1,13 @@
+import { ArrowDownWideNarrow, ArrowUpWideNarrow, X } from "lucide-react";
+
 import type { SortField, SortOption } from "../../hooks/sort.types";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../forms/select";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../overlays/dropdown-menu";
 import { Button } from "../primitives/button";
-import { X } from "lucide-react";
 
 export interface SortRowProps {
   sortOption: SortOption;
@@ -10,6 +16,10 @@ export interface SortRowProps {
   usedFields: SortField[];
   updateSortOption: (index: number, option: SortOption) => void;
   removeSortOption: (index: number) => void;
+}
+
+function fieldLabel(field: SortField) {
+  return field.charAt(0).toUpperCase() + field.slice(1);
 }
 
 export function SortRow({
@@ -25,47 +35,51 @@ export function SortRow({
   );
 
   return (
-    <div key={sortOption.field} className="flex items-center gap-2">
-      <Select
-        value={sortOption.field}
-        onValueChange={(value) => updateSortOption(index, { ...sortOption, field: value })}
-      >
-        <SelectTrigger className="h-8 w-[130px] text-xs">
-          <SelectValue placeholder="Select field" />
-        </SelectTrigger>
-        <SelectContent>
+    <div className="flex w-full items-center gap-1">
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <button
+            type="button"
+            className="hover:bg-muted focus-visible:ring-ring flex-1 rounded-md px-2 py-1.5 text-left text-sm outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+          >
+            {fieldLabel(sortOption.field)}
+          </button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
           {availableFieldsForCurrentSelect.map((field) => (
-            <SelectItem key={field} value={field} className="text-xs">
-              {field.charAt(0).toUpperCase() + field.slice(1)}
-            </SelectItem>
+            <DropdownMenuItem
+              key={field}
+              onClick={() => updateSortOption(index, { ...sortOption, field })}
+            >
+              {fieldLabel(field)}
+            </DropdownMenuItem>
           ))}
-        </SelectContent>
-      </Select>
-      <Select
-        value={sortOption.direction}
-        onValueChange={(value) => {
-          if (value === "asc" || value === "desc") {
-            updateSortOption(index, { ...sortOption, direction: value });
-          }
-        }}
+        </DropdownMenuContent>
+      </DropdownMenu>
+      <Button
+        variant="ghost"
+        size="sm"
+        className="size-8 p-0"
+        aria-label={sortOption.direction === "asc" ? "Sorted ascending" : "Sorted descending"}
+        onClick={() =>
+          updateSortOption(index, {
+            ...sortOption,
+            direction: sortOption.direction === "asc" ? "desc" : "asc",
+          })
+        }
       >
-        <SelectTrigger className="h-8 w-[110px] text-xs">
-          <SelectValue placeholder="Direction" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="asc" className="text-xs">
-            Ascending
-          </SelectItem>
-          <SelectItem value="desc" className="text-xs">
-            Descending
-          </SelectItem>
-        </SelectContent>
-      </Select>
+        {sortOption.direction === "asc" ? (
+          <ArrowUpWideNarrow className="size-4" />
+        ) : (
+          <ArrowDownWideNarrow className="size-4" />
+        )}
+      </Button>
       <Button
         variant="ghost"
         size="sm"
         onClick={() => removeSortOption(index)}
         className="size-8 p-0"
+        aria-label="Remove sort criterion"
       >
         <X className="text-muted-foreground size-4" />
       </Button>

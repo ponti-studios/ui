@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.8.0](https://github.com/ponti-studios/ui/compare/ui-v0.7.1...ui-v0.8.0) (2026-08-04)
+
+
+### Features
+
+* enhance development workflow with Makefile and update documentation ([95188b7](https://github.com/ponti-studios/ui/commit/95188b7d2437e26e6615cd7660ff04a51f78f5e4))
+* remove field and group-by ([68ac7fd](https://github.com/ponti-studios/ui/commit/68ac7fd61549da0c5bc99d03edb81c08a5bed9f2))
+
+
+### Bug Fixes
+
+* update chart color variables to use correct CSS variable names ([f7b1f2c](https://github.com/ponti-studios/ui/commit/f7b1f2c9d70c28a3eec208d33e3abd024c46518f))
+* update import path for utility function in date-month-select component ([721e280](https://github.com/ponti-studios/ui/commit/721e280ca80b0d8178006610632a1b9a8def39df))
+* update styling in AccordionTrigger and DropZone components ([95188b7](https://github.com/ponti-studios/ui/commit/95188b7d2437e26e6615cd7660ff04a51f78f5e4))
+
 ## [0.7.1](https://github.com/ponti-studios/ui/compare/ui-v0.7.0...ui-v0.7.1) (2026-07-31)
 
 

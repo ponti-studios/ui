@@ -3,8 +3,6 @@ export { EmptyState } from "./empty-state";
 export type { EmptyStateProps } from "./empty-state";
 export { FileUploadStatus } from "./file-upload-status";
 export type { FileUploadState, FileUploadStats } from "./file-upload-status";
-export { FileUploadStatusBadge } from "./file-upload-status-badge";
-export type { FileUploadStatusValue } from "./file-upload-status-badge";
 export { Progress } from "./progress";
 export { ProgressBar } from "./progress-bar";
 export type { ProgressBarProps } from "./progress-bar";

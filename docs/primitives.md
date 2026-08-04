@@ -235,20 +235,43 @@ or service-worker lifecycle UI when the package provides them.
 
 ### AppNavigation
 
-`Navigation` exposes an anchor-only `Navigation.Link` for consistent navigation styling:
+`Navigation` is a compound component. `Navigation` (the root) only owns the
+responsive chrome — the sticky header, the desktop row, and the mobile
+Sheet — the app composes the actual brand/link/cta elements as JSX and
+passes them in as `brand`/`links`/`cta`:
 
 ```tsx
-<Navigation.Link href="/dashboard">
-  Dashboard
-</Navigation.Link>
+<Navigation
+  brand={
+    <Navigation.Link asChild brand>
+      <RouterLink to="/">Acme</RouterLink>
+    </Navigation.Link>
+  }
+  links={navItems.map((item) => (
+    <Navigation.Link key={item.href} asChild active={pathname === item.href}>
+      <RouterLink to={item.href}>{item.label}</RouterLink>
+    </Navigation.Link>
+  ))}
+  cta={
+    <Navigation.Cta asChild>
+      <RouterLink to="/get-started">Get started</RouterLink>
+    </Navigation.Cta>
+  }
+/>
 ```
 
-`AppNavigation` remains available as a compatibility alias. `Navigation.Link`
-always renders a native anchor.
+`Navigation.Link` renders a plain `<a>` by default; pass `asChild` with a
+single child element (your router's `Link`, or anything else) to apply the
+same base styling/`aria-current` to that element instead — same pattern as
+`Button`'s `asChild`. `Navigation.Cta` is a thin, nav-sized wrapper around
+`Button` and defaults `asChild` to `true` (since it exists to wrap a link),
+so it doesn't need the flag spelled out unless you want a non-link CTA.
 
-- **Props:** `brand`, `brandHref`, `links[]`, `cta`, `endContent`, `activeHref`.
+`AppNavigation` remains available as a compatibility alias for `Navigation`.
+
+- **Props:** `brand`, `links`, `cta`, `endContent` — all `ReactNode`, not data arrays or render callbacks. The root re-renders `links`/`cta` inside the mobile Sheet automatically (wrapping each in `SheetClose asChild` so tapping a link also closes the menu), so the app only composes its link list once.
+- Active-link/route matching is entirely the app's responsibility now (pass `active` per `Navigation.Link`) — the root no longer knows about routes.
 - **Layout:** `sticky top-0`, `--background` at 95% opacity, `backdrop-blur`, `--border-default` border-bottom. Mobile: Sheet-based hamburger menu.
-- Active link detection: exact match or prefix match.
 
 ---
 

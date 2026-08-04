@@ -235,42 +235,58 @@ or service-worker lifecycle UI when the package provides them.
 
 ### AppNavigation
 
-`Navigation` is a compound component. `Navigation` (the root) only owns the
-responsive chrome — the sticky header, the desktop row, and the mobile
-Sheet — the app composes the actual brand/link/cta elements as JSX and
-passes them in as `brand`/`links`/`cta`:
+`Navigation` is a pure composition-based compound component — no data-shape
+props at all. `Navigation` (the root) only owns the responsive chrome (the
+sticky header, the desktop row, and the mobile Sheet); everything else is
+composed directly as children:
 
 ```tsx
-<Navigation
-  brand={
-    <Navigation.Link asChild brand>
-      <RouterLink to="/">Acme</RouterLink>
-    </Navigation.Link>
-  }
-  links={navItems.map((item) => (
-    <Navigation.Link key={item.href} asChild active={pathname === item.href}>
-      <RouterLink to={item.href}>{item.label}</RouterLink>
-    </Navigation.Link>
-  ))}
-  cta={
-    <Navigation.Cta asChild>
+<Navigation>
+  <Navigation.Brand>
+    <RouterLink to="/">Acme</RouterLink>
+  </Navigation.Brand>
+
+  <Navigation.List>
+    {navItems.map((item) => (
+      <Navigation.Item key={item.href} asChild active={pathname === item.href}>
+        <RouterLink to={item.href}>{item.label}</RouterLink>
+      </Navigation.Item>
+    ))}
+  </Navigation.List>
+
+  <Navigation.Action>
+    <Button asChild>
       <RouterLink to="/get-started">Get started</RouterLink>
-    </Navigation.Cta>
-  }
-/>
+    </Button>
+  </Navigation.Action>
+</Navigation>
 ```
 
-`Navigation.Link` renders a plain `<a>` by default; pass `asChild` with a
-single child element (your router's `Link`, or anything else) to apply the
-same base styling/`aria-current` to that element instead — same pattern as
-`Button`'s `asChild`. `Navigation.Cta` is a thin, nav-sized wrapper around
-`Button` and defaults `asChild` to `true` (since it exists to wrap a link),
-so it doesn't need the flag spelled out unless you want a non-link CTA.
+- `Navigation.Brand` is a plain layout wrapper, always visible at every
+  width — style/link it however you want, nothing is injected.
+- `Navigation.List` is a semantic `<ul>` of `Navigation.Item`s (`<li>`).
+  It lays out horizontally on desktop and stacks vertically inside the
+  mobile Sheet automatically.
+- `Navigation.Item` renders a plain `<a>` by default; pass `asChild` with
+  a single child element (your router's `Link`, or anything else) to
+  apply the same base styling/`data-active`/`aria-current` to that
+  element instead — same `asChild` pattern as `Button`, backed by the
+  same generic `Slot` primitive (`src/lib/slot.tsx`). When rendered
+  inside the mobile Sheet it auto-wraps in `SheetClose asChild` so
+  tapping a link also closes the menu.
+- `Navigation.Action` is a layout wrapper for a CTA, avatar menu, theme
+  toggle, etc. — bring your own `Button` directly, there's no dedicated
+  CTA wrapper component. It does **not** auto-close the mobile Sheet
+  (it may hold more than one element, or non-navigational controls) —
+  use `Navigation.Item` for anything that should close the menu on tap.
+- Anything else — a search input, a notification bell — can sit as a
+  sibling child too; `Navigation` only special-cases `Navigation.Brand`
+  (kept out of the mobile Sheet copy and always visible), everything
+  else is treated uniformly and duplicated into the Sheet as composed.
 
 `AppNavigation` remains available as a compatibility alias for `Navigation`.
 
-- **Props:** `brand`, `links`, `cta`, `endContent` — all `ReactNode`, not data arrays or render callbacks. The root re-renders `links`/`cta` inside the mobile Sheet automatically (wrapping each in `SheetClose asChild` so tapping a link also closes the menu), so the app only composes its link list once.
-- Active-link/route matching is entirely the app's responsibility now (pass `active` per `Navigation.Link`) — the root no longer knows about routes.
+- Active-link/route matching is entirely the app's responsibility (pass `active` per `Navigation.Item`) — the root doesn't know about routes.
 - **Layout:** `sticky top-0`, `--background` at 95% opacity, `backdrop-blur`, `--border-default` border-bottom. Mobile: Sheet-based hamburger menu.
 
 ---

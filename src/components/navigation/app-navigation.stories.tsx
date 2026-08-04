@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import * as React from "react";
 
+import { Button } from "../primitives/button";
 import { Navigation } from "./app-navigation";
 
 const meta: Meta<typeof Navigation> = {
@@ -45,23 +46,25 @@ function PageContent({
 export const Default: Story = {
   render: () => (
     <>
-      <Navigation
-        brand={
-          <Navigation.Link href="/" brand>
-            Acme
-          </Navigation.Link>
-        }
-        links={defaultLinks.map((link) => (
-          <Navigation.Link key={link.href} href={link.href}>
-            {link.label}
-          </Navigation.Link>
-        ))}
-        cta={
-          <Navigation.Cta asChild variant="default">
+      <Navigation>
+        <Navigation.Brand>
+          <a href="/">Acme</a>
+        </Navigation.Brand>
+
+        <Navigation.List>
+          {defaultLinks.map((link) => (
+            <Navigation.Item key={link.href} href={link.href}>
+              {link.label}
+            </Navigation.Item>
+          ))}
+        </Navigation.List>
+
+        <Navigation.Action>
+          <Button size="md" asChild>
             <a href="/get-started">Get started</a>
-          </Navigation.Cta>
-        }
-      />
+          </Button>
+        </Navigation.Action>
+      </Navigation>
       <PageContent />
     </>
   ),
@@ -70,85 +73,99 @@ export const Default: Story = {
 export const NoCta: Story = {
   render: () => (
     <>
-      <Navigation
-        brand={
-          <Navigation.Link href="/" brand>
-            Acme
-          </Navigation.Link>
-        }
-        links={defaultLinks.map((link) => (
-          <Navigation.Link key={link.href} href={link.href}>
-            {link.label}
-          </Navigation.Link>
-        ))}
-      />
-      <PageContent message="Same nav, no CTA button." />
-    </>
-  ),
-};
-
-export const OutlineCta: Story = {
-  render: () => (
-    <>
-      <Navigation
-        brand={
-          <Navigation.Link href="/" brand>
-            Acme
-          </Navigation.Link>
-        }
-        links={defaultLinks.map((link) => (
-          <Navigation.Link key={link.href} href={link.href}>
-            {link.label}
-          </Navigation.Link>
-        ))}
-        cta={
-          <Navigation.Cta asChild variant="outline">
-            <a href="/get-started">Get started</a>
-          </Navigation.Cta>
-        }
-      />
-      <PageContent message="The outline CTA keeps the same navigation geometry with a quieter emphasis." />
+      <Navigation>
+        <Navigation.Brand>
+          <a href="/">Acme</a>
+        </Navigation.Brand>
+        <Navigation.List>
+          {defaultLinks.map((link) => (
+            <Navigation.Item key={link.href} href={link.href}>
+              {link.label}
+            </Navigation.Item>
+          ))}
+        </Navigation.List>
+      </Navigation>
+      <PageContent message="Same nav, no Action content." />
     </>
   ),
 };
 
 /**
- * `Navigation.Link`/`Navigation.Cta` support the same `asChild` composition
- * as `Button`: pass your router's `Link` (or anything else) as the single
- * child, and the base styling/`aria-current`/mobile auto-close behavior
- * still apply. This story stands in for a router `Link` with a plain anchor
- * that no-ops on click, since Storybook has no router.
+ * `Navigation.Item` (and any of the other pieces) support the same
+ * `asChild` composition as `Button`: pass your router's `Link` (or
+ * anything else) as the single child. This story stands in for a router
+ * `Link` with a plain anchor that no-ops on click, since Storybook has no
+ * router.
  */
 export const WithCustomRouterLink: Story = {
   render: () => {
     const activeHref = "/pricing";
     return (
       <>
-        <Navigation
-          brand={
-            <Navigation.Link asChild brand>
-              <a href="/" data-router-link="stand-in" onClick={(e) => e.preventDefault()}>
-                Acme
-              </a>
-            </Navigation.Link>
-          }
-          links={defaultLinks.map((link) => (
-            <Navigation.Link key={link.href} asChild active={link.href === activeHref}>
-              <a href={link.href} data-router-link="stand-in" onClick={(e) => e.preventDefault()}>
-                {link.label}
-              </a>
-            </Navigation.Link>
-          ))}
-          cta={
-            <Navigation.Cta asChild variant="default">
+        <Navigation>
+          <Navigation.Brand>
+            <a href="/" data-router-link="stand-in" onClick={(e) => e.preventDefault()}>
+              Acme
+            </a>
+          </Navigation.Brand>
+
+          <Navigation.List>
+            {defaultLinks.map((link) => (
+              <Navigation.Item key={link.href} asChild active={link.href === activeHref}>
+                <a href={link.href} data-router-link="stand-in" onClick={(e) => e.preventDefault()}>
+                  {link.label}
+                </a>
+              </Navigation.Item>
+            ))}
+          </Navigation.List>
+
+          <Navigation.Action>
+            <Button size="md" asChild>
               <a href="/get-started" data-router-link="stand-in" onClick={(e) => e.preventDefault()}>
                 Get started
               </a>
-            </Navigation.Cta>
-          }
-        />
-        <PageContent message="Every link here is a custom element composed via asChild - open the elements panel to see data-router-link on each one, and the /pricing link's aria-current." />
+            </Button>
+          </Navigation.Action>
+        </Navigation>
+        <PageContent message="Every link here is a custom element composed via asChild - open the elements panel to see data-router-link on each one, and the /pricing item's data-active/aria-current." />
       </>
     );
   },
+};
+
+/**
+ * Composition means arbitrary content can sit alongside the link list and
+ * action area without any prop-shape changes to `Navigation` itself.
+ */
+export const WithExtraContent: Story = {
+  render: () => (
+    <>
+      <Navigation>
+        <Navigation.Brand>
+          <a href="/">Acme</a>
+        </Navigation.Brand>
+
+        <Navigation.List>
+          {defaultLinks.slice(0, 2).map((link) => (
+            <Navigation.Item key={link.href} href={link.href}>
+              {link.label}
+            </Navigation.Item>
+          ))}
+        </Navigation.List>
+
+        <input
+          type="search"
+          placeholder="Search..."
+          className="h-9 w-40 rounded-md border bg-background px-3 text-sm"
+        />
+
+        <Navigation.Action>
+          <Button size="md" variant="outline" asChild>
+            <a href="/get-started">Get started</a>
+          </Button>
+        </Navigation.Action>
+      </Navigation>
+      <PageContent message="A search input sits directly between the link list and the action area — no endContent prop needed." />
+    </>
+  ),
 };

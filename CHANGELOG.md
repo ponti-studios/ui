@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.0.0](https://github.com/ponti-studios/ui/compare/ui-v0.8.0...ui-v1.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* **navigation:** Navigation's brand/links/cta/endContent props are gone. Compose Navigation.Brand/Navigation.List+Navigation.Item/Navigation.Action as children instead. Navigation.Link/Navigation.Cta (introduced in the immediately preceding commit) are also gone — use Navigation.Item and a plain Button respectively. See docs/primitives.md for the composition example.
+* **navigation:** AppNavigationProps' `links`/`cta` are now ReactNode (compose Navigation.Link/Navigation.Cta elements yourself) instead of AppNavigationLink[]/AppNavigationCta data objects, and `activeHref` is removed — pass `active` directly to each Navigation.Link. See docs/primitives.md for the new composition example.
+
+### Features
+
+* **navigation:** children-first composition, drop brand/links/cta props ([7f327ec](https://github.com/ponti-studios/ui/commit/7f327ecb1772c44e5aaa8e77e55c8342cf00e956))
+* **navigation:** compound Navigation.Link/Cta composition, drop link data props ([53691e5](https://github.com/ponti-studios/ui/commit/53691e517f0bf4e2064349c52e7835fa295d0270))
+
 ## [0.8.0](https://github.com/ponti-studios/ui/compare/ui-v0.7.1...ui-v0.8.0) (2026-08-04)
 
 

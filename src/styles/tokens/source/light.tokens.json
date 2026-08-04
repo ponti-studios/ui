@@ -88,15 +88,15 @@
   },
   "chart-positive": {
     "$type": "color",
-    "$value": "rgb(48, 164, 108)"
+    "$value": "rgb(31, 122, 80)"
   },
   "chart-negative": {
     "$type": "color",
-    "$value": "rgb(229, 72, 77)"
+    "$value": "rgb(190, 46, 51)"
   },
   "chart-neutral": {
     "$type": "color",
-    "$value": "rgb(185, 187, 198)"
+    "$value": "rgb(98, 106, 115)"
   },
   "overlay-scrim": {
     "$type": "color",

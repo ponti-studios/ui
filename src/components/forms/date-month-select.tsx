@@ -1,7 +1,7 @@
 import { Calendar } from "lucide-react";
 import { useMemo } from "react";
 
-import { cn } from "@/index";
+import { cn } from "../../lib/utils";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./select";
 
 interface MonthOption {

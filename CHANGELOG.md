@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.1](https://github.com/ponti-studios/ui/compare/ui-v1.0.0...ui-v1.0.1) (2026-08-04)
+
+
+### Bug Fixes
+
+* **pagination-controls:** stop the pill stretching in flex-col parents ([fa70506](https://github.com/ponti-studios/ui/commit/fa705061c7f76e93f25d84779405eafb3571fb73))
+* **sort-controls:** make sort rows keyboard-navigable, fix popover background ([2e3ed5e](https://github.com/ponti-studios/ui/commit/2e3ed5e83cc6366e7325d75137c374b164e95aa9))
+
 ## [1.0.0](https://github.com/ponti-studios/ui/compare/ui-v0.8.0...ui-v1.0.0) (2026-08-04)
 
 

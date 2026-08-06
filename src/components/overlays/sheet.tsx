@@ -49,18 +49,28 @@ const SheetOverlay = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof SheetPrimitive.Backdrop>
 >(({ className, ...props }, ref) => (
   <SheetPrimitive.Backdrop
-    className={cn(
-      "data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 fixed inset-0 z-50 bg-black/80 transition-opacity",
-      className,
-    )}
+    data-slot="sheet-overlay"
+    className={cn("fixed inset-0 z-50 bg-black/80", className)}
     {...props}
     ref={ref}
   />
 ));
 SheetOverlay.displayName = "SheetOverlay";
 
-const sheetClassName =
-  "bg-background text-foreground data-open:animate-in data-closed:animate-out fixed inset-x-0 bottom-0 z-50 flex max-h-[90dvh] min-h-[30dvh] flex-col gap-6 rounded-t-xl border border-b-0 border-l-0 border-r-0 p-4 pb-[max(1rem,env(safe-area-inset-bottom))] md:inset-y-0 md:right-0 md:bottom-auto md:left-auto md:h-full md:w-3/4 md:max-w-sm md:min-h-0 md:rounded-t-none md:rounded-l-xl md:border-t-0 md:border-r-0 md:border-b-0 md:border-l md:p-6 md:pb-6";
+const sheetClassName = [
+  // Appearance
+  "bg-background text-foreground rounded-xl border shadow-lg",
+  // Layout
+  "flex flex-col gap-6 p-4",
+  // Position: floats off every edge, anchored to the bottom on mobile
+  "fixed z-50 inset-x-2 bottom-[max(0.5rem,env(safe-area-inset-bottom))]",
+  // Size: mobile
+  "max-h-[calc(100dvh-2rem)] min-h-[30dvh]",
+  // Position: anchored to the right edge on desktop
+  "md:inset-y-2 md:right-2 md:left-auto md:bottom-auto",
+  // Size: desktop
+  "md:w-3/4 md:max-w-sm md:min-h-0",
+];
 
 interface SheetContentProps extends React.ComponentPropsWithoutRef<typeof SheetPrimitive.Popup> {}
 
@@ -70,7 +80,12 @@ const SheetContent = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <SheetPortal>
     <SheetOverlay />
-    <SheetPrimitive.Popup ref={ref} className={cn(sheetClassName, className)} {...props}>
+    <SheetPrimitive.Popup
+      ref={ref}
+      data-slot="sheet-content"
+      className={cn(sheetClassName, className)}
+      {...props}
+    >
       <SheetPrimitive.Close className="text-muted-foreground hover:bg-muted hover:text-muted-foreground focus-visible:outline-ring absolute top-3 right-3 inline-flex size-9 items-center justify-center rounded-md border border-transparent transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none md:top-4 md:right-4">
         <X className="size-4.5" />
         <span className="sr-only">Close</span>

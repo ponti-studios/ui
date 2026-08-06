@@ -318,7 +318,8 @@
     "$type": "cubicBezier",
     "in": { "$value": [0.4, 0, 1, 1] },
     "out": { "$value": [0, 0, 0.2, 1] },
-    "in-out": { "$value": [0.4, 0, 0.2, 1] }
+    "in-out": { "$value": [0.4, 0, 0.2, 1] },
+    "drawer": { "$value": [0.32, 0.72, 0, 1] }
   },
   "duration": {
     "$type": "duration",

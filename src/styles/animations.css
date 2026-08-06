@@ -50,6 +50,46 @@
     transform: scale(0.95);
   }
 }
+@keyframes sheet-slide-in-bottom {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes sheet-slide-out-bottom {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+@keyframes sheet-slide-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes sheet-slide-out-right {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
 
 .data-open\:animate-in[data-open],
 .data-open\:animate-in[data-state="open"] {
@@ -64,11 +104,62 @@
     zoom-out 120ms ease-in;
 }
 
+[data-slot="sheet-overlay"][data-open],
+[data-slot="sheet-overlay"][data-state="open"] {
+  animation: fade-in 400ms var(--ease-out);
+}
+[data-slot="sheet-overlay"][data-closed],
+[data-slot="sheet-overlay"][data-state="closed"] {
+  /* Must stay in lockstep with [data-slot="sheet-content"]'s close duration below (both 200ms) —
+     Base UI gates the whole portal's unmount on this element's own close-animation duration, not
+     the content panel's, so a mismatch here yanks the sliding panel off mid-animation. */
+  animation: fade-out 200ms var(--ease-in);
+}
+
+[data-slot="sheet-content"][data-open],
+[data-slot="sheet-content"][data-state="open"] {
+  animation: sheet-slide-in-bottom 300ms var(--ease-drawer);
+}
+[data-slot="sheet-content"][data-closed],
+[data-slot="sheet-content"][data-state="closed"] {
+  animation: sheet-slide-out-bottom 200ms var(--ease-drawer);
+}
+
+@media (min-width: 768px) {
+  [data-slot="sheet-content"][data-open],
+  [data-slot="sheet-content"][data-state="open"] {
+    animation: sheet-slide-in-right 300ms var(--ease-drawer);
+  }
+  [data-slot="sheet-content"][data-closed],
+  [data-slot="sheet-content"][data-state="closed"] {
+    animation: sheet-slide-out-right 200ms var(--ease-drawer);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-in,
   .animate-out,
   [data-open],
   [data-closed] {
     animation: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-slot="sheet-overlay"][data-open],
+  [data-slot="sheet-overlay"][data-state="open"] {
+    animation: fade-in 120ms var(--ease-out) !important;
+  }
+  [data-slot="sheet-overlay"][data-closed],
+  [data-slot="sheet-overlay"][data-state="closed"] {
+    animation: fade-out 120ms var(--ease-in) !important;
+  }
+  [data-slot="sheet-content"][data-open],
+  [data-slot="sheet-content"][data-state="open"] {
+    animation: fade-in var(--duration-150) var(--ease-out) !important;
+  }
+  [data-slot="sheet-content"][data-closed],
+  [data-slot="sheet-content"][data-state="closed"] {
+    animation: fade-out 120ms var(--ease-in) !important;
   }
 }

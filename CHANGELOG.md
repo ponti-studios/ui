@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.1.0](https://github.com/ponti-studios/ui/compare/ui-v1.0.1...ui-v1.1.0) (2026-08-07)
+
+
+### Features
+
+* add Card component and related subcomponents for UI structure ([24714ce](https://github.com/ponti-studios/ui/commit/24714cef8b97e0664c4d288ee59cd6bc82b90e9d))
+* create IconButton component for interactive icons ([24714ce](https://github.com/ponti-studios/ui/commit/24714cef8b97e0664c4d288ee59cd6bc82b90e9d))
+* implement TextField component for user input ([24714ce](https://github.com/ponti-studios/ui/commit/24714cef8b97e0664c4d288ee59cd6bc82b90e9d))
+
+
+### Bug Fixes
+
+* sheet animation ([6354ad9](https://github.com/ponti-studios/ui/commit/6354ad9087bc9211cc5c132e426edb3145b412f3))
+
 ## [1.0.1](https://github.com/ponti-studios/ui/compare/ui-v1.0.0...ui-v1.0.1) (2026-08-04)
 
 

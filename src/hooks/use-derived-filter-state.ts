@@ -53,9 +53,7 @@ export function useDerivedFilterState<T extends Record<string, FilterConfig>>({
       .filter(([, v]) => v !== "")
       .map(([key, v]) => ({
         id: key,
-        label: fields[key]?.label
-          ? fields[key].label!(v)
-          : `${key}: ${v}`,
+        label: fields[key]?.label ? fields[key].label!(v) : `${key}: ${v}`,
         onRemove: () => setValue(key, ""),
       }));
   }, [values, fields, setValue]);

@@ -18,8 +18,7 @@ export function useFilterState<T extends Record<string, unknown>>(
   const setFilters = useCallback(
     (newFilters: T | ((prev: T) => T)) => {
       setFiltersState((prev) => {
-        const updatedFilters =
-          typeof newFilters === "function" ? newFilters(prev) : newFilters;
+        const updatedFilters = typeof newFilters === "function" ? newFilters(prev) : newFilters;
 
         if (debounceMs && debounceMs > 0) {
           if (debounceTimerRef.current) {

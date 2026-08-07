@@ -121,7 +121,11 @@ export const WithCustomRouterLink: Story = {
 
           <Navigation.Action>
             <Button size="md" asChild>
-              <a href="/get-started" data-router-link="stand-in" onClick={(e) => e.preventDefault()}>
+              <a
+                href="/get-started"
+                data-router-link="stand-in"
+                onClick={(e) => e.preventDefault()}
+              >
                 Get started
               </a>
             </Button>

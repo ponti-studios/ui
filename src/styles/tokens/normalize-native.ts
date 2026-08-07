@@ -17,7 +17,9 @@ const makeFlat = (raw: Record<string, unknown>) => ({
   fontWeight: raw.fontWeight as number,
   lineHeight: unwrap(raw.lineHeight as DimensionValue),
   letterSpacing: unwrap(raw.letterSpacing as DimensionValue),
-  ...(raw.textTransform ? { textTransform: raw.textTransform as "uppercase" | "lowercase" | "capitalize" | "none" } : {}),
+  ...(raw.textTransform
+    ? { textTransform: raw.textTransform as "uppercase" | "lowercase" | "capitalize" | "none" }
+    : {}),
 });
 
 const generated = nativeGenerated as unknown as {
@@ -62,13 +64,13 @@ export const screenMargin = toPixels(generated["screen-margin"]);
 
 export const componentSize = Object.fromEntries(
   Object.entries(generated["component-size"]).map(([key, value]) => [key, toPixels(value)]),
-) as Record<keyof typeof generated["component-size"], number>;
+) as Record<keyof (typeof generated)["component-size"], number>;
 
 export type ComponentSizeToken = keyof typeof componentSize;
 
 export const borderRadius = Object.fromEntries(
   Object.entries(generated["border-radius"]).map(([key, value]) => [key, toPixels(value)]),
-) as Record<keyof typeof generated["border-radius"], number>;
+) as Record<keyof (typeof generated)["border-radius"], number>;
 
 export type BorderRadiusToken = keyof typeof borderRadius;
 

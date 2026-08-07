@@ -5,13 +5,7 @@ import { ActiveFiltersBar, type ActiveFiltersBarProps } from "./active-filters-b
 import { FilterSelect, type FilterSelectProps } from "./filter-select";
 import { Label } from "../primitives/label";
 
-export function FiltersSearch({
-  label,
-  children,
-}: {
-  label: string;
-  children: ReactNode;
-}) {
+export function FiltersSearch({ label, children }: { label: string; children: ReactNode }) {
   const id = `filters-search-${label.toLowerCase().replace(/\s+/g, "-")}`;
   return (
     <div className="flex-1 space-y-2">

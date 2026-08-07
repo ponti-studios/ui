@@ -29,15 +29,15 @@
     "icon": { "$value": "{radius.md}" }
   },
   "stream-item": {
-    "$description": "Shared look for stream rows (time, inbox). Mirrors what the app used to hand-roll in theme.ts.",
+    "$description": "Shared flat list-row look (Inbox, Time, Tasks) — Vercel-style dense list: full-bleed bottom divider, no radius.",
     "$type": "dimension",
-    "border-radius": { "$value": "{radius.md}" },
+    "border-radius": { "$value": { "value": 0, "unit": "rem" } },
     "border-width": { "$value": { "value": 1, "unit": "px" } },
-    "gap": { "$value": "{spacing-scale.2}" },
-    "icon-size": { "$value": "{component-size.md}" },
-    "min-height": { "$value": { "value": 50, "unit": "px" } },
-    "padding-horizontal": { "$value": "{spacing-scale.2}" },
-    "padding-vertical": { "$value": "{spacing-scale.1}" }
+    "gap": { "$value": "{spacing-scale.3}" },
+    "icon-size": { "$value": "{component-size.icon}" },
+    "min-height": { "$value": "{spacing-scale.14}" },
+    "padding-horizontal": { "$value": "{spacing-scale.4}" },
+    "padding-vertical": { "$value": "{spacing-scale.2}" }
   },
   "font-family": {
     "$type": "string",

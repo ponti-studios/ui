@@ -196,7 +196,11 @@ function UpdateGuardClient({
     updateServiceWorker,
   } = useRegisterSW({ serviceWorkerPath });
 
-  const isOnline = useSyncExternalStore(subscribeOnline, getOnlineSnapshot, getOnlineServerSnapshot);
+  const isOnline = useSyncExternalStore(
+    subscribeOnline,
+    getOnlineSnapshot,
+    getOnlineServerSnapshot,
+  );
 
   const closePrompt = () => {
     setOfflineReady(false);

@@ -5,7 +5,10 @@
  * foundations.generated.ts.
  */
 export default {
-  source: ["src/styles/tokens/source/foundations.tokens.json", "src/styles/tokens/source/native.tokens.json"],
+  source: [
+    "src/styles/tokens/source/foundations.tokens.json",
+    "src/styles/tokens/source/native.tokens.json",
+  ],
   platforms: {
     typescript: {
       transformGroup: "js",

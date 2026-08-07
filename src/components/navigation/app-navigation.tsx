@@ -26,17 +26,26 @@ export interface NavigationRootProps {
  * shape) so `Navigation.Item`'s active state and `asChild` composition
  * behave identically in both places.
  */
-function NavigationRoot({ children, ariaLabel = "Primary navigation", className }: NavigationRootProps) {
+function NavigationRoot({
+  children,
+  ariaLabel = "Primary navigation",
+  className,
+}: NavigationRootProps) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const items = React.Children.toArray(children);
-  const brand = items.find((child) => React.isValidElement(child) && child.type === NavigationBrand);
+  const brand = items.find(
+    (child) => React.isValidElement(child) && child.type === NavigationBrand,
+  );
   const rest = items.filter((child) => child !== brand);
 
   return (
     <header className="bg-background/95 supports-backdrop-filter:bg-background/60 sticky top-0 z-50 flex w-full justify-center border-b px-4 backdrop-blur">
       <nav
-        className={cn("flex min-h-14 w-full max-w-7xl items-center justify-between gap-6", className)}
+        className={cn(
+          "flex min-h-14 w-full max-w-7xl items-center justify-between gap-6",
+          className,
+        )}
         aria-label={ariaLabel}
       >
         <div className="flex min-w-0 items-center">{brand}</div>
@@ -108,7 +117,13 @@ export type NavigationItemProps = NavigationItemOwnProps &
   Omit<ComponentPropsWithoutRef<"a">, keyof NavigationItemOwnProps>;
 
 /** A single nav link, wrapped in `<li>`. Auto-closes the mobile Sheet on click when rendered there. */
-function NavigationItem({ active = false, asChild = false, className, children, ...props }: NavigationItemProps) {
+function NavigationItem({
+  active = false,
+  asChild = false,
+  className,
+  children,
+  ...props
+}: NavigationItemProps) {
   const isMobile = React.useContext(MobileMenuContext);
   const itemClassName = cn(
     "inline-flex h-9 max-h-9 shrink-0 items-center px-3 py-2 text-sm font-medium hover:bg-muted hover:text-muted-foreground data-[active]:font-semibold data-[active]:text-foreground",

@@ -47,12 +47,7 @@ export function FilterSelect({
     <div className={cn("space-y-2 min-w-36 bg-background", className)}>
       <Label htmlFor={selectId}>{label}</Label>
       <Select value={value} onValueChange={onChange} items={items}>
-        <SelectTrigger
-          id={selectId}
-          disabled={disabled}
-          aria-label={label}
-          className="w-full"
-        >
+        <SelectTrigger id={selectId} disabled={disabled} aria-label={label} className="w-full">
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent className="bg-background max-h-[250px] min-w-36 overflow-y-auto">

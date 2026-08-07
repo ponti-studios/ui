@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import { Input } from '../forms/input';
-import { FilterSelect } from './filter-select';
-import { SearchFilterBar } from './search-filter-bar';
+import { Input } from "../forms/input";
+import { FilterSelect } from "./filter-select";
+import { SearchFilterBar } from "./search-filter-bar";
 
 const meta = {
-  title: 'Filters/SearchFilterBar',
+  title: "Filters/SearchFilterBar",
   component: SearchFilterBar,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
 } satisfies Meta<typeof SearchFilterBar>;
 
 export default meta;
@@ -20,16 +20,14 @@ export const Legacy: Story = {
   render: () => (
     <div className="w-[720px]">
       <SearchFilterBar
-        activeFilters={[
-          { id: 'status', label: 'Status: Active', onRemove: () => {} },
-        ]}
+        activeFilters={[{ id: "status", label: "Status: Active", onRemove: () => {} }]}
         onClearAll={() => {}}
         search={<Input placeholder="Search..." aria-label="Search" />}
         filters={[
           <FilterSelect
             key="status"
             value="active"
-            options={[{ value: 'active', label: 'Active' }]}
+            options={[{ value: "active", label: "Active" }]}
             onChange={() => {}}
             placeholder="All"
             label="Status"

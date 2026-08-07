@@ -4,7 +4,9 @@ import { Text, View, type TextProps, type ViewProps } from "react-native";
 import { cn } from "../lib/utils";
 
 function Card({ className, ...props }: ViewProps) {
-  return <View className={cn("bg-card gap-4 rounded border border-border p-4", className)} {...props} />;
+  return (
+    <View className={cn("bg-card gap-4 rounded border border-border p-4", className)} {...props} />
+  );
 }
 
 function CardHeader({ className, ...props }: ViewProps) {

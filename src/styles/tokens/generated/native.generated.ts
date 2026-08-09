@@ -235,4 +235,32 @@ export default {
     primary: "System",
     mono: "Menlo",
   },
+  motion: {
+    duration: {
+      instant: "0ms",
+      quick: "150ms",
+      standard: "300ms",
+      deliberate: "500ms",
+    },
+    easing: {
+      enter: [0, 0, 0.2, 1],
+      exit: [0.4, 0, 1, 1],
+      inOut: [0.4, 0, 0.2, 1],
+    },
+    distance: {
+      rowEnter: "0.5rem",
+      sceneReveal: "2rem",
+    },
+    opacity: {
+      hidden: 0,
+      visible: 1,
+      disabled: 0.5,
+    },
+    interruption: {
+      policy: "cancel-and-settle",
+    },
+    reducedMotion: {
+      policy: "replace-transform-with-opacity",
+    },
+  },
 };

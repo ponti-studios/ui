@@ -1,6 +1,7 @@
 import darkTokens from "./generated/dark.colors.generated";
 import foundations from "./generated/foundations.generated";
 import lightTokens from "./generated/light.colors.generated";
+import nativeTokens from "./generated/native.generated";
 
 const toPixels = (value: string) => {
   if (value.endsWith("rem")) return Number.parseFloat(value) * 16;
@@ -62,6 +63,7 @@ export const transitionDurations = Object.fromEntries(
   Object.entries(foundations.duration).map(([key, value]) => [key, toMilliseconds(value)]),
 ) as Record<keyof typeof foundations.duration, number>;
 export const animations = foundations.animate;
+export const motion = nativeTokens.motion;
 
 export type RadiusToken = keyof typeof radii;
 export type TextSizeToken = keyof typeof textSizes;

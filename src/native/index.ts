@@ -35,3 +35,4 @@ export {
   type SpacingToken,
   type TypographyVariant,
 } from "../styles/tokens/normalize-native";
+export { motion as nativeMotion } from "../styles/tokens";

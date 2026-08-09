@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/ponti-studios/ui/compare/ui-v1.1.0...ui-v1.2.0) (2026-08-09)
+
+
+### Features
+
+* add native motion tokens ([1631c18](https://github.com/ponti-studios/ui/commit/1631c18758cdcfaf9fe05a2888a51a7ea9da7a5f))
+
 ## [1.1.0](https://github.com/ponti-studios/ui/compare/ui-v1.0.1...ui-v1.1.0) (2026-08-07)
 
 

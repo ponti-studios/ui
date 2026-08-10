@@ -41,7 +41,7 @@ export function DatePicker({
       ) : null}
       <Popover>
         <div className="flex w-full items-center">
-          <div className="border-border bg-surface-2 text-text-1 flex size-10 shrink-0 items-center justify-center rounded-l-xl border">
+          <div className="border-border bg-background text-foreground flex size-10 shrink-0 items-center justify-center rounded-l-xl border">
             <CalendarIcon className="size-4" aria-hidden />
           </div>
           <PopoverTrigger asChild>
@@ -49,7 +49,7 @@ export function DatePicker({
               id={id}
               variant={variant}
               disabled={disabled}
-              className="border-border bg-surface-2 text-text-1 placeholder:text-muted-foreground min-h-10 max-h-10 w-full justify-start rounded-l-none rounded-r-xl border-l-0 text-left font-normal"
+              className="border-border bg-background text-foreground placeholder:text-muted-foreground min-h-10 max-h-10 w-full justify-start rounded-l-none rounded-r-xl border-l-0 text-left font-normal"
             >
               {value ? format(value, dateFormat) : <span>{placeholder}</span>}
             </Button>

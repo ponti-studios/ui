@@ -6,8 +6,9 @@ import { cn } from "../../lib/utils";
 
 function Accordion({
   type,
-  collapsible: _collapsible,
+  collapsible = true,
   className,
+  onValueChange,
   ...props
 }: React.ComponentProps<typeof AccordionPrimitive.Root> & {
   type?: "single" | "multiple";
@@ -17,6 +18,14 @@ function Accordion({
     <AccordionPrimitive.Root
       data-slot="accordion"
       multiple={type === "multiple"}
+      onValueChange={(value, details) => {
+        if (type !== "multiple" && !collapsible && value.length === 0) {
+          details.cancel();
+          return;
+        }
+
+        onValueChange?.(value, details);
+      }}
       {...props}
       className={cn("w-full", className)}
     />

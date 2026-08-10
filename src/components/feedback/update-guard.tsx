@@ -225,7 +225,7 @@ function UpdateGuardClient({
     <>
       {offlineMessage ? (
         <div className="fixed inset-x-0 bottom-16 z-50 flex justify-center px-4">
-          <div className="border-border bg-surface flex items-center gap-3 rounded-md border px-4 py-2">
+          <div className="border-border bg-card flex items-center gap-3 rounded-md border px-4 py-2">
             <span className="text-foreground text-sm">{offlineMessage}</span>
           </div>
         </div>
@@ -233,7 +233,7 @@ function UpdateGuardClient({
 
       {offlineReady || needRefresh ? (
         <div className="fixed inset-x-0 bottom-4 z-50 flex justify-center px-4">
-          <div className="border-border bg-surface flex items-center gap-3 rounded-md border px-4 py-2">
+          <div className="border-border bg-card flex items-center gap-3 rounded-md border px-4 py-2">
             <span className="text-foreground text-sm">
               {offlineReady
                 ? (copy?.offlineReady ?? "App ready to work offline")

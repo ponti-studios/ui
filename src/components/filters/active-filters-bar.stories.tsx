@@ -26,6 +26,7 @@ export const Default: Story = {
       { id: "1", label: "Status: Active", onRemove: fn() },
       { id: "2", label: "Created after Jan 1", onRemove: fn() },
     ],
+    onClearAll: fn(),
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -62,6 +63,7 @@ export const WithClearAll: Story = {
 export const WithSortOnly: Story = {
   args: {
     filters: [{ id: "1", label: "Date", onRemove: fn(), variant: "sort", direction: "desc" }],
+    onClearAll: fn(),
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);

@@ -2,6 +2,7 @@ import { Combobox as CommandPrimitive } from "@base-ui/react/combobox";
 import { SearchIcon } from "lucide-react";
 import * as React from "react";
 
+import { cn } from "../../lib/utils";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "./dialog";
 
 function Command({
@@ -14,7 +15,10 @@ function Command({
   return (
     <div
       data-slot="command"
-      className={`bg-popover text-popover-foreground flex h-full w-full flex-col overflow-hidden rounded-md ${className ?? ""}`}
+      className={cn(
+        "bg-popover text-popover-foreground flex h-full w-full flex-col overflow-hidden rounded-md",
+        className,
+      )}
     >
       <CommandPrimitive.Root {...props}>{children}</CommandPrimitive.Root>
     </div>
@@ -63,7 +67,11 @@ function CommandInput({
       <CommandPrimitive.Input
         data-slot="command-input"
         aria-label={ariaLabel}
-        className={`placeholder:text-muted-foreground flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-hidden disabled:cursor-not-allowed disabled:opacity-50 ${className ?? ""}`}
+        className={cn(
+          "placeholder:text-muted-foreground flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-hidden",
+          "disabled:cursor-not-allowed disabled:opacity-50",
+          className,
+        )}
         onChange={(event) => {
           onChange?.(event);
           onValueChange?.(event.currentTarget.value);
@@ -74,14 +82,18 @@ function CommandInput({
   );
 }
 
-function CommandList({ children, ...props }: React.ComponentProps<typeof CommandPrimitive.List>) {
+function CommandList({
+  children,
+  className,
+  ...props
+}: React.ComponentProps<typeof CommandPrimitive.List>) {
   if (typeof children === "function") {
     return (
       <CommandPrimitive.List
         data-slot="command-list"
         aria-label="Command results"
         tabIndex={0}
-        className="max-h-75 scroll-py-1 overflow-x-hidden overflow-y-auto"
+        className={cn("max-h-75 scroll-py-1 overflow-x-hidden overflow-y-auto", className)}
         {...props}
       >
         {children}
@@ -103,7 +115,7 @@ function CommandList({ children, ...props }: React.ComponentProps<typeof Command
         data-slot="command-list"
         aria-label="Command results"
         tabIndex={0}
-        className="max-h-75 scroll-py-1 overflow-x-hidden overflow-y-auto"
+        className={cn("max-h-75 scroll-py-1 overflow-x-hidden overflow-y-auto", className)}
         {...props}
       >
         {listChildren}
@@ -113,11 +125,14 @@ function CommandList({ children, ...props }: React.ComponentProps<typeof Command
   );
 }
 
-function CommandEmpty({ ...props }: React.ComponentProps<typeof CommandPrimitive.Empty>) {
+function CommandEmpty({
+  className,
+  ...props
+}: React.ComponentProps<typeof CommandPrimitive.Empty>) {
   return (
     <CommandPrimitive.Empty
       data-slot="command-empty"
-      className="py-6 text-center text-sm"
+      className={cn("py-6 text-center text-sm", className)}
       {...props}
     />
   );
@@ -132,7 +147,7 @@ function CommandGroup({
   return (
     <CommandPrimitive.Group
       data-slot="command-group"
-      className={`text-foreground overflow-hidden p-1 ${className ?? ""}`}
+      className={cn("text-foreground overflow-hidden p-1", className)}
       {...props}
     >
       {heading ? (
@@ -153,7 +168,11 @@ function CommandItem({ className, onSelect, onClick, ...props }: CommandItemProp
   return (
     <CommandPrimitive.Item
       data-slot="command-item"
-      className={`data-highlighted:bg-muted data-highlighted:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-md px-2 py-1.5 text-sm outline-hidden select-none data-disabled:pointer-events-none data-disabled:opacity-50 ${className ?? ""}`}
+      className={cn(
+        "data-highlighted:bg-muted data-highlighted:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-md px-2 py-1.5 text-sm outline-hidden select-none",
+        "data-disabled:pointer-events-none data-disabled:opacity-50",
+        className,
+      )}
       onClick={(event) => {
         onClick?.(event);
         onSelect?.();
@@ -168,24 +187,30 @@ function CommandSeparator({ className, ...props }: React.ComponentProps<"div">) 
     <div
       data-slot="command-separator"
       aria-hidden="true"
-      className={`bg-border -mx-1 h-px ${className ?? ""}`}
+      className={cn("bg-border -mx-1 h-px", className)}
       {...props}
     />
   );
 }
 
-function CommandShortcut(props: React.ComponentProps<"span">) {
+function CommandShortcut({ className, ...props }: React.ComponentProps<"span">) {
   return (
     <span
       data-slot="command-shortcut"
-      className="text-muted-foreground ml-auto text-xs tracking-widest"
+      className={cn("text-muted-foreground ml-auto text-xs tracking-widest", className)}
       {...props}
     />
   );
 }
 
-function CommandListLoading(props: React.ComponentProps<"div">) {
-  return <div data-slot="command-list-loading" className="py-6 text-center text-sm" {...props} />;
+function CommandListLoading({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="command-list-loading"
+      className={cn("py-6 text-center text-sm", className)}
+      {...props}
+    />
+  );
 }
 
 export {

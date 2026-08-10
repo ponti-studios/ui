@@ -78,17 +78,6 @@ export function DropZone({
     [triggerFileInput],
   );
 
-  const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent<HTMLButtonElement>) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        e.stopPropagation();
-        triggerFileInput();
-      }
-    },
-    [triggerFileInput],
-  );
-
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       e.stopPropagation();
@@ -119,7 +108,6 @@ export function DropZone({
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         onClick={handleClick}
-        onKeyDown={handleKeyDown}
         tabIndex={isImporting ? -1 : 0}
         aria-disabled={isImporting}
         aria-label="Upload file area. Press Enter or Space to open file browser"

@@ -33,31 +33,29 @@ export function ActiveFiltersBar({ filters, className, onClearAll }: ActiveFilte
       <span className="text-muted-foreground shrink-0 self-stretch flex items-center text-sm border-r px-4">
         Filters
       </span>
-      <div
-        role="list"
-        className="flex flex-1 min-w-0 items-center gap-2 overflow-x-auto scroll-fade-x pl-4 py-1.5"
-      >
+      <ul className="flex flex-1 min-w-0 items-center gap-2 overflow-x-auto scroll-fade-x pl-4 py-1.5">
         {filters.map((filter) => (
-          <FilterChip
-            key={filter.id}
-            role="listitem"
-            className="shrink-0"
-            label={filter.label}
-            onRemove={filter.onRemove}
-            onClick={filter.onClick}
-            variant={filter.variant === "sort" ? "sort" : "default"}
-            direction={filter.direction}
-          />
+          <li key={filter.id} className="shrink-0">
+            <FilterChip
+              label={filter.label}
+              onRemove={filter.onRemove}
+              onClick={filter.onClick}
+              variant={filter.variant === "sort" ? "sort" : "default"}
+              direction={filter.direction}
+            />
+          </li>
         ))}
-      </div>
-      <button
-        type="button"
-        onClick={onClearAll}
-        className="hover:bg-muted text-muted-foreground hover:text-foreground inline-flex shrink-0 items-center justify-center self-stretch aspect-square rounded-r-lg border-l border-border transition-colors"
-        aria-label="Clear all"
-      >
-        <X className="size-4" />
-      </button>
+      </ul>
+      {onClearAll ? (
+        <button
+          type="button"
+          onClick={onClearAll}
+          className="hover:bg-muted text-muted-foreground hover:text-foreground focus-visible:ring-ring inline-flex shrink-0 items-center justify-center self-stretch aspect-square rounded-r-lg border-l border-border transition-colors focus-visible:ring-2 focus-visible:outline-none"
+          aria-label="Clear all"
+        >
+          <X className="size-4" aria-hidden />
+        </button>
+      ) : null}
     </div>
   );
 }

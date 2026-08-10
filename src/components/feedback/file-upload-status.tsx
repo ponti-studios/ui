@@ -1,7 +1,6 @@
 import { XIcon } from "lucide-react";
 import { memo } from "react";
 
-import { cn } from "../../lib/utils";
 import { ProgressBar } from "./progress-bar";
 
 export interface FileUploadStats {
@@ -47,11 +46,12 @@ export const FileUploadStatus = memo(function FileUploadStatus({
           {typeof progress === "number" ? (
             <ProgressBar
               progress={progress}
-              className={cn("bg-muted h-2", "before:bg-emphasis-high")}
+              className="bg-muted h-2"
+              indicatorClassName="border-primary"
             />
           ) : (
             <div className="bg-muted h-2 overflow-hidden">
-              <div className="bg-emphasis-high void-anim-breezy-progress h-full" />
+              <div className="bg-primary void-anim-breezy-progress h-full" />
             </div>
           )}
         </div>
@@ -66,7 +66,11 @@ export const FileUploadStatus = memo(function FileUploadStatus({
           <span className="text-muted-foreground text-sm font-medium">Queue position</span>
         </div>
         <div className="w-full">
-          <ProgressBar progress={0} className="bg-warning-subtle before:bg-warning h-2" />
+          <ProgressBar
+            progress={0}
+            className="bg-warning/10 h-2"
+            indicatorClassName="border-warning"
+          />
         </div>
       </output>
     );
@@ -76,7 +80,11 @@ export const FileUploadStatus = memo(function FileUploadStatus({
     return (
       <output className="space-y-3">
         <div className="w-full">
-          <ProgressBar progress={100} className="bg-emphasis-minimal before:bg-emphasis-high h-2" />
+          <ProgressBar
+            progress={100}
+            className="bg-muted h-2"
+            indicatorClassName="border-primary"
+          />
         </div>
         {stats && <ProcessingStats stats={stats} />}
       </output>
@@ -87,7 +95,7 @@ export const FileUploadStatus = memo(function FileUploadStatus({
     return (
       <output className="mt-2" role="alert">
         <div className="bg-destructive/10 text-destructive-text flex items-start gap-2 p-3">
-          <XIcon className="mt-0.5 h-5 w-5 flex-shrink-0" aria-hidden="true" />
+          <XIcon className="mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />
           <span className="text-sm">{error}</span>
         </div>
       </output>

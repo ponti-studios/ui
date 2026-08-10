@@ -21,7 +21,7 @@ export function SectionIntro({ eyebrow, title, description, actions }: SectionIn
           </div>
         ) : null}
         <div className="space-y-3">
-          <h1 className="text-title-2 text-foreground font-semibold tracking-tight">{title}</h1>
+          <h1 className="text-2xl text-foreground font-semibold tracking-tight">{title}</h1>
           {description ? <p className="text-muted-foreground text-sm">{description}</p> : null}
         </div>
       </div>

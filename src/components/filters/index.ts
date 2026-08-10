@@ -4,7 +4,3 @@ export { FilterChip } from "./filter-chip";
 export type { FilterChipProps } from "./filter-chip";
 export { FilterSelect } from "./filter-select";
 export type { FilterSelectOption, FilterSelectProps } from "./filter-select";
-export { Filters } from "./filters";
-export type { FiltersProps } from "./filters";
-export { SearchFilterBar } from "./search-filter-bar";
-export type { SearchFilterBarProps } from "./search-filter-bar";

@@ -23,7 +23,7 @@ export const Default: Story = {
   args: {
     hideInDev: false,
     children: (
-      <div className="border-border bg-surface text-muted-foreground rounded-md border p-6 text-sm">
+      <div className="border-border bg-card text-muted-foreground rounded-md border p-6 text-sm">
         App content renders here. Offline/update prompts appear fixed to the bottom of the viewport
         when the service worker reports a change.
       </div>

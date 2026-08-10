@@ -25,12 +25,24 @@ export const Default: Story = {
         </div>
         <div className="grid gap-4 pt-4">
           <div className="grid grid-cols-3 items-center gap-4">
-            <label className="text-sm">Width</label>
-            <input className="col-span-2 h-8 rounded border px-2 text-sm" defaultValue="100%" />
+            <label htmlFor="popover-width" className="text-sm">
+              Width
+            </label>
+            <input
+              id="popover-width"
+              className="col-span-2 h-8 rounded border px-2 text-sm"
+              defaultValue="100%"
+            />
           </div>
           <div className="grid grid-cols-3 items-center gap-4">
-            <label className="text-sm">Height</label>
-            <input className="col-span-2 h-8 rounded border px-2 text-sm" defaultValue="25px" />
+            <label htmlFor="popover-height" className="text-sm">
+              Height
+            </label>
+            <input
+              id="popover-height"
+              className="col-span-2 h-8 rounded border px-2 text-sm"
+              defaultValue="25px"
+            />
           </div>
         </div>
       </PopoverContent>

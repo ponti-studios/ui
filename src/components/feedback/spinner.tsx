@@ -9,7 +9,7 @@ const sizeClasses = {
   xl: "size-12",
 } as const;
 
-export interface SpinnerProps extends React.ComponentProps<"div"> {
+export interface SpinnerProps extends React.ComponentProps<"output"> {
   label?: string | false;
   presentation?: "inline" | "centered";
   size?: keyof typeof sizeClasses;
@@ -25,13 +25,12 @@ export function Spinner({
   const accessibleLabel = typeof label === "string" ? label : "Loading";
 
   return (
-    <div
+    <output
       className={cn(
         "inline-flex items-center justify-center gap-2",
         presentation === "centered" && "flex w-full py-12",
         className,
       )}
-      role="status"
       aria-label={accessibleLabel}
       {...props}
     >
@@ -43,6 +42,6 @@ export function Spinner({
         aria-hidden="true"
       />
       {label && <span className="text-muted-foreground text-xs">{label}</span>}
-    </div>
+    </output>
   );
 }

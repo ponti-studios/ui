@@ -14,6 +14,7 @@ export interface FilterSelectProps {
   onChange: (value: string) => void;
   options: FilterSelectOption[];
   label: string;
+  loadingText?: string;
   placeholder?: string;
   disabled?: boolean;
   isLoading?: boolean;
@@ -29,6 +30,7 @@ export function FilterSelect({
   value,
   options,
   onChange,
+  loadingText = "Loading...",
   placeholder = "All",
   disabled = false,
   isLoading = false,
@@ -44,7 +46,7 @@ export function FilterSelect({
   );
 
   return (
-    <div className={cn("space-y-2 min-w-36 bg-background", className)}>
+    <div className={cn("space-y-2 min-w-36", className)}>
       <Label htmlFor={selectId}>{label}</Label>
       <Select value={value} onValueChange={onChange} items={items}>
         <SelectTrigger id={selectId} disabled={disabled} aria-label={label} className="w-full">
@@ -53,7 +55,7 @@ export function FilterSelect({
         <SelectContent className="bg-background max-h-[250px] min-w-36 overflow-y-auto">
           <SelectItem value={ALL_VALUE}>{placeholder}</SelectItem>
           {isLoading ? (
-            <div className="text-muted-foreground px-2 py-1.5 text-sm">Loading…</div>
+            <div className="text-muted-foreground px-2 py-1.5 text-sm">{loadingText}</div>
           ) : options.length === 0 ? (
             <div className="text-muted-foreground px-2 py-1.5 text-sm">{emptyLabel}</div>
           ) : (

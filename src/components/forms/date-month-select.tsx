@@ -42,7 +42,7 @@ export function DateMonthSelect({
 
   return (
     <div className="flex items-center">
-      <div className="flex items-center justify-center size-10 border rounded-l-xl bg-surface-2 text-text-1">
+      <div className="border-border bg-background text-foreground flex size-10 items-center justify-center rounded-l-xl border">
         <Calendar className="size-4" />
       </div>
       <Select
@@ -51,7 +51,7 @@ export function DateMonthSelect({
       >
         <SelectTrigger
           className={cn(
-            "rounded-r-xl rounded-l-none min-h-10 max-h-10 bg-surface-2 text-text-1 border-l-0",
+            "border-border bg-background text-foreground min-h-10 max-h-10 rounded-l-none rounded-r-xl border-l-0",
             className,
           )}
           aria-label={placeholder}

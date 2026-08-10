@@ -40,7 +40,7 @@ export function EmptyState({
         variant === "default" && "bg-card border",
         variant === "dashed" && "bg-card border border-dashed",
         variant === "search" && "bg-muted border border-dashed",
-        variant === "quiet" && "bg-surface",
+        variant === "quiet" && "bg-card",
         centered
           ? cn(
               "flex flex-col items-center justify-center text-center",

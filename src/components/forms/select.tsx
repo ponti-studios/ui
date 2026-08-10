@@ -67,7 +67,7 @@ function SelectTrigger({
 function SelectContent({
   className,
   children,
-  position: _position = "item-aligned",
+  position: _position = "popper",
   ...props
 }: React.ComponentProps<typeof SelectPrimitive.Popup> & {
   position?: "item-aligned" | "popper";
@@ -81,7 +81,7 @@ function SelectContent({
         <SelectPrimitive.Popup
           data-slot="select-content"
           className={cn(
-            "bg-background text-popover-foreground data-open:animate-in data-closed:animate-out data-closed:zoom-out-95 data-open:zoom-in-95 relative z-50 max-h-(--available-height) min-w-32 origin-(--transform-origin) overflow-x-hidden overflow-y-auto rounded-md border p-1 outline-none",
+            "bg-background text-popover-foreground data-open:animate-in data-closed:animate-out data-closed:zoom-out-95 data-open:zoom-in-95 relative z-50 max-h-(--available-height) min-w-(--anchor-width) origin-(--transform-origin) overflow-x-hidden overflow-y-auto rounded-md border p-1 outline-none",
             className,
           )}
           {...props}

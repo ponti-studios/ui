@@ -27,18 +27,21 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
   ) => (
     <SliderPrimitive.Root
       ref={ref}
-      className={cn("relative flex w-full touch-none items-center select-none", className)}
       {...props}
       onValueChange={(value) => onValueChange?.(Array.isArray(value) ? [...value] : [value])}
     >
-      <SliderPrimitive.Track className="bg-muted relative h-2 w-full grow overflow-hidden rounded-full">
-        <SliderPrimitive.Indicator className="bg-primary absolute h-full" />
-      </SliderPrimitive.Track>
-      <SliderPrimitive.Thumb
-        aria-label={ariaLabel ?? "Slider"}
-        aria-labelledby={ariaLabelledby}
-        className="border-border focus-visible:border-ring focus-visible:bg-primary focus-visible:ring-ring bg-background block h-6 w-6 rounded-full border shadow-sm ring-1 ring-border/5 transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
-      />
+      <SliderPrimitive.Control
+        className={cn("relative flex w-full touch-none items-center py-2 select-none", className)}
+      >
+        <SliderPrimitive.Track className="bg-muted relative h-2 w-full grow rounded-full">
+          <SliderPrimitive.Indicator className="bg-primary absolute h-full rounded-full" />
+          <SliderPrimitive.Thumb
+            aria-label={ariaLabel ?? "Slider"}
+            aria-labelledby={ariaLabelledby}
+            className="border-border focus-visible:border-ring focus-visible:bg-primary focus-visible:ring-ring bg-background z-10 block h-6 w-6 rounded-full border shadow-sm ring-1 ring-border/5 transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
+          />
+        </SliderPrimitive.Track>
+      </SliderPrimitive.Control>
     </SliderPrimitive.Root>
   ),
 );

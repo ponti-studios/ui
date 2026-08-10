@@ -9,7 +9,7 @@ const meta: Meta<typeof Slider> = {
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <div className="w-full max-w-sm px-1">
+      <div className="w-80 px-1">
         <Story />
       </div>
     ),
@@ -48,7 +48,7 @@ export const Controlled: Story = {
   render: () => {
     const [value, setValue] = React.useState([33]);
     return (
-      <div className="w-full max-w-sm space-y-4 px-1">
+      <div className="w-80 space-y-4 px-1">
         <Slider aria-label="Volume" value={value} onValueChange={setValue} min={0} max={100} />
         <div className="flex justify-between text-sm">
           <span className="text-muted-foreground">Volume</span>

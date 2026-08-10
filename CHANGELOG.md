@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/ponti-studios/ui/compare/ui-v1.2.0...ui-v1.3.0) (2026-08-10)
+
+
+### Features
+
+* **forms:** improve drop zone and form controls ([d4a7c43](https://github.com/ponti-studios/ui/commit/d4a7c4367b3ad377ad2858d91fe7ed69192b0b6e))
+
 ## [1.2.0](https://github.com/ponti-studios/ui/compare/ui-v1.1.0...ui-v1.2.0) (2026-08-09)
 
 

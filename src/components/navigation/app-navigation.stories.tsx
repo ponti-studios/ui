@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import * as React from "react";
+import { userEvent, within } from "storybook/test";
 
 import { Button } from "../primitives/button";
 import { Navigation } from "./app-navigation";
@@ -172,4 +173,45 @@ export const WithExtraContent: Story = {
       <PageContent message="A search input sits directly between the link list and the action area — no endContent prop needed." />
     </>
   ),
+};
+
+/**
+ * `@internal` — undocumented Nokia 3310-style LCD skin for the mobile Sheet
+ * menu, opted into via `variant="nokia"`. Only affects the mobile Sheet, so
+ * this story forces a mobile viewport and auto-opens the menu trigger.
+ */
+export const Nokia: Story = {
+  parameters: {
+    viewport: { defaultViewport: "mobile1" },
+    chromatic: { viewports: [375] },
+  },
+  render: () => (
+    <>
+      <Navigation variant="nokia">
+        <Navigation.Brand>
+          <a href="/">Acme</a>
+        </Navigation.Brand>
+
+        <Navigation.List>
+          {defaultLinks.map((link) => (
+            <Navigation.Item key={link.href} href={link.href} active={link.href === "/pricing"}>
+              {link.label}
+            </Navigation.Item>
+          ))}
+        </Navigation.List>
+
+        <Navigation.Action>
+          <Button size="md" asChild>
+            <a href="/get-started">Get started</a>
+          </Button>
+        </Navigation.Action>
+      </Navigation>
+      <PageContent message="Open the menu button to see the Nokia 3310-style LCD skin." />
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const trigger = canvas.getByRole("button", { name: /open menu/i });
+    await userEvent.click(trigger);
+  },
 };

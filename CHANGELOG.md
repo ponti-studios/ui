@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/ponti-studios/ui/compare/ui-v1.3.0...ui-v1.4.0) (2026-08-12)
+
+
+### Features
+
+* **navigation:** add undocumented nokia LCD variant ([6b4d71f](https://github.com/ponti-studios/ui/commit/6b4d71ffb30ce7f7434ad52edb02dc6d545a2cde))
+
 ## [1.3.0](https://github.com/ponti-studios/ui/compare/ui-v1.2.0...ui-v1.3.0) (2026-08-10)
 
 

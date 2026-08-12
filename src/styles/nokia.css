@@ -3,14 +3,12 @@
  * skin for the mobile Sheet menu. Not part of the public API surface (no
  * README/Storybook entry); opt in via `<Navigation variant="nokia">`.
  */
-@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
-
 @theme {
   --color-nokia-screen: #c8d6a6;
   --color-nokia-screen-deep: #b0c188;
   --color-nokia-ink: #26331b;
   --color-nokia-bezel: #1a1a1a;
-  --font-nokia: "VT323", "Courier New", monospace;
+  --font-nokia: ui-monospace, "SF Mono", "Courier New", monospace;
 }
 
 /* No `position: relative` here — SheetContent is `position: fixed` via its

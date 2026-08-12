@@ -18,6 +18,7 @@
 @import "./tokens/generated/light.css";
 @import "./tokens/generated/dark.css" (prefers-color-scheme: dark);
 @import "./animations.css";
+@import "./nokia.css";
 
 @theme {
   --animate-accordion-down: accordion-down 200ms ease-out;

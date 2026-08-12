@@ -7,13 +7,36 @@ import { Slot } from "../../lib/slot";
 import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from "../overlays/sheet";
 import { Button } from "../primitives/button";
 
-/** True while rendering inside the mobile Sheet copy of the nav content. */
-const MobileMenuContext = React.createContext(false);
+type MobileMenuState = {
+  /** True while rendering inside the mobile Sheet copy of the nav content. */
+  isMobile: boolean;
+  variant?: NavigationVariant;
+};
+
+const MobileMenuContext = React.createContext<MobileMenuState>({ isMobile: false });
+
+/** @internal Undocumented — not part of the public API surface. */
+type NavigationVariant = "nokia";
+
+// Nokia 3310-style monochrome LCD skin for the mobile Sheet. See
+// src/styles/nokia.css for the palette/font tokens and scanline texture.
+const NOKIA_SHEET_CLASSNAME =
+  "nokia-screen rounded-none border-[6px] border-nokia-bezel bg-nokia-screen p-4 font-nokia text-nokia-ink shadow-[0_0_0_3px_var(--color-nokia-screen-deep),0_10px_30px_-6px_rgba(0,0,0,0.65)]";
+const NOKIA_SHEET_CLOSE_CLASSNAME =
+  "text-nokia-ink hover:bg-nokia-ink hover:text-nokia-screen rounded-none border-2 border-nokia-ink";
+const NOKIA_LIST_CLASSNAME = "!grid grid-cols-3 gap-3";
+const NOKIA_ITEM_CLASSNAME =
+  "!h-auto !max-h-none w-full flex-col justify-center gap-1 rounded-none border-2 border-nokia-ink/40 px-2 py-3 text-center font-nokia text-base tracking-widest uppercase hover:bg-transparent active:bg-nokia-ink active:text-nokia-screen data-[active]:border-nokia-ink data-[active]:bg-nokia-ink data-[active]:text-nokia-screen";
 
 export interface NavigationRootProps {
   children: ReactNode;
   ariaLabel?: string;
   className?: string;
+  /**
+   * @internal Undocumented mobile-Sheet skin, not part of the public API
+   * (no README/Storybook entry). Opt in at your own risk.
+   */
+  variant?: NavigationVariant;
 }
 
 /**
@@ -30,8 +53,10 @@ function NavigationRoot({
   children,
   ariaLabel = "Primary navigation",
   className,
+  variant,
 }: NavigationRootProps) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const isNokia = variant === "nokia";
 
   const items = React.Children.toArray(children);
   const brand = items.find(
@@ -63,10 +88,15 @@ function NavigationRoot({
                 <Menu className="size-4" aria-hidden="true" />
               </Button>
             </SheetTrigger>
-            <SheetContent>
+            <SheetContent
+              className={isNokia ? NOKIA_SHEET_CLASSNAME : undefined}
+              closeClassName={isNokia ? NOKIA_SHEET_CLOSE_CLASSNAME : undefined}
+            >
               <SheetTitle className="sr-only">Navigation menu</SheetTitle>
               <div className="mt-8 flex flex-1 flex-col gap-4">
-                <MobileMenuContext.Provider value={true}>{rest}</MobileMenuContext.Provider>
+                <MobileMenuContext.Provider value={{ isMobile: true, variant }}>
+                  {rest}
+                </MobileMenuContext.Provider>
               </div>
             </SheetContent>
           </Sheet>
@@ -93,12 +123,14 @@ export interface NavigationListProps {
 
 /** Semantic `<ul>` of `Navigation.Item`s. Lays out horizontally on desktop, stacks inside the mobile Sheet. */
 function NavigationList({ children, className }: NavigationListProps) {
-  const isMobile = React.useContext(MobileMenuContext);
+  const { isMobile, variant } = React.useContext(MobileMenuContext);
+  const isNokia = isMobile && variant === "nokia";
   return (
     <ul
       className={cn(
         "flex items-center gap-1",
         isMobile && "flex-col items-stretch gap-1",
+        isNokia && NOKIA_LIST_CLASSNAME,
         className,
       )}
     >
@@ -124,9 +156,11 @@ function NavigationItem({
   children,
   ...props
 }: NavigationItemProps) {
-  const isMobile = React.useContext(MobileMenuContext);
+  const { isMobile, variant } = React.useContext(MobileMenuContext);
+  const isNokia = isMobile && variant === "nokia";
   const itemClassName = cn(
     "inline-flex h-9 max-h-9 shrink-0 items-center px-3 py-2 text-sm font-medium hover:bg-muted hover:text-muted-foreground data-[active]:font-semibold data-[active]:text-foreground",
+    isNokia && NOKIA_ITEM_CLASSNAME,
     className,
   );
 
@@ -166,12 +200,14 @@ export interface NavigationActionProps {
  * for a link that should close the menu when tapped.
  */
 function NavigationAction({ children, className }: NavigationActionProps) {
-  const isMobile = React.useContext(MobileMenuContext);
+  const { isMobile, variant } = React.useContext(MobileMenuContext);
+  const isNokia = isMobile && variant === "nokia";
   return (
     <div
       className={cn(
         "flex items-center gap-3",
         isMobile && "mt-2 flex-col items-stretch gap-3 border-t pt-4",
+        isNokia && "border-nokia-ink/40",
         className,
       )}
     >

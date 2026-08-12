@@ -72,12 +72,15 @@ const sheetClassName = [
   "md:w-3/4 md:max-w-sm md:min-h-0",
 ];
 
-interface SheetContentProps extends React.ComponentPropsWithoutRef<typeof SheetPrimitive.Popup> {}
+interface SheetContentProps extends React.ComponentPropsWithoutRef<typeof SheetPrimitive.Popup> {
+  /** Applied to the built-in close button, alongside its default styling. */
+  closeClassName?: string;
+}
 
 const SheetContent = React.forwardRef<
   React.ComponentRef<typeof SheetPrimitive.Popup>,
   SheetContentProps
->(({ className, children, ...props }, ref) => (
+>(({ className, closeClassName, children, ...props }, ref) => (
   <SheetPortal>
     <SheetOverlay />
     <SheetPrimitive.Popup
@@ -86,7 +89,12 @@ const SheetContent = React.forwardRef<
       className={cn(sheetClassName, className)}
       {...props}
     >
-      <SheetPrimitive.Close className="text-muted-foreground hover:bg-muted hover:text-muted-foreground focus-visible:outline-ring absolute top-3 right-3 inline-flex size-9 items-center justify-center rounded-md border border-transparent transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none md:top-4 md:right-4">
+      <SheetPrimitive.Close
+        className={cn(
+          "text-muted-foreground hover:bg-muted hover:text-muted-foreground focus-visible:outline-ring absolute top-3 right-3 inline-flex size-9 items-center justify-center rounded-md border border-transparent transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none md:top-4 md:right-4",
+          closeClassName,
+        )}
+      >
         <X className="size-4.5" />
         <span className="sr-only">Close</span>
       </SheetPrimitive.Close>

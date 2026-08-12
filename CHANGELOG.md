@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.1](https://github.com/ponti-studios/ui/compare/ui-v1.5.0...ui-v1.5.1) (2026-08-12)
+
+
+### Bug Fixes
+
+* select field value ([0c1531f](https://github.com/ponti-studios/ui/commit/0c1531fe8473747478cf10010a7590b2576090f0))
+
 ## [1.5.0](https://github.com/ponti-studios/ui/compare/ui-v1.4.0...ui-v1.5.0) (2026-08-12)
 
 

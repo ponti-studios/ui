@@ -56,7 +56,7 @@ export function DatePicker({
           </PopoverTrigger>
         </div>
         <PopoverContent className="bg-popover w-auto p-0" align={popoverAlign}>
-          <Calendar mode="single" selected={value} onSelect={onSelect} />
+          <Calendar mode="single" selected={value} defaultMonth={value} onSelect={onSelect} />
         </PopoverContent>
       </Popover>
     </div>

@@ -6,22 +6,19 @@ import { cn } from "../../lib/utils";
 
 type SelectProps = Omit<
   React.ComponentProps<typeof SelectPrimitive.Root<string>>,
-  "onValueChange" | "value" | "defaultValue"
+  "value" | "defaultValue"
 > & {
-  value?: string;
-  defaultValue?: string;
-  onValueChange?: (value: string) => void;
+  value?: string | null;
+  defaultValue?: string | null;
 };
 
-function Select({ onValueChange, ...props }: SelectProps) {
+function Select({ children, items, ...props }: SelectProps) {
+  const resolvedItems = items ?? getItemsFromChildren(children);
+
   return (
-    <SelectPrimitive.Root
-      data-slot="select"
-      {...props}
-      onValueChange={(value) => {
-        if (value !== null) onValueChange?.(value);
-      }}
-    />
+    <SelectPrimitive.Root data-slot="select" items={resolvedItems} {...props}>
+      {children}
+    </SelectPrimitive.Root>
   );
 }
 
@@ -127,6 +124,33 @@ function SelectItem({
       <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
     </SelectPrimitive.Item>
   );
+}
+
+function getItemsFromChildren(children: React.ReactNode): Record<string, React.ReactNode> {
+  const items: Record<string, React.ReactNode> = {};
+
+  React.Children.forEach(children, (child) => {
+    if (!React.isValidElement(child)) return;
+
+    const element = child as React.ReactElement<{
+      children?: React.ReactNode;
+      value?: unknown;
+    }>;
+
+    if (element.type === SelectItem) {
+      const value = element.props.value;
+      if (typeof value === "string") {
+        items[value] = element.props.children;
+      }
+      return;
+    }
+
+    if (element.props.children) {
+      Object.assign(items, getItemsFromChildren(element.props.children));
+    }
+  });
+
+  return items;
 }
 
 function SelectScrollUpButton({ className, ...props }: React.ComponentProps<"div">) {

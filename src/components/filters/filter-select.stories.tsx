@@ -25,7 +25,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: { value: "" },
+  args: { value: null },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const trigger = canvas.getByRole("combobox", { name: "Status" });
@@ -44,7 +44,7 @@ export const WithValue: Story = {
 };
 
 export const Loading: Story = {
-  args: { value: "", isLoading: true, options: [] },
+  args: { value: null, isLoading: true, options: [] },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await expect(canvas.getByRole("combobox", { name: "Status" })).toBeInTheDocument();
@@ -53,7 +53,7 @@ export const Loading: Story = {
 };
 
 export const Empty: Story = {
-  args: { value: "", options: [], emptyLabel: "No statuses found" },
+  args: { value: null, options: [], emptyLabel: "No statuses found" },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await expect(canvas.getByRole("combobox", { name: "Status" })).toBeInTheDocument();

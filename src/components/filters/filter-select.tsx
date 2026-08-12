@@ -1,8 +1,8 @@
 import { useId, useMemo } from "react";
 
 import { cn } from "../../lib/utils";
-import { Label } from "../primitives/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../forms/select";
+import { Label } from "../primitives/label";
 
 export interface FilterSelectOption {
   value: string;
@@ -10,8 +10,8 @@ export interface FilterSelectOption {
 }
 
 export interface FilterSelectProps {
-  value: string;
-  onChange: (value: string) => void;
+  value: string | null;
+  onChange: (value: string | null) => void;
   options: FilterSelectOption[];
   label: string;
   loadingText?: string;
@@ -22,8 +22,6 @@ export interface FilterSelectProps {
   className?: string;
   id?: string;
 }
-
-const ALL_VALUE = "";
 
 export function FilterSelect({
   label,
@@ -41,7 +39,7 @@ export function FilterSelect({
   const generatedId = useId();
   const selectId = id ?? generatedId;
   const items = useMemo(
-    () => [{ value: ALL_VALUE, label: placeholder }, ...options],
+    () => [{ value: null, label: placeholder }, ...options],
     [options, placeholder],
   );
 
@@ -53,7 +51,7 @@ export function FilterSelect({
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent className="bg-background max-h-[250px] min-w-36 overflow-y-auto">
-          <SelectItem value={ALL_VALUE}>{placeholder}</SelectItem>
+          <SelectItem>{placeholder}</SelectItem>
           {isLoading ? (
             <div className="text-muted-foreground px-2 py-1.5 text-sm">{loadingText}</div>
           ) : options.length === 0 ? (

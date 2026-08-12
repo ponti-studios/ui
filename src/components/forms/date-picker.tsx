@@ -55,7 +55,11 @@ export function DatePicker({
             </Button>
           </PopoverTrigger>
         </div>
-        <PopoverContent className="bg-popover w-auto p-0" align={popoverAlign}>
+        <PopoverContent
+          className="bg-popover w-auto p-0"
+          align={popoverAlign}
+          aria-label={label ?? "Choose a date"}
+        >
           <Calendar mode="single" selected={value} defaultMonth={value} onSelect={onSelect} />
         </PopoverContent>
       </Popover>

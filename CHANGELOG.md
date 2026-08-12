@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.5.0](https://github.com/ponti-studios/ui/compare/ui-v1.4.0...ui-v1.5.0) (2026-08-12)
+
+
+### Features
+
+* **forms:** add DateField with hidden-input date and range support ([9a1be49](https://github.com/ponti-studios/ui/commit/9a1be49584c317582751ec50aaee82161c24481b))
+
+
+### Bug Fixes
+
+* **forms:** make calendar month navigation clickable and open on the selected month ([c176174](https://github.com/ponti-studios/ui/commit/c1761746c8f9770840b631ba7f0b57f27e3ee476))
+
 ## [1.4.0](https://github.com/ponti-studios/ui/compare/ui-v1.3.0...ui-v1.4.0) (2026-08-12)
 
 

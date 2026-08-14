@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/ponti-studios/ui/compare/ui-v1.5.1...ui-v1.6.0) (2026-08-14)
+
+
+### Features
+
+* **forms:** support dropdown month/year captions on Calendar, DatePicker, and DateField ([75f0401](https://github.com/ponti-studios/ui/commit/75f0401fa8e4c8444d029f2b4081f589ee98ae43))
+
 ## [1.5.1](https://github.com/ponti-studios/ui/compare/ui-v1.5.0...ui-v1.5.1) (2026-08-12)
 
 

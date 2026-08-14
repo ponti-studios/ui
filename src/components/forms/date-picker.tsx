@@ -17,6 +17,12 @@ export interface DatePickerProps {
   containerClassName?: string;
   popoverAlign?: "start" | "center" | "end";
   variant?: "outline" | "default" | "destructive" | "secondary" | "ghost" | "link";
+  /**
+   * Calendar caption style. `"dropdown"` swaps the month/year label for
+   * select dropdowns, which is much faster for picking dates years in the
+   * past (e.g. a job start date) than clicking prev/next repeatedly.
+   */
+  captionLayout?: "label" | "dropdown" | "dropdown-months" | "dropdown-years";
 }
 
 export function DatePicker({
@@ -31,6 +37,7 @@ export function DatePicker({
   containerClassName = "flex-1 min-w-0",
   popoverAlign = "start",
   variant = "outline",
+  captionLayout = "label",
 }: DatePickerProps) {
   return (
     <div className={containerClassName}>
@@ -60,7 +67,13 @@ export function DatePicker({
           align={popoverAlign}
           aria-label={label ?? "Choose a date"}
         >
-          <Calendar mode="single" selected={value} defaultMonth={value} onSelect={onSelect} />
+          <Calendar
+            mode="single"
+            selected={value}
+            defaultMonth={value}
+            onSelect={onSelect}
+            captionLayout={captionLayout}
+          />
         </PopoverContent>
       </Popover>
     </div>

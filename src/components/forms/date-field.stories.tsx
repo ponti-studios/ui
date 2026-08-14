@@ -102,6 +102,44 @@ export const Disabled: Story = {
   },
 };
 
+// No play function — this one is for manually driving the interaction
+// (e.g. screen recordings), not automated assertions.
+export const DropdownEmpty: Story = {
+  args: {
+    name: "startDate",
+    label: "Start date",
+    captionLayout: "dropdown",
+  },
+};
+
+export const WithDropdownCaption: Story = {
+  args: {
+    mode: "range",
+    startName: "startDate",
+    endName: "endDate",
+    defaultValue: { from: "2018-03-01" },
+    label: "Employment period",
+    captionLayout: "dropdown",
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Jumping back to a date years ago is a month/year select, not repeated
+    // prev-month clicks.
+    const trigger = canvas.getByRole("button", { name: "Employment period" });
+    await userEvent.click(trigger);
+    const dialog = await screen.findByRole("dialog");
+
+    const yearSelect = within(dialog).getByRole("combobox", { name: /year/i });
+    await userEvent.selectOptions(yearSelect, "2009");
+    const monthSelect = within(dialog).getByRole("combobox", { name: /month/i });
+    await userEvent.selectOptions(monthSelect, "May");
+
+    await userEvent.click(within(dialog).getByText("12"));
+    await expect(hiddenValue(canvasElement, "startDate")).toBe("2009-05-12");
+  },
+};
+
 export const WithRangeDefaultValue: Story = {
   args: {
     mode: "range",

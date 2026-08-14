@@ -23,6 +23,7 @@ interface DateFieldCommonProps {
   containerClassName?: string;
   popoverAlign?: DatePickerProps["popoverAlign"];
   variant?: DatePickerProps["variant"];
+  captionLayout?: DatePickerProps["captionLayout"];
 }
 
 export interface SingleDateFieldProps extends DateFieldCommonProps {
@@ -55,6 +56,7 @@ function SingleDateField({
   containerClassName,
   popoverAlign,
   variant,
+  captionLayout,
 }: SingleDateFieldProps) {
   const generatedId = useId();
   const inputId = id ?? generatedId;
@@ -72,6 +74,7 @@ function SingleDateField({
         containerClassName={containerClassName}
         popoverAlign={popoverAlign}
         variant={variant}
+        captionLayout={captionLayout}
         value={value}
         onSelect={setValue}
       />
@@ -93,6 +96,7 @@ function RangeDateField({
   containerClassName = "flex-1 min-w-0",
   popoverAlign = "start",
   variant = "outline",
+  captionLayout = "label",
 }: RangeDateFieldProps) {
   const generatedId = useId();
   const inputId = id ?? generatedId;
@@ -140,6 +144,7 @@ function RangeDateField({
             defaultMonth={range.from ?? range.to}
             resetOnSelect
             onSelect={(next) => setRange({ from: next?.from, to: next?.to })}
+            captionLayout={captionLayout}
           />
         </PopoverContent>
       </Popover>

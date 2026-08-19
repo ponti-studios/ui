@@ -1,11 +1,47 @@
+"use client";
+
+import { AlertDialog as BaseAlertDialog } from "@base-ui/react/alert-dialog";
 import { Dialog as BaseDialog } from "@base-ui/react/dialog";
 import { XIcon } from "lucide-react";
 import * as React from "react";
 
 import { cn } from "../../lib/utils";
 
-function Dialog({ ...props }: React.ComponentProps<typeof BaseDialog.Root>) {
-  return <BaseDialog.Root {...props} />;
+/**
+ * Whether the nearest ancestor `<Dialog alert>` is in alert mode. Every part
+ * below (`DialogContent`, etc.) reads this instead of taking its own `alert`
+ * prop, so the mode only has to be set once, at the root.
+ */
+const DialogAlertContext = React.createContext(false);
+
+/**
+ * `alert: true` swaps the root primitive for Base UI's `AlertDialog.Root`:
+ * `role="alertdialog"`, forced `modal`, and no dismiss via outside click or
+ * Escape — for confirmations that need explicit acknowledgment. Every other
+ * part (`Trigger`, `Popup`, `Close`, `Title`, `Description`, ...) is a plain
+ * re-export shared by both Base UI primitives, so only the root needs to
+ * branch; `DialogContent` reads `DialogAlertContext` to default its close
+ * button off in alert mode.
+ */
+function Dialog({
+  alert = false,
+  modal,
+  disablePointerDismissal,
+  ...props
+}: Omit<React.ComponentProps<typeof BaseDialog.Root>, "handle"> & { alert?: boolean }) {
+  return (
+    <DialogAlertContext value={alert}>
+      {alert ? (
+        <BaseAlertDialog.Root {...props} />
+      ) : (
+        <BaseDialog.Root
+          modal={modal}
+          disablePointerDismissal={disablePointerDismissal}
+          {...props}
+        />
+      )}
+    </DialogAlertContext>
+  );
 }
 
 function DialogTrigger({
@@ -62,36 +98,41 @@ function DialogOverlay({ className, ...props }: React.ComponentProps<typeof Base
   return (
     <BaseDialog.Backdrop
       data-slot="dialog-overlay"
-      className={cn(
-        "data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 fixed inset-0 z-50 bg-black/80 transition-opacity",
-        className,
-      )}
+      className={cn("fixed inset-0 z-50 bg-black/80", className)}
       {...props}
     />
   );
 }
 
+/**
+ * Flush to the bottom edge as a sheet on mobile, centered as a card from
+ * `sm` up. Animation (slide-up on mobile, fade/zoom on desktop) is driven by
+ * [data-slot="dialog-content"] rules in animations.css, not by this class.
+ */
+const dialogContentClassName =
+  "bg-popover text-popover-foreground fixed inset-x-0 bottom-0 z-50 grid max-h-[90dvh] w-full gap-6 overflow-y-auto rounded-t-xl border p-4 outline-none sm:top-[50%] sm:bottom-auto sm:left-[50%] sm:w-[calc(100%-2rem)] sm:max-w-[30rem] sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-xl sm:p-6";
+
 function DialogContent({
   className,
   children,
-  showCloseButton = true,
+  showCloseButton,
   ...props
 }: React.ComponentProps<typeof BaseDialog.Popup> & {
   showCloseButton?: boolean;
 }) {
+  const isAlert = React.useContext(DialogAlertContext);
+  const shouldShowClose = showCloseButton ?? !isAlert;
+
   return (
     <BaseDialog.Portal data-slot="dialog-portal">
       <DialogOverlay />
       <BaseDialog.Popup
         data-slot="dialog-content"
-        className={cn(
-          "bg-popover text-popover-foreground data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 data-closed:zoom-out-95 data-open:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid max-h-[90dvh] w-[calc(100%-2rem)] max-w-[30rem] translate-x-[-50%] translate-y-[-50%] gap-6 overflow-y-auto rounded-lg border p-4 duration-200 outline-none sm:p-6",
-          className,
-        )}
+        className={cn(dialogContentClassName, className)}
         {...props}
       >
         {children}
-        {showCloseButton && (
+        {shouldShowClose && (
           <BaseDialog.Close
             data-slot="dialog-close"
             className="text-muted-foreground hover:bg-muted hover:text-muted-foreground focus-visible:outline-ring absolute top-3 right-3 inline-flex size-9 items-center justify-center rounded-md border border-transparent opacity-100 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none sm:top-4 sm:right-4 [&_svg]:pointer-events-none [&_svg]:size-4.5 [&_svg]:shrink-0"

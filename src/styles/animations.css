@@ -133,6 +133,44 @@
   animation: sheet-slide-out-bottom 200ms var(--ease-drawer);
 }
 
+[data-slot="dialog-overlay"][data-open],
+[data-slot="dialog-overlay"][data-state="open"] {
+  animation: fade-in 200ms var(--ease-out);
+}
+[data-slot="dialog-overlay"][data-closed],
+[data-slot="dialog-overlay"][data-state="closed"] {
+  /* Must stay in lockstep with [data-slot="dialog-content"]'s close duration below (both 200ms) —
+     Base UI gates the whole portal's unmount on this element's own close-animation duration, not
+     the content panel's, so a mismatch here yanks the sliding/zooming panel off mid-animation. */
+  animation: fade-out 200ms var(--ease-in);
+}
+
+/* Mobile: bottom sheet, slides up from the edge it's anchored to. */
+[data-slot="dialog-content"][data-open],
+[data-slot="dialog-content"][data-state="open"] {
+  animation: sheet-slide-in-bottom 300ms var(--ease-drawer);
+}
+[data-slot="dialog-content"][data-closed],
+[data-slot="dialog-content"][data-state="closed"] {
+  animation: sheet-slide-out-bottom 200ms var(--ease-drawer);
+}
+
+/* Desktop: centered card, fades and scales in place instead of sliding. */
+@media (min-width: 640px) {
+  [data-slot="dialog-content"][data-open],
+  [data-slot="dialog-content"][data-state="open"] {
+    animation:
+      fade-in 150ms var(--ease-out),
+      zoom-in 150ms var(--ease-out);
+  }
+  [data-slot="dialog-content"][data-closed],
+  [data-slot="dialog-content"][data-state="closed"] {
+    animation:
+      fade-out 200ms var(--ease-in),
+      zoom-out 200ms var(--ease-in);
+  }
+}
+
 @media (min-width: 768px) {
   [data-slot="sheet-content"][data-open],
   [data-slot="sheet-content"][data-state="open"] {
@@ -168,6 +206,22 @@
   }
   [data-slot="sheet-content"][data-closed],
   [data-slot="sheet-content"][data-state="closed"] {
+    animation: fade-out 120ms var(--ease-in) !important;
+  }
+  [data-slot="dialog-overlay"][data-open],
+  [data-slot="dialog-overlay"][data-state="open"] {
+    animation: fade-in 120ms var(--ease-out) !important;
+  }
+  [data-slot="dialog-overlay"][data-closed],
+  [data-slot="dialog-overlay"][data-state="closed"] {
+    animation: fade-out 120ms var(--ease-in) !important;
+  }
+  [data-slot="dialog-content"][data-open],
+  [data-slot="dialog-content"][data-state="open"] {
+    animation: fade-in var(--duration-150) var(--ease-out) !important;
+  }
+  [data-slot="dialog-content"][data-closed],
+  [data-slot="dialog-content"][data-state="closed"] {
     animation: fade-out 120ms var(--ease-in) !important;
   }
 }

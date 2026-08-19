@@ -5,6 +5,7 @@ import { booleanControl, hiddenControl } from "../../storybook/controls";
 import { Button } from "../primitives/button";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -103,9 +104,45 @@ export const WithCloseButton: Story = {
           <DialogDescription>Are you sure you want to proceed?</DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <Button>Confirm</Button>
+          <DialogClose asChild>
+            <Button>Confirm</Button>
+          </DialogClose>
         </DialogFooter>
       </DialogContent>
     </DialogPreview>
+  ),
+};
+
+/**
+ * `alert` swaps in Base UI's AlertDialog primitive: `role="alertdialog"`,
+ * forced modal, and no dismiss via outside click or Escape. Use it for
+ * confirmations that need explicit acknowledgment (destructive actions,
+ * unsaved-changes warnings). The close (X) button is off by default in this
+ * mode — dismissal should go through an explicit action.
+ */
+export const Alert: Story = {
+  render: () => (
+    <Dialog alert>
+      <DialogTrigger asChild>
+        <Button variant="outline">Delete account</Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Are you absolutely sure?</DialogTitle>
+          <DialogDescription>
+            This action cannot be undone. This will permanently delete your account and remove your
+            data from our servers.
+          </DialogDescription>
+        </DialogHeader>
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DialogClose>
+          <DialogClose asChild>
+            <Button>Continue</Button>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   ),
 };

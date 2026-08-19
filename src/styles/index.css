@@ -179,6 +179,15 @@
 @utility scroll-fade-none {
   --scroll-fade-mask: none;
 }
+/* Hides the native scrollbar so a custom overlay affordance (ScrollArea's
+ * Scrollbar/Thumb) can stand in for it. */
+@utility scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
 @utility h-screen {
   height: 100vh;
   height: 100dvh;

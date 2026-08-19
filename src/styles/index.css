@@ -29,6 +29,7 @@
   --animate-fade-out: fade-out 120ms ease-in;
   --animate-zoom-in: zoom-in 150ms ease-out;
   --animate-zoom-out: zoom-out 120ms ease-in;
+  --animate-progress-shimmer: progress-shimmer 1.1s linear infinite;
 }
 
 @utility fade-in-0 {

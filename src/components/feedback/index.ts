@@ -1,11 +1,7 @@
 export { Alert, AlertDescription, AlertTitle } from "./alert";
 export { EmptyState } from "./empty-state";
 export type { EmptyStateProps } from "./empty-state";
-export { FileUploadStatus } from "./file-upload-status";
-export type { FileUploadState, FileUploadStats } from "./file-upload-status";
 export { Progress } from "./progress";
-export { ProgressBar } from "./progress-bar";
-export type { ProgressBarProps } from "./progress-bar";
 export { Skeleton } from "./skeleton";
 export { Spinner } from "./spinner";
 export type { SpinnerProps } from "./spinner";

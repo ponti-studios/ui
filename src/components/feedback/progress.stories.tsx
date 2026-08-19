@@ -16,14 +16,29 @@ export const Default: Story = {
     value: 60,
     "aria-label": "Upload progress",
   },
+  render: (args) => (
+    <div className="w-64">
+      <Progress {...args} />
+    </div>
+  ),
 };
 
 export const Empty: Story = {
   args: { value: 0, "aria-label": "Upload progress" },
+  render: (args) => (
+    <div className="w-64">
+      <Progress {...args} />
+    </div>
+  ),
 };
 
 export const Complete: Story = {
   args: { value: 100, "aria-label": "Upload progress" },
+  render: (args) => (
+    <div className="w-64">
+      <Progress {...args} />
+    </div>
+  ),
 };
 
 export const Partial: Story = {

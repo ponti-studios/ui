@@ -9,7 +9,12 @@ export function parseDateInput(value: Date | string | null | undefined): Date | 
   if (value instanceof Date) return Number.isNaN(value.getTime()) ? undefined : value;
   const [year, month, day] = value.split("-").map(Number);
   if (!year || !month || !day) return undefined;
-  const date = new Date(year, month - 1, day);
+  // `new Date(year, month, day)` treats years from 0 through 99 as
+  // 1900-based years. Native date inputs can temporarily expose those years
+  // while a user is editing the year segment, so construct the date first and
+  // set the full year explicitly to avoid turning `0002` into `1902`.
+  const date = new Date(0);
+  date.setFullYear(year, month - 1, day);
   return Number.isNaN(date.getTime()) ? undefined : date;
 }
 

@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.7.0](https://github.com/ponti-studios/ui/compare/ui-v1.6.0...ui-v1.7.0) (2026-08-20)
+
+
+### Features
+
+* add avatar placeholder SVG for improved user experience ([298d3e1](https://github.com/ponti-studios/ui/commit/298d3e1c6ff864908d46e4d62d7b74ddc0692259))
+* enhance DropZone component with progress indication and improved styles ([298d3e1](https://github.com/ponti-studios/ui/commit/298d3e1c6ff864908d46e4d62d7b74ddc0692259))
+* **feedback:** merge ProgressBar into Progress with animated shimmer ([dd9522d](https://github.com/ponti-studios/ui/commit/dd9522de46ec6586d0c99cf7ef33cc9a313b5a55))
+* **layout:** add ParticleBackground, migrated from labs ([c2d92b0](https://github.com/ponti-studios/ui/commit/c2d92b0557d8c48e46ba295114b448dd4988144a))
+* **layout:** redesign ScrollArea with animated overlay scrollbar ([69fbd55](https://github.com/ponti-studios/ui/commit/69fbd55a74d48baa74debb65fedc481c348cf654))
+* **overlays:** merge AlertDialog into Dialog, add bottom-sheet mobile layout ([01951a1](https://github.com/ponti-studios/ui/commit/01951a1ad8f96a339f3492122ca125718309e92f))
+
+
+### Bug Fixes
+
+* **forms:** parse two-digit years correctly in parseDateInput ([4732a48](https://github.com/ponti-studios/ui/commit/4732a487ac5935e7f551ba818f461187d850e7da))
+* **primitives:** remove stray semicolon from CardTitle; make avatar story network-free ([2672bb6](https://github.com/ponti-studios/ui/commit/2672bb644a957be27adc2bd93163a2edee31644c))
+* update PasskeyManagement component to handle delete errors and improve UI ([298d3e1](https://github.com/ponti-studios/ui/commit/298d3e1c6ff864908d46e4d62d7b74ddc0692259))
+
 ## [1.6.0](https://github.com/ponti-studios/ui/compare/ui-v1.5.1...ui-v1.6.0) (2026-08-14)
 
 

@@ -1,3 +1,4 @@
+import { FileIcon, UploadIcon, XIcon } from "lucide-react";
 import {
   useCallback,
   useId,
@@ -8,9 +9,9 @@ import {
   type KeyboardEvent,
   type ReactNode,
 } from "react";
-import { FileIcon, UploadIcon, XIcon } from "lucide-react";
 
 import { cn } from "../../lib/utils";
+import { Progress } from "../feedback/progress";
 import { Button } from "../primitives/button";
 
 export type DropZoneStatus = "empty" | "armed" | "busy" | "failed";
@@ -73,7 +74,7 @@ export function DropZone({
   className,
   emptyLabel = (
     <>
-      Drop a file here, or <span className="text-primary font-medium">browse</span>
+      Drop a file here, or <span className="text-accent-text font-medium">browse</span>
     </>
   ),
   emptyHint,
@@ -157,8 +158,8 @@ export function DropZone({
 
   const showDragging = dragging && isInteractive;
   const frameTone = cn(
-    showDragging && "border-primary bg-primary/5",
-    status === "failed" && !showDragging && "border-destructive/50 bg-destructive/5",
+    showDragging && "border-ring bg-primary/5",
+    status === "failed" && !showDragging && "border-destructive bg-destructive/5",
     status === "busy" && "border-border bg-muted/30",
     status !== "failed" && status !== "busy" && !showDragging && "border-border bg-card",
   );
@@ -204,7 +205,7 @@ export function DropZone({
           {showDragging ? (
             <>
               <UploadIcon
-                className="text-primary size-8 motion-safe:transition-[transform,opacity] motion-safe:duration-200 motion-safe:ease-in-out motion-reduce:transition-none motion-safe:-translate-y-0.5 motion-reduce:translate-y-0"
+                className="text-accent-text size-8 motion-safe:transition-[transform,opacity] motion-safe:duration-200 motion-safe:ease-in-out motion-reduce:transition-none motion-safe:-translate-y-0.5 motion-reduce:translate-y-0"
                 aria-hidden
               />
               <p className="body-3 text-foreground">{draggingLabel}</p>
@@ -240,13 +241,11 @@ export function DropZone({
                 ) : null}
                 {file ? <p className="body-4 truncate text-muted-foreground">{file.name}</p> : null}
               </div>
-              <div
-                className="bg-muted h-1.5 w-full overflow-hidden rounded-full"
-                role="progressbar"
+              <Progress
+                className="h-1.5 opacity-80 motion-safe:animate-pulse"
                 aria-label={typeof busyLabel === "string" ? busyLabel : "Processing"}
-              >
-                <div className="bg-primary h-full w-2/5 rounded-full opacity-80 motion-safe:animate-pulse" />
-              </div>
+                value={50}
+              />
             </div>
           ) : null}
 

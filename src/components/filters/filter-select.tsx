@@ -1,9 +1,8 @@
 import { useId, useMemo } from "react";
 
 import { cn } from "../../lib/utils";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../forms/select";
-import { Label } from "../primitives/label";
 import { Spinner } from "../feedback/spinner";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../forms/select";
 
 export interface FilterSelectOption {
   value: string;
@@ -44,7 +43,7 @@ export function FilterSelect({
 
   return (
     <div className={cn("space-y-2 min-w-36", className)}>
-      <Label htmlFor={selectId}>{label}</Label>
+      <label htmlFor={selectId}>{label}</label>
       <Select value={value} onValueChange={onChange} items={items}>
         <SelectTrigger id={selectId} disabled={disabled} aria-label={label} className="w-full">
           <SelectValue placeholder={placeholder} />

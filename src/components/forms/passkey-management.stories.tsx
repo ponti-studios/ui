@@ -17,14 +17,13 @@ const initialPasskeys: PasskeyRecord[] = [
   { id: "2", name: "iPhone", createdAt: "2025-03-02T00:00:00.000Z" },
 ];
 
-function PasskeyManagementPreview({ withError = false }: { withError?: boolean }) {
+function PasskeyManagementPreview({ withDeleteError = false }: { withDeleteError?: boolean }) {
   const [passkeys, setPasskeys] = useState(initialPasskeys);
 
   return (
     <div className="w-96">
       <PasskeyManagement
         passkeys={passkeys}
-        error={withError ? "Could not delete passkey. Please try again." : null}
         onAdd={async () => {
           setPasskeys((prev) => [
             ...prev,
@@ -37,6 +36,7 @@ function PasskeyManagementPreview({ withError = false }: { withError?: boolean }
           return true;
         }}
         onDelete={async (id) => {
+          if (withDeleteError && id === "2") return false;
           setPasskeys((prev) => prev.filter((pk) => pk.id !== id));
           return true;
         }}
@@ -68,14 +68,18 @@ export const Loading: Story = {
     onAdd: async () => true,
     onDelete: async () => true,
   },
+  render: (args) => (
+    <div className="w-[calc(100vw-2rem)] max-w-md">
+      <PasskeyManagement {...args} />
+    </div>
+  ),
 };
 
 export const WithError: Story = {
   args: {
     passkeys: initialPasskeys,
-    error: "Could not delete passkey. Please try again.",
     onAdd: async () => true,
     onDelete: async () => true,
   },
-  render: () => <PasskeyManagementPreview withError />,
+  render: () => <PasskeyManagementPreview withDeleteError />,
 };

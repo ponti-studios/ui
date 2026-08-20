@@ -1,7 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import * as React from "react";
 
-import { Label } from "../primitives/label";
 import { RadioGroup, RadioGroupItem } from "./radio-group";
 
 const meta: Meta<typeof RadioGroup> = {
@@ -25,9 +23,9 @@ export const Default: Story = {
       {options.map(({ value, label }) => (
         <div key={value} className="flex items-center gap-3">
           <RadioGroupItem value={value} id={`opt-${value}`} />
-          <Label htmlFor={`opt-${value}`} className="cursor-pointer">
+          <label htmlFor={`opt-${value}`} className="cursor-pointer">
             {label}
-          </Label>
+          </label>
         </div>
       ))}
     </RadioGroup>
@@ -40,7 +38,7 @@ export const Disabled: Story = {
       {options.map(({ value, label }) => (
         <div key={value} className="flex items-center gap-3">
           <RadioGroupItem value={value} id={`dis-${value}`} />
-          <Label htmlFor={`dis-${value}`}>{label}</Label>
+          <label htmlFor={`dis-${value}`}>{label}</label>
         </div>
       ))}
     </RadioGroup>

@@ -32,7 +32,7 @@
   },
   "primary": {
     "$type": "color",
-    "$value": "rgb(255, 90, 54)"
+    "$value": "rgb(16, 112, 102)"
   },
   "destructive": {
     "$type": "color",
@@ -46,9 +46,17 @@
     "$type": "color",
     "$value": "rgb(255, 197, 61)"
   },
-  "primary-foreground": {
+  "success-foreground": {
     "$type": "color",
     "$value": "rgb(21, 17, 15)"
+  },
+  "warning-foreground": {
+    "$type": "color",
+    "$value": "rgb(21, 17, 15)"
+  },
+  "primary-foreground": {
+    "$type": "color",
+    "$value": "rgb(255, 255, 255)"
   },
   "destructive-foreground": {
     "$type": "color",
@@ -60,15 +68,15 @@
   },
   "text-accent": {
     "$type": "color",
-    "$value": "rgb(178, 63, 29)"
+    "$value": "rgb(16, 112, 102)"
   },
   "border-default": {
     "$type": "color",
-    "$value": "rgb(217, 210, 198)"
+    "$value": "rgb(143, 133, 118)"
   },
   "focus-ring": {
     "$type": "color",
-    "$value": "rgb(178, 63, 29)"
+    "$value": "rgb(16, 112, 102)"
   },
   "chart-1": {
     "$type": "color",
@@ -80,7 +88,7 @@
   },
   "chart-3": {
     "$type": "color",
-    "$value": "rgb(18, 165, 148)"
+    "$value": "rgb(199, 49, 120)"
   },
   "chart-4": {
     "$type": "color",

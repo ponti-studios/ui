@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
+import { LucideAlertCircle, LucideDiamond, LucideNut } from "lucide-react";
 import { Badge } from "./badge";
 
 const meta = {
@@ -24,9 +25,18 @@ export const Default: Story = {
 export const Variants: Story = {
   render: () => (
     <div className="flex flex-wrap gap-3">
-      <Badge variant="default">Default</Badge>
-      <Badge variant="secondary">Secondary</Badge>
-      <Badge variant="destructive">Destructive</Badge>
+      <Badge variant="default">
+        <LucideDiamond className="size-3" />
+        Default
+      </Badge>
+      <Badge variant="secondary">
+        <LucideNut className="size-3" />
+        Secondary
+      </Badge>
+      <Badge variant="destructive">
+        <LucideAlertCircle className="size-3" />
+        Destructive
+      </Badge>
       <Badge variant="outline">Outline</Badge>
     </div>
   ),

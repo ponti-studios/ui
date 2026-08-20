@@ -64,6 +64,11 @@
   --color-muted-foreground: var(--text-secondary);
   --color-accent: var(--primary);
   --color-accent-foreground: var(--primary-foreground);
+  /* Distinct from --color-accent: that pairs with white/primary-foreground
+   * for solid fills (badges, active states). This pairs with the page
+   * background for standalone text/icons/borders (inline links, upload
+   * affordances) and must differ per theme to stay AA-compliant. */
+  --color-accent-text: var(--text-accent);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   /* Distinct from --color-destructive: that pairs with white for solid
@@ -72,7 +77,9 @@
    * messages, alert copy) and must differ per theme to stay AA-compliant. */
   --color-destructive-text: var(--text-destructive);
   --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
   --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
   --color-border: var(--border-default);
   --color-input: var(--border-default);
   --color-ring: var(--focus-ring);
@@ -288,6 +295,16 @@
   button {
     cursor: pointer;
     font-family: inherit;
+  }
+  label {
+    color: var(--color-foreground);
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-medium);
+    line-height: 1;
+  }
+  :where(.peer:disabled) ~ label {
+    cursor: not-allowed;
+    opacity: 0.7;
   }
   h1,
   h2,

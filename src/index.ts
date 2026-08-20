@@ -9,11 +9,11 @@ export { useMediaQuery } from "./hooks/use-media-query";
 export { useIsMobile } from "./hooks/use-mobile";
 export { normalizeOtp, OTP_LENGTH } from "./lib/auth";
 export { copyToClipboard } from "./lib/clipboard";
-export { createMemoryStorage } from "./lib/create-memory-storage";
 export { cn } from "./lib/utils";
 export { colors } from "./styles/tokens/css-vars";
 export {
   animations,
+  breakpoints,
   colorThemes,
   colorTokenNames,
   containers,
@@ -29,7 +29,6 @@ export {
   textSizes,
   tracking,
   transitionDurations,
-  breakpoints,
   zIndices,
 } from "./styles/tokens/index";
 export type {

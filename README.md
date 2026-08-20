@@ -16,13 +16,13 @@ The design system is documented in `docs/`:
 Common development workflows are available through the `Makefile`:
 
 ```bash
-make check          # tokens, source contracts, and typecheck
-make tokens-build   # regenerate token artifacts
-make storybook      # build Storybook themes and start Storybook
-make test-a11y      # run light and dark accessibility tests
+make build      # regenerate token artifacts and typecheck
+make check      # build, then verify tokens/source contracts/lint
+make test       # run light and dark Storybook/vitest tests (implies build)
+make storybook  # build tokens and start Storybook
 ```
 
-The existing `pnpm run` scripts delegate to these targets for compatibility.
+The `pnpm run` scripts (`check`, `build`, `test`, `storybook`, `format`) delegate to these targets for compatibility.
 
 ## Release
 
@@ -37,11 +37,11 @@ Releases are owned by [release-please](https://github.com/googleapis/release-ple
 2. Once on `main`, find or wait for the `chore(main): release ui X.Y.Z` PR that Release Please opens or updates.
 3. Review and merge it. That merge creates the `ui-v<version>` tag; after validation succeeds, the release workflow publishes that exact tag automatically.
 
-`prepack` (`tokens:check && check:source && typecheck`) runs as part of `pnpm install`/publish tooling and is the last gate before anything reaches npm — see "Generated files" below for the failure mode that most commonly trips it.
+`prepack` (`make check`) runs as part of `pnpm install`/publish tooling and is the last gate before anything reaches npm — see "Generated files" below for the failure mode that most commonly trips it.
 
 ### Generated files must never be hand-edited
 
-`src/styles/tokens/generated/**` and `.storybook/generated/**` are produced only by `pnpm run tokens:build` (style-dictionary) from the DTCG source in `src/styles/tokens/source/*.tokens.json`. `tokens:check` enforces this with `git diff --exit-code -- src/styles/tokens/generated` after a fresh rebuild — if the committed file doesn't byte-for-byte match what the tool just produced, the check (and therefore `prepack` and the publish) fails. This has happened in practice when a repo-wide formatter (oxfmt) reformatted a generated CSS file directly; `.oxfmtrc.json`'s `ignorePatterns` now excludes both generated directories specifically to prevent that recurring. If `tokens:check` fails on a file you didn't intend to touch, run `pnpm run tokens:build` and commit the regenerated output — don't hand-format it back into place.
+`src/styles/tokens/generated/**` and `.storybook/generated/**` are produced only by `make build` (style-dictionary) from the DTCG source in `src/styles/tokens/source/*.tokens.json`. `make check` enforces this with `git diff --exit-code -- src/styles/tokens/generated .storybook/generated` after a fresh rebuild — if the committed file doesn't byte-for-byte match what the tool just produced, the check (and therefore `prepack` and the publish) fails. This has happened in practice when a repo-wide formatter (oxfmt) reformatted a generated CSS file directly; `.oxfmtrc.json`'s `ignorePatterns` now excludes both generated directories specifically to prevent that recurring. If `make check` fails on a file you didn't intend to touch, run `make build` and commit the regenerated output — don't hand-format it back into place.
 
 ## Consumers
 

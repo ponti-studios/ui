@@ -78,20 +78,12 @@
     "registry": "https://registry.npmjs.org"
   },
   "scripts": {
+    "check": "make check",
     "build": "make build",
-    "dev": "vite",
-    "storybook": "make storybook",
-    "check:source": "make check-source",
     "test": "make test",
-    "test:a11y": "make test-a11y",
-    "test:a11y:light": "make test-a11y-light",
-    "test:a11y:dark": "make test-a11y-dark",
-    "tokens:build": "make tokens-build",
-    "tokens:check": "make tokens-check",
-    "typecheck": "make typecheck",
-    "lint": "make lint",
+    "storybook": "make storybook",
     "format": "make format",
-    "prepack": "make prepack"
+    "prepack": "make check"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",
@@ -114,10 +106,9 @@
     "@types/node": "^26.1.1",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^6.0.3",
     "@vitest/browser": "4.1.10",
     "@vitest/browser-playwright": "4.1.10",
-    "oxfmt": "0.61.0",
+    "oxfmt": "0.64.0",
     "oxlint": "^1.74.0",
     "playwright": "^1.61.1",
     "react": "^19.2.7",

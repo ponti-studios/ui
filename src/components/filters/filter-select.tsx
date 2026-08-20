@@ -3,6 +3,7 @@ import { useId, useMemo } from "react";
 import { cn } from "../../lib/utils";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../forms/select";
 import { Label } from "../primitives/label";
+import { Spinner } from "../feedback/spinner";
 
 export interface FilterSelectOption {
   value: string;
@@ -14,7 +15,6 @@ export interface FilterSelectProps {
   onChange: (value: string | null) => void;
   options: FilterSelectOption[];
   label: string;
-  loadingText?: string;
   placeholder?: string;
   disabled?: boolean;
   isLoading?: boolean;
@@ -28,7 +28,6 @@ export function FilterSelect({
   value,
   options,
   onChange,
-  loadingText = "Loading...",
   placeholder = "All",
   disabled = false,
   isLoading = false,
@@ -53,7 +52,7 @@ export function FilterSelect({
         <SelectContent className="bg-background max-h-[250px] min-w-36 overflow-y-auto">
           <SelectItem>{placeholder}</SelectItem>
           {isLoading ? (
-            <div className="text-muted-foreground px-2 py-1.5 text-sm">{loadingText}</div>
+            <Spinner presentation="centered" size="sm" />
           ) : options.length === 0 ? (
             <div className="text-muted-foreground px-2 py-1.5 text-sm">{emptyLabel}</div>
           ) : (

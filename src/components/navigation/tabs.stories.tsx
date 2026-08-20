@@ -32,27 +32,6 @@ export const Default: Story = {
   ),
 };
 
-export const LineVariant: Story = {
-  render: () => (
-    <Tabs defaultValue="tab1" className="w-[400px]">
-      <TabsList className="border-x-0 border-t-0 bg-transparent">
-        <TabsTrigger value="tab1">Overview</TabsTrigger>
-        <TabsTrigger value="tab2">Analytics</TabsTrigger>
-        <TabsTrigger value="tab3">Reports</TabsTrigger>
-      </TabsList>
-      <TabsContent value="tab1">
-        <p className="text-muted-foreground p-4 text-sm">Overview content</p>
-      </TabsContent>
-      <TabsContent value="tab2">
-        <p className="text-muted-foreground p-4 text-sm">Analytics content</p>
-      </TabsContent>
-      <TabsContent value="tab3">
-        <p className="text-muted-foreground p-4 text-sm">Reports content</p>
-      </TabsContent>
-    </Tabs>
-  ),
-};
-
 export const Vertical: Story = {
   render: () => (
     <Tabs defaultValue="tab1" orientation="vertical" className="w-[400px]">

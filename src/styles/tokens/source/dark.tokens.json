@@ -4,35 +4,35 @@
   },
   "background": {
     "$type": "color",
-    "$value": "rgb(17, 17, 19)"
+    "$value": "rgb(23, 23, 20)"
   },
   "card": {
     "$type": "color",
-    "$value": "rgb(24, 25, 27)"
+    "$value": "rgb(29, 29, 25)"
   },
   "popover": {
     "$type": "color",
-    "$value": "rgb(33, 34, 37)"
+    "$value": "rgb(34, 34, 30)"
   },
   "muted": {
     "$type": "color",
-    "$value": "rgb(24, 25, 27)"
+    "$value": "rgb(29, 29, 25)"
   },
   "text-primary": {
     "$type": "color",
-    "$value": "rgb(237, 238, 240)"
+    "$value": "rgb(255, 255, 255)"
   },
   "text-secondary": {
     "$type": "color",
-    "$value": "rgb(176, 180, 186)"
+    "$value": "rgb(170, 167, 159)"
   },
   "tertiary": {
     "$type": "color",
-    "$value": "rgb(119, 123, 132)"
+    "$value": "rgb(208, 204, 194)"
   },
   "primary": {
     "$type": "color",
-    "$value": "rgb(62, 99, 221)"
+    "$value": "rgb(255, 137, 111)"
   },
   "destructive": {
     "$type": "color",
@@ -48,7 +48,7 @@
   },
   "primary-foreground": {
     "$type": "color",
-    "$value": "rgb(255, 255, 255)"
+    "$value": "rgb(21, 17, 15)"
   },
   "destructive-foreground": {
     "$type": "color",
@@ -60,11 +60,11 @@
   },
   "border-default": {
     "$type": "color",
-    "$value": "rgb(67, 72, 78)"
+    "$value": "rgb(54, 54, 49)"
   },
   "focus-ring": {
     "$type": "color",
-    "$value": "rgb(62, 99, 221)"
+    "$value": "rgb(255, 137, 111)"
   },
   "chart-1": {
     "$type": "color",

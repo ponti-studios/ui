@@ -25,8 +25,12 @@ function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
-function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
-  return <div data-slot="card-title" className={cn("text-xl", className)} {...props} />;
+function CardTitle({ className, ...props }: React.ComponentProps<"h3">) {
+  return (
+    <h3 data-slot="card-title" className={cn("text-xl", className)} {...props}>
+      {props.children};
+    </h3>
+  );
 }
 
 function CardDescription({ className, ...props }: React.ComponentProps<"div">) {

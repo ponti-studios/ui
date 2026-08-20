@@ -14,7 +14,13 @@ function CardHeader({ className, ...props }: ViewProps) {
 }
 
 function CardTitle({ className, ...props }: TextProps) {
-  return <Text className={cn("text-card-foreground text-xl", className)} {...props} />;
+  return (
+    <Text
+      accessibilityRole="header"
+      className={cn("text-card-foreground text-xl", className)}
+      {...props}
+    />
+  );
 }
 
 function CardDescription({ className, ...props }: TextProps) {

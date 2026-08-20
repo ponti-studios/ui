@@ -131,7 +131,7 @@ export const RangeControlled: Story = {
   render: () => {
     const [range, setRange] = useState<{ from: string | null; to: string | null }>({
       from: "2026-08-01",
-      to: null,
+      to: "2026-08-15",
     });
     return (
       <div className="flex flex-col gap-2">
@@ -153,6 +153,13 @@ export const RangeControlled: Story = {
   },
   play: async ({ canvasElement }) => {
     await expect(canvasElement.textContent).toContain("from: 2026-08-01");
+    await expect(canvasElement.textContent).toContain("to: 2026-08-15");
+
+    const end = canvasElement.querySelector<HTMLInputElement>('input[name="stayEnd"]');
+    await userEvent.clear(end!);
+    await userEvent.type(end!, "0002-08-01");
+    await expect(end?.value).toBe("0002-08-01");
+    await expect(canvasElement.textContent).toContain("to: 0002-08-01");
   },
 };
 

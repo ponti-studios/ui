@@ -25,7 +25,7 @@ export function parseDateInput(value: Date | string | null | undefined): Date | 
 export function formatDateInput(value: Date | string | null | undefined): string {
   const date = parseDateInput(value);
   if (!date) return "";
-  const year = date.getFullYear();
+  const year = String(date.getFullYear()).padStart(4, "0");
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
   return `${year}-${month}-${day}`;

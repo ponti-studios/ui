@@ -24,11 +24,11 @@
   },
   "text-secondary": {
     "$type": "color",
-    "$value": "rgb(111, 107, 98)"
+    "$value": "rgb(106, 99, 82)"
   },
   "tertiary": {
     "$type": "color",
-    "$value": "rgb(143, 139, 128)"
+    "$value": "rgb(109, 102, 89)"
   },
   "primary": {
     "$type": "color",
@@ -58,13 +58,17 @@
     "$type": "color",
     "$value": "rgb(200, 44, 49)"
   },
+  "text-accent": {
+    "$type": "color",
+    "$value": "rgb(178, 63, 29)"
+  },
   "border-default": {
     "$type": "color",
     "$value": "rgb(217, 210, 198)"
   },
   "focus-ring": {
     "$type": "color",
-    "$value": "rgb(255, 90, 54)"
+    "$value": "rgb(178, 63, 29)"
   },
   "chart-1": {
     "$type": "color",

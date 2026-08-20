@@ -1,7 +1,6 @@
 import darkTokens from "./generated/dark.colors.generated";
 import foundations from "./generated/foundations.generated";
 import lightTokens from "./generated/light.colors.generated";
-import nativeTokens from "./generated/native.generated";
 
 const toPixels = (value: string) => {
   if (value.endsWith("rem")) return Number.parseFloat(value) * 16;
@@ -39,7 +38,6 @@ export const fontFamilies = Object.fromEntries(
   Object.entries(foundations.font).map(([key, value]) => [key, value.join(", ")]),
 ) as Record<keyof typeof foundations.font, string>;
 
-export const fontFamiliesNative = { sans: "System", serif: "serif", mono: "monospace" } as const;
 export const textSizes = Object.fromEntries(
   Object.entries(foundations.text).map(([key, value]) => [key, toPixels(value)]),
 ) as Record<keyof typeof foundations.text, number>;
@@ -63,7 +61,6 @@ export const transitionDurations = Object.fromEntries(
   Object.entries(foundations.duration).map(([key, value]) => [key, toMilliseconds(value)]),
 ) as Record<keyof typeof foundations.duration, number>;
 export const animations = foundations.animate;
-export const motion = nativeTokens.motion;
 
 export type RadiusToken = keyof typeof radii;
 export type TextSizeToken = keyof typeof textSizes;

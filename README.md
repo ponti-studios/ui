@@ -70,7 +70,3 @@ This package has no build output — every `exports` entry resolves to a file un
 ```
 
 **Important:** `./styles.css` uses `@reference "tailwindcss"` (it does not import Tailwind itself). Your project owns the `@import "tailwindcss"` — place it before the UI stylesheet. Omitting it will cause missing CSS variables (e.g. `--tw-shadow-color`) and unresolved utilities.
-
-### `./native` subpath
-
-`@ponti-studios/ui/native` is the only part of the package that imports `react-native`. Web consumers never pull it in; native consumers get `createMakeStyles`, `nativeShadows`, `useColorMode`, and `useThemeColors`. `react-native` is an optional peer dependency — only declare it in your own `package.json` if you actually import from this subpath.

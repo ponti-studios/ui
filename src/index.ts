@@ -19,7 +19,6 @@ export {
   containers,
   easing,
   fontFamilies,
-  fontFamiliesNative,
   fontWeights,
   leading,
   radii,

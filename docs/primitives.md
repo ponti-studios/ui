@@ -345,6 +345,3 @@ composed directly as children:
 - Hardcoded colors, radii, spacing values, font sizes, or durations in
   screen code are prohibited — every value must resolve to a token from
   Foundations.
-- Web components that depend on the DOM (Table, DropdownMenu, PaginationControls,
-  Command, etc.) do not render on native. Use the native-equivalent primitives
-  or build a designated native adapter in `apps/omiro`.

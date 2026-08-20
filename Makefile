@@ -20,7 +20,6 @@ format:
 
 tokens-build:
 	$(STYLE_DICTIONARY) build --config src/styles/tokens/style-dictionary.foundations.json
-	$(STYLE_DICTIONARY) build --config src/styles/tokens/style-dictionary.native.mjs
 	$(STYLE_DICTIONARY) build --config src/styles/tokens/style-dictionary.light.json
 	$(STYLE_DICTIONARY) build --config src/styles/tokens/style-dictionary.dark.json
 	$(STYLE_DICTIONARY) build --config src/styles/tokens/style-dictionary.light-storybook.json

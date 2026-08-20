@@ -29,6 +29,6 @@ export default {
   "chart-5": "#696e77",
   "chart-positive": "#30a46c",
   "chart-negative": "#e5484d",
-  "chart-neutral": "#5a6169",
+  "chart-neutral": "#878d94",
   "overlay-scrim": "#000000",
 };

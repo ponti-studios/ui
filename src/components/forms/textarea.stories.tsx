@@ -37,7 +37,7 @@ function TextareaField({
         </p>
       ) : null}
       {error ? (
-        <p id={errorId} className="text-destructive text-sm" role="alert">
+        <p id={errorId} className="text-destructive-text text-sm" role="alert">
           {error}
         </p>
       ) : null}

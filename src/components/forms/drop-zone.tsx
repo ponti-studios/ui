@@ -252,7 +252,7 @@ export function DropZone({
           {!showDragging && status === "failed" ? (
             <div className="w-full space-y-2">
               {file ? <p className="subheading-4 truncate text-foreground">{file.name}</p> : null}
-              {error ? <p className="body-3 text-destructive">{error}</p> : null}
+              {error ? <p className="body-3 text-destructive-text">{error}</p> : null}
               {failedActions}
             </div>
           ) : null}

@@ -114,16 +114,13 @@ Falls back gracefully when the status is null or undefined.
 - **Props:** `value`, `min`, `max`, `step`, `onChange`, `format`, `disabled`.
 - **Uses:** ghost Button variants, `--border-default` border, `--muted` background, `--radius-lg`.
 
-### Calendar
-
-- react-day-picker wrapper. `--radius-md`, `p-4`. Day buttons: `size-6`, `--radius-md`, `--text-sm`.
-- **States:** `selected`, `today`, `outside`, `disabled`, `range_start`, `range_middle`, `range_end`.
-
 ### DatePicker
 
-- Trigger variant: any Button variant (default `outline`).
-- **Alignment:** `start` | `center` | `end`.
-- **Props:** `value`, `onSelect`, `placeholder`, `label`, `dateFormat`.
+- Native `<input type="date">` fields styled to the design system. The browser owns the picker UI — no popover, calendar grid, or positioning layer in the bundle.
+- **Modes:** `single` (`name`) and `range` (`startName` + `endName`). Inputs submit "YYYY-MM-DD" local date strings directly.
+- **Controlled + form:** `value`/`defaultValue` accept `Date | string | null`; `onValueChange` returns strings. `error`/`helpText` follow TextField conventions.
+- **Range:** two independent fields cross-wired via `min`/`max` (end floor = start, start ceiling = end). Optional `fromLabel`/`toLabel`.
+- Calendar, DateField, and the popover-backed pickers were removed in the native-input consolidation.
 
 ### DropZone
 

@@ -51,9 +51,9 @@ export const SelectedValue: Story = {
     </Select>
   ),
   play: async ({ canvasElement }) => {
-    await expect(within(canvasElement).getByRole("combobox", { name: "Selected fruit" })).toHaveTextContent(
-      "Banana",
-    );
+    await expect(
+      within(canvasElement).getByRole("combobox", { name: "Selected fruit" }),
+    ).toHaveTextContent("Banana");
   },
 };
 
@@ -76,18 +76,15 @@ export const ExplicitItems: Story = {
     </Select>
   ),
   play: async ({ canvasElement }) => {
-    await expect(within(canvasElement).getByRole("combobox", { name: "Country" })).toHaveTextContent(
-      "United States",
-    );
+    await expect(
+      within(canvasElement).getByRole("combobox", { name: "Country" }),
+    ).toHaveTextContent("United States");
   },
 };
 
 export const NullItem: Story = {
   render: () => (
-    <Select
-      defaultValue={null}
-      items={[{ value: null, label: "All options" }]}
-    >
+    <Select defaultValue={null} items={[{ value: null, label: "All options" }]}>
       <SelectTrigger aria-label="Filter">
         <SelectValue placeholder="Choose a filter" />
       </SelectTrigger>
@@ -142,9 +139,13 @@ export const ControlledNullChange: Story = {
     const trigger = canvas.getByRole("combobox", { name: "Controlled filter" });
 
     await userEvent.click(trigger);
-    await userEvent.click(await within(document.body).findByRole("option", { name: "All options" }));
+    await userEvent.click(
+      await within(document.body).findByRole("option", { name: "All options" }),
+    );
     await expect(trigger).toHaveTextContent("All options");
-    await expect(canvas.getByRole("status", { name: "Last selected value" })).toHaveTextContent("null");
+    await expect(canvas.getByRole("status", { name: "Last selected value" })).toHaveTextContent(
+      "null",
+    );
     await userEvent.keyboard("{Escape}");
   },
 };
@@ -184,7 +185,9 @@ export const Disabled: Story = {
     </Select>
   ),
   play: async ({ canvasElement }) => {
-    await expect(within(canvasElement).getByRole("combobox", { name: "Select a fruit" })).toBeDisabled();
+    await expect(
+      within(canvasElement).getByRole("combobox", { name: "Select a fruit" }),
+    ).toBeDisabled();
   },
 };
 

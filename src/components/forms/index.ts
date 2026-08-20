@@ -1,14 +1,10 @@
 export { FilterSelect } from "../filters/filter-select";
 export type { FilterSelectOption, FilterSelectProps } from "../filters/filter-select";
-export { Calendar } from "./calendar";
-export type { CalendarProps } from "./calendar";
-export { DateField } from "./date-field";
-export type { DateFieldProps } from "./date-field";
+export { DatePicker } from "./date-picker";
+export type { DatePickerProps, DateRangeValue } from "./date-picker";
 export { formatDateInput, parseDateInput, todayDateInput } from "./date-utils";
 export { DateMonthSelect, getCurrentMonthYear } from "./date-month-select";
 export type { DateMonthSelectProps } from "./date-month-select";
-export { DatePicker } from "./date-picker";
-export type { DatePickerProps } from "./date-picker";
 export { DropZone } from "./drop-zone";
 export type { DropZoneProps } from "./drop-zone";
 export { Input } from "./input";

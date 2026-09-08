@@ -48,10 +48,13 @@ function DialogTrigger({
   asChild,
   children,
   ...props
-}: React.ComponentProps<typeof BaseDialog.Trigger> & { asChild?: boolean }) {
+}: Omit<React.ComponentProps<typeof BaseDialog.Trigger>, "handle"> & { asChild?: boolean }) {
+  const isAlert = React.useContext(DialogAlertContext);
+  const Trigger = isAlert ? BaseAlertDialog.Trigger : BaseDialog.Trigger;
+
   if (asChild && React.isValidElement(children)) {
     return (
-      <BaseDialog.Trigger
+      <Trigger
         data-slot="dialog-trigger"
         render={(triggerProps) =>
           React.cloneElement(children as React.ReactElement<unknown>, triggerProps)
@@ -61,9 +64,9 @@ function DialogTrigger({
     );
   }
   return (
-    <BaseDialog.Trigger data-slot="dialog-trigger" {...props}>
+    <Trigger data-slot="dialog-trigger" {...props}>
       {children}
-    </BaseDialog.Trigger>
+    </Trigger>
   );
 }
 
@@ -75,10 +78,13 @@ function DialogClose({
   asChild,
   children,
   ...props
-}: React.ComponentProps<typeof BaseDialog.Close> & { asChild?: boolean }) {
+}: Omit<React.ComponentProps<typeof BaseDialog.Close>, "handle"> & { asChild?: boolean }) {
+  const isAlert = React.useContext(DialogAlertContext);
+  const Close = isAlert ? BaseAlertDialog.Close : BaseDialog.Close;
+
   if (asChild && React.isValidElement(children)) {
     return (
-      <BaseDialog.Close
+      <Close
         data-slot="dialog-close"
         render={(closeProps) =>
           React.cloneElement(children as React.ReactElement<unknown>, closeProps)
@@ -88,15 +94,18 @@ function DialogClose({
     );
   }
   return (
-    <BaseDialog.Close data-slot="dialog-close" {...props}>
+    <Close data-slot="dialog-close" {...props}>
       {children}
-    </BaseDialog.Close>
+    </Close>
   );
 }
 
 function DialogOverlay({ className, ...props }: React.ComponentProps<typeof BaseDialog.Backdrop>) {
+  const isAlert = React.useContext(DialogAlertContext);
+  const Backdrop = isAlert ? BaseAlertDialog.Backdrop : BaseDialog.Backdrop;
+
   return (
-    <BaseDialog.Backdrop
+    <Backdrop
       data-slot="dialog-overlay"
       className={cn("fixed inset-0 z-50 bg-black/80", className)}
       {...props}
@@ -122,27 +131,29 @@ function DialogContent({
 }) {
   const isAlert = React.useContext(DialogAlertContext);
   const shouldShowClose = showCloseButton ?? !isAlert;
+  const Portal = isAlert ? BaseAlertDialog.Portal : BaseDialog.Portal;
+  const Popup = isAlert ? BaseAlertDialog.Popup : BaseDialog.Popup;
 
   return (
-    <BaseDialog.Portal data-slot="dialog-portal">
+    <Portal data-slot="dialog-portal">
       <DialogOverlay />
-      <BaseDialog.Popup
+      <Popup
         data-slot="dialog-content"
         className={cn(dialogContentClassName, className)}
         {...props}
       >
         {children}
         {shouldShowClose && (
-          <BaseDialog.Close
+          <DialogClose
             data-slot="dialog-close"
             className="text-muted-foreground hover:bg-muted hover:text-muted-foreground focus-visible:outline-ring absolute top-3 right-3 inline-flex size-9 items-center justify-center rounded-md border border-transparent opacity-100 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none sm:top-4 sm:right-4 [&_svg]:pointer-events-none [&_svg]:size-4.5 [&_svg]:shrink-0"
           >
             <XIcon />
             <span className="sr-only">Close</span>
-          </BaseDialog.Close>
+          </DialogClose>
         )}
-      </BaseDialog.Popup>
-    </BaseDialog.Portal>
+      </Popup>
+    </Portal>
   );
 }
 

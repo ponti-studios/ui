@@ -86,6 +86,8 @@ Other TS 7 default changes were audited and are **non-issues** here:
 
 Re-trigger condition: a `@storybook/addon-vitest` release whose peer range includes `vitest: ^5.0.0` (and, in turn, `@vitest/browser: ^5`, `@vitest/browser-playwright: ^5`, and drops/relaxes `@vitest/runner`). Check `npm view @storybook/addon-vitest@latest peerDependencies` before starting; if `^5` is not present, stop.
 
+Status re-checked 2026-09-08: still blocked. `@storybook/addon-vitest` peer-deps remain `vitest ^3 || ^4` on both `latest` (10.6.0) and `next` (11.0.0-alpha.0). Upstream tracking issues (open): `storybookjs/storybook#36082` (adapt `vitest@5` breaking changes for `projects[].extends`) and `storybookjs/storybook#35752` (adapt `vitest@5` for `testNamePattern`). Re-check after either issue closes or a new addon-vitest release appears.
+
 Migration checklist (from the official Vitest 5.0 migration guide, distilled) to run when unblocked:
 - Prereqs already OK: Node ≥22.12 (24.18), Vite ≥6.4 (8.1.5).
 - Bump `vitest` + `@vitest/browser` + `@vitest/browser-playwright` to exact `5.0.0` (lockstep); keep `@storybook/addon-vitest` on a `^5`-supporting version.

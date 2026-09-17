@@ -54,20 +54,18 @@
   --color-foreground: var(--text-primary);
   --color-card: var(--card);
   --color-card-foreground: var(--text-primary);
-  --color-popover: var(--background);
+  --color-popover: var(--popover);
   --color-popover-foreground: var(--text-primary);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--card);
+  --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--text-primary);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--text-secondary);
-  --color-accent: var(--primary);
-  --color-accent-foreground: var(--primary-foreground);
-  /* Distinct from --color-accent: that pairs with white/primary-foreground
-   * for solid fills (badges, active states). This pairs with the page
-   * background for standalone text/icons/borders (inline links, upload
-   * affordances) and must differ per theme to stay AA-compliant. */
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  /* Distinct from --color-accent: this pairs with the page background for
+   * standalone text/icons/borders (inline links, upload affordances). */
   --color-accent-text: var(--text-accent);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
@@ -78,8 +76,10 @@
   --color-destructive-text: var(--text-destructive);
   --color-success: var(--success);
   --color-success-foreground: var(--success-foreground);
+  --color-success-text: var(--text-success);
   --color-warning: var(--warning);
   --color-warning-foreground: var(--warning-foreground);
+  --color-warning-text: var(--text-warning);
   --color-border: var(--border-default);
   --color-input: var(--border-default);
   --color-ring: var(--focus-ring);

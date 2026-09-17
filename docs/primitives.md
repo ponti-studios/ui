@@ -14,8 +14,18 @@ elevation levels, or new color values inline.
 
 ### Button
 
-- **Variants:** `default` (filled `--primary`, `--primary-foreground` label), `secondary` (filled `--card`, `--text-primary` label), `destructive` (filled `--destructive`, `--destructive-foreground` label), `outline` (transparent, `--border-default` border, `--text-primary` label), `ghost` (transparent, no border, `--text-primary` label), `link` (transparent, `--primary` text, underline on hover).
-- **Sizes:** `sm` (min-h-8, `--text-xs`), `md` (min-h-9, `--text-sm`), `lg` (min-h-10, `--text-base`), `icon` (square, size-9).
+- **Variants:**
+  - `default` (filled `--primary`, `--primary-foreground` label)
+  - `secondary` (filled `--secondary`, `--text-primary` label)
+  - `destructive` (filled `--destructive`, `--destructive-foreground` label)
+  - `outline` (transparent, `--border-default` border, `--text-primary` label)
+  - `ghost` (transparent, no border, `--text-primary` label)
+  - `link` (transparent, `--primary` text, underline on hover)
+- **Sizes:**
+  - `sm` (min-h-8, `--text-xs`)
+  - `md` (min-h-9, `--text-sm`)
+  - `lg` (min-h-10, `--text-base`)
+  - `icon` (square, size-9)
 - **Shape:** `--radius-md` on every variant, including `outline`. `icon` size is square.
 - **States:** default, pressed, `disabled` (reduced opacity, `cursor-not-allowed`), `aria-busy` (loading spinner overlaid, label hidden, width preserved), `focus-visible` (ring-2 with `--focus-ring`).
 - **Default type:** `type="button"`. Never defaults to submit.
@@ -23,7 +33,14 @@ elevation levels, or new color values inline.
 
 ### Badge
 
-- **Variants:** `default` (`--primary` fill), `secondary` (`--card` fill, `--text-secondary` label), `destructive`, `outline`, `ghost`, `link`, `ref` (mono font, `--tertiary`, for reference IDs).
+- **Variants:**
+  - `default` (`--primary` fill)
+  - `secondary` (`--secondary` fill, `--text-secondary` label)
+  - `destructive`
+  - `outline`
+  - `ghost`
+  - `link`
+  - `ref` (mono font, `--tertiary`, for reference IDs)
 - **Size:** single default size (`--text-xs`, px-1.5, py-px). No small/large variants.
 - **Shape:** `--radius-sm`.
 - **States:** default, `aria-invalid` (destructive border + ring).
@@ -41,7 +58,12 @@ Falls back gracefully when the status is null or undefined.
 
 ### Avatar
 
-- **Subcomponents:** `Avatar`, `AvatarImage`, `AvatarFallback`, `AvatarGroup`, `AvatarGroupCount`.
+- **Subcomponents:**
+  - `Avatar`
+  - `AvatarImage`
+  - `AvatarFallback`
+  - `AvatarGroup`
+  - `AvatarGroupCount`
 - **Sizes:** `sm` (size-6), `default` (size-6), `lg` (size-10).
 - **Shape:** `--radius-full`.
 - **States:** Optional `statusBadge` dot (primary fill, ring-2 `--background`).

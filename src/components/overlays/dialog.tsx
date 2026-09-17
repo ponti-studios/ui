@@ -30,7 +30,7 @@ function Dialog({
   ...props
 }: Omit<React.ComponentProps<typeof BaseDialog.Root>, "handle"> & { alert?: boolean }) {
   return (
-    <DialogAlertContext value={alert}>
+    <DialogAlertContext.Provider value={alert}>
       {alert ? (
         <BaseAlertDialog.Root {...props} />
       ) : (
@@ -40,7 +40,7 @@ function Dialog({
           {...props}
         />
       )}
-    </DialogAlertContext>
+    </DialogAlertContext.Provider>
   );
 }
 

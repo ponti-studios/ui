@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.0](https://github.com/ponti-studios/ui/compare/ui-v1.7.0...ui-v1.8.0) (2026-09-17)
+
+
+### Features
+
+* **tokens:** clarify semantic color roles ([b597f7f](https://github.com/ponti-studios/ui/commit/b597f7f0c842b4d576e67181d8bdf899c7be2224))
+
 ## [1.7.0](https://github.com/ponti-studios/ui/compare/ui-v1.6.0...ui-v1.7.0) (2026-08-20)
 
 

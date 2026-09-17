@@ -30,6 +30,13 @@ for (const file of sourceFiles) {
   const source = readFileSync(file, "utf8");
   for (const check of checks) {
     if (check.name === "legacy semantic utility classes" && file.endsWith(".css")) continue;
+    // The Colors foundation story intentionally lists token names as data;
+    // those strings are not Tailwind utility classes consumed by components.
+    if (
+      check.name === "legacy semantic utility classes" &&
+      file.endsWith("color-systems.stories.tsx")
+    )
+      continue;
     if (check.pattern.test(source))
       failures.push(`${check.name}: ${relative(sourceDirectory, file)}`);
   }

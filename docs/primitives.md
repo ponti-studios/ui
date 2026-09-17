@@ -35,7 +35,7 @@ elevation levels, or new color values inline.
 
 - **Variants:**
   - `default` (`--primary` fill)
-  - `secondary` (`--secondary` fill, `--text-secondary` label)
+  - `secondary` (`--secondary` fill, `--text-secondary-foreground` label)
   - `destructive`
   - `outline`
   - `ghost`

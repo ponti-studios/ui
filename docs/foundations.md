@@ -57,8 +57,10 @@ Screen code references the token name, never a hex value.
 - `--text-primary` — Primary reading text. Maps to `--foreground` in the shadcn layer.
 - `--text-secondary` — Supporting text, secondary labels. Maps to `--muted-foreground`.
 - `--tertiary` — Tertiary text: placeholders, metadata, timestamps.
-- `--primary` — The single interactive accent color. Buttons, links, selection, focus rings.
+- `--primary` — Solid interactive action color. Buttons, selection, and strong emphasis.
 - `--primary-foreground` — Text and icons on top of `--primary` fills.
+- `--accent` — Tinted emphasis and hover surface.
+- `--accent-foreground` — Text and icons on top of `--accent` surfaces.
 - `--destructive` — Destructive action backgrounds and error indicators.
 - `--destructive-foreground` — Text and icons on `--destructive` fills.
 - `--text-destructive` — Standalone destructive text (no background fill). AA-compliant per theme.

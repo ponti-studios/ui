@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.1](https://github.com/ponti-studios/ui/compare/ui-v1.8.0...ui-v1.8.1) (2026-09-17)
+
+
+### Bug Fixes
+
+* **tokens:** address semantic color review ([41667fd](https://github.com/ponti-studios/ui/commit/41667fdc1e6002d8d4e5cedff6535065ad4ccccc))
+
 ## [1.8.0](https://github.com/ponti-studios/ui/compare/ui-v1.7.0...ui-v1.8.0) (2026-09-17)
 
 

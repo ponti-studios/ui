@@ -50,6 +50,8 @@ Screen code references the token name, never a hex value.
 
 - `--background` — Page background. Every screen, row, and input sits on it.
 - `--card` — Card and surface container background.
+- `--secondary` — Neutral secondary-action surface. Distinct from containers
+  so secondary buttons and selectable chips have their own role.
 - `--popover` — Popover, dropdown, and overlay panel background.
 - `--muted` — Muted and disabled control background.
 - `--text-primary` — Primary reading text. Maps to `--foreground` in the shadcn layer.
@@ -62,6 +64,8 @@ Screen code references the token name, never a hex value.
 - `--text-destructive` — Standalone destructive text (no background fill). AA-compliant per theme.
 - `--success` — Success state. Positive indicators, confirmed actions.
 - `--warning` — Warning state. Caution indicators, attention flags.
+- `--text-success` — Standalone success text and icons. AA-compliant per theme.
+- `--text-warning` — Standalone warning text and icons. AA-compliant per theme.
 - `--border-default` — The single border color. Inputs, card edges, table dividers.
 - `--focus-ring` — Keyboard focus indicator. Always appears, never the sole state indicator.
 - `--overlay-scrim` — Modal, sheet, and dialog backdrop. Always `#000` at reduced opacity.
@@ -90,26 +94,32 @@ second palette. The mapping is:
 - `--color-popover-foreground` ← `--text-primary`
 - `--color-primary` ← `--primary`
 - `--color-primary-foreground` ← `--primary-foreground`
-- `--color-secondary` ← `--card`
+- `--color-secondary` ← `--secondary`
 - `--color-secondary-foreground` ← `--text-primary`
 - `--color-muted` ← `--muted`
 - `--color-muted-foreground` ← `--text-secondary`
-- `--color-accent` ← `--primary`
-- `--color-accent-foreground` ← `--primary-foreground`
+- `--color-accent` ← `--accent`
+- `--color-accent-foreground` ← `--accent-foreground`
 - `--color-destructive` ← `--destructive`
 - `--color-destructive-foreground` ← `--destructive-foreground`
 - `--color-destructive-text` ← `--text-destructive`
 - `--color-success` ← `--success`
+- `--color-success-text` ← `--text-success`
 - `--color-warning` ← `--warning`
+- `--color-warning-text` ← `--text-warning`
 - `--color-border` ← `--border-default`
 - `--color-input` ← `--border-default`
 - `--color-ring` ← `--focus-ring`
 
 ### Color rules
 
-- `--primary` is the one interactive accent. There is no second brand color.
+- `--primary` is the solid interactive action color. `--accent` is the
+  distinct tinted interactive surface used for secondary emphasis and hover
+  states.
 - `--success` and `--warning` exist as standing tokens for state communication.
   They are not used as categorical or decorative colors.
+- Use `--text-success` and `--text-warning` for standalone copy or icons;
+  reserve `--success` and `--warning` for filled indicators and controls.
 - Text hierarchy is `--text-primary`, `--text-secondary`, or `--tertiary`.
   Do not invent a new text color by hand-picking a hue.
 - `--border-default` is the default border. A `divider` line between rows is

@@ -10,6 +10,10 @@
     "$type": "color",
     "$value": "rgb(251, 248, 242)"
   },
+  "secondary": {
+    "$type": "color",
+    "$value": "rgb(232, 228, 218)"
+  },
   "popover": {
     "$type": "color",
     "$value": "rgb(246, 242, 234)"
@@ -34,6 +38,10 @@
     "$type": "color",
     "$value": "rgb(16, 112, 102)"
   },
+  "accent": {
+    "$type": "color",
+    "$value": "rgb(215, 239, 235)"
+  },
   "destructive": {
     "$type": "color",
     "$value": "rgb(206, 44, 49)"
@@ -46,6 +54,14 @@
     "$type": "color",
     "$value": "rgb(255, 197, 61)"
   },
+  "text-success": {
+    "$type": "color",
+    "$value": "rgb(31, 122, 80)"
+  },
+  "text-warning": {
+    "$type": "color",
+    "$value": "rgb(138, 90, 0)"
+  },
   "success-foreground": {
     "$type": "color",
     "$value": "rgb(21, 17, 15)"
@@ -57,6 +73,10 @@
   "primary-foreground": {
     "$type": "color",
     "$value": "rgb(255, 255, 255)"
+  },
+  "accent-foreground": {
+    "$type": "color",
+    "$value": "rgb(17, 17, 15)"
   },
   "destructive-foreground": {
     "$type": "color",

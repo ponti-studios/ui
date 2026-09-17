@@ -5,18 +5,23 @@
 :root {
   --background: #171714;
   --card: #1d1d19;
+  --secondary: #2b2b25;
   --popover: #22221e;
   --muted: #1d1d19;
   --text-primary: #ffffff;
   --text-secondary: #aaa79f;
   --tertiary: #d0ccc2;
   --primary: #178277;
+  --accent: #21433f;
   --destructive: #ce2c31;
   --success: #30a46c;
   --warning: #ffc53d;
+  --text-success: #55d89a;
+  --text-warning: #ffd86a;
   --success-foreground: #15110f;
   --warning-foreground: #15110f;
   --primary-foreground: #ffffff;
+  --accent-foreground: #ffffff;
   --destructive-foreground: #ffffff;
   --text-destructive: #ff9592;
   --text-accent: #1b988b;

@@ -69,6 +69,41 @@
       "dependencies": ["@base-ui/react"],
       "registryDependencies": ["utils"],
       "files": [{ "source": "primitives/segmented-control", "target": "components/ui/segmented-control.tsx" }]
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "Mono checkbox with checked, indeterminate, and disabled states.",
+      "dependencies": ["@base-ui/react", "lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [{ "source": "forms/checkbox", "target": "components/ui/checkbox.tsx" }]
+    },
+    {
+      "name": "label",
+      "type": "registry:ui",
+      "title": "Label",
+      "description": "Form label with disabled-state handling.",
+      "registryDependencies": ["utils"],
+      "files": [{ "source": "forms/label", "target": "components/ui/label.tsx" }]
+    },
+    {
+      "name": "separator",
+      "type": "registry:ui",
+      "title": "Separator",
+      "description": "Horizontal/vertical hairline divider.",
+      "dependencies": ["@base-ui/react"],
+      "registryDependencies": ["utils"],
+      "files": [{ "source": "primitives/separator", "target": "components/ui/separator.tsx" }]
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "Hover tooltip with arrow and positioning.",
+      "dependencies": ["@base-ui/react"],
+      "registryDependencies": ["utils"],
+      "files": [{ "source": "overlays/tooltip", "target": "components/ui/tooltip.tsx" }]
     }
   ]
 }

@@ -41,6 +41,7 @@ export {
 } from "./dropdown-menu";
 export { Popover, PopoverAnchor, PopoverContent, PopoverTrigger } from "./popover";
 export { BottomSheet, type BottomSheetProps } from "./bottom-sheet";
+export { Tooltip, TooltipContent, TooltipPortal, TooltipProvider, TooltipTrigger } from "./tooltip";
 export {
   Sheet,
   SheetClose,

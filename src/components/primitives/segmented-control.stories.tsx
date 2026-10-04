@@ -12,6 +12,13 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Single: Story = {
+  args: {
+    label: "Layers",
+    options: [
+      { value: "cameras", label: "Cameras" },
+      { value: "places", label: "Places" },
+    ],
+  },
   render: () => (
     <SegmentedControl
       label="Layers"
@@ -25,6 +32,13 @@ export const Single: Story = {
 };
 
 export const Multiple: Story = {
+  args: {
+    label: "Layers",
+    options: [
+      { value: "cameras", label: "Cameras" },
+      { value: "places", label: "Places" },
+    ],
+  },
   render: () => (
     <SegmentedControl
       label="Layers"

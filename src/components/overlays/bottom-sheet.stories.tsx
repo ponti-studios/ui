@@ -12,6 +12,10 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  args: {
+    label: "Example panel",
+    children: "Panel content",
+  },
   render: () => (
     <div className="bg-muted relative h-105 w-120 overflow-hidden rounded-xl border">
       <BottomSheet
@@ -30,6 +34,10 @@ export const Default: Story = {
 };
 
 export const Collapsed: Story = {
+  args: {
+    label: "Example panel",
+    children: "Panel content",
+  },
   render: () => (
     <div className="bg-muted relative h-105 w-120 overflow-hidden rounded-xl border">
       <BottomSheet

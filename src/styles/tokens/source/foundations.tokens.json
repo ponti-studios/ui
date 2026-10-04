@@ -43,6 +43,7 @@
     "$type": "fontFamily",
     "sans": {
       "$value": [
+        "Geist",
         "system-ui",
         "-apple-system",
         "BlinkMacSystemFont",
@@ -77,6 +78,7 @@
     },
     "mono": {
       "$value": [
+        "Geist Mono",
         "ui-monospace",
         "SFMono-Regular",
         "Menlo",

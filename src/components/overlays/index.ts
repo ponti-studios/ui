@@ -40,6 +40,7 @@ export {
   DropdownMenuTrigger,
 } from "./dropdown-menu";
 export { Popover, PopoverAnchor, PopoverContent, PopoverTrigger } from "./popover";
+export { BottomSheet, type BottomSheetProps } from "./bottom-sheet";
 export {
   Sheet,
   SheetClose,

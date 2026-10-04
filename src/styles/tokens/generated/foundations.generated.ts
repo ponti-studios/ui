@@ -43,6 +43,7 @@ export default {
   },
   font: {
     sans: [
+      "Geist",
       "system-ui",
       "-apple-system",
       "BlinkMacSystemFont",
@@ -73,6 +74,7 @@ export default {
       "Noto Color Emoji",
     ],
     mono: [
+      "Geist Mono",
       "ui-monospace",
       "SFMono-Regular",
       "Menlo",

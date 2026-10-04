@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "segmented-control",
+  "type": "registry:ui",
+  "title": "SegmentedControl",
+  "description": "Pill-group single/multi toggle for layers, filters, and modes.",
+  "dependencies": [
+    "@base-ui/react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/segmented-control.tsx",
+      "content": "\"use client\";\n\nimport { ToggleGroup as SegmentedPrimitive } from \"@base-ui/react/toggle-group\";\nimport { Toggle as SegmentedItemPrimitive } from \"@base-ui/react/toggle\";\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\nexport type SegmentedOption = {\n  value: string;\n  label: React.ReactNode;\n  ariaLabel?: string;\n};\n\nexport type SegmentedControlProps = {\n  options: SegmentedOption[];\n  /** Selected values. Single mode: pass at most one. */\n  value?: string[];\n  defaultValue?: string[];\n  onValueChange?: (value: string[]) => void;\n  /** @default false — single-select. True allows several pressed. */\n  multiple?: boolean;\n  /** Accessible name for the group. Falls back to joining option labels. */\n  label?: string;\n  className?: string;\n  itemClassName?: string;\n};\n\n// Pill-group single/multi toggle. Shape + pressed states are kit-owned;\n// elevation and placement are app-owned via className.\nexport function SegmentedControl({\n  options,\n  value,\n  defaultValue,\n  onValueChange,\n  multiple = false,\n  label,\n  className,\n  itemClassName,\n}: SegmentedControlProps) {\n  return (\n    <SegmentedPrimitive\n      data-slot=\"segmented-control\"\n      aria-label={label ?? options.map((o) => o.ariaLabel ?? o.value).join(\", \")}\n      multiple={multiple}\n      value={value}\n      defaultValue={defaultValue}\n      onValueChange={onValueChange}\n      className={cn(\n        \"border-border bg-card inline-flex items-center gap-0.5 rounded-full border p-0.5\",\n        className,\n      )}\n    >\n      {options.map((option) => (\n        <SegmentedItemPrimitive\n          key={option.value}\n          data-slot=\"segmented-control-item\"\n          value={option.value}\n          aria-label={option.ariaLabel ?? (typeof option.label === \"string\" ? option.label : option.value)}\n          className={cn(\n            \"text-muted-foreground hover:text-foreground rounded-full px-4 py-1.5 text-[11px] font-semibold tracking-wider whitespace-nowrap uppercase transition-colors\",\n            \"data-pressed:bg-foreground data-pressed:text-background\",\n            \"focus-visible:outline-ring focus-visible:outline-2 focus-visible:outline-offset-2\",\n            \"data-disabled:pointer-events-none data-disabled:opacity-50\",\n            itemClassName,\n          )}\n        >\n          {option.label}\n        </SegmentedItemPrimitive>\n      ))}\n    </SegmentedPrimitive>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

@@ -11,6 +11,17 @@ The design system is documented in `docs/`:
 - [Patterns](./docs/patterns.md) — screen composition rules
 - [Review gates](./docs/review-gates.md) — pass/fail review criteria
 
+## React Native
+
+Import native components and the shared token theme from `@ponti-studios/ui/native`.
+This entry point requires `react-native` as a peer and uses the same light/dark
+color, spacing, radius, type-size, and font-weight tokens as the web components.
+The base package remains usable by web consumers that do not install React Native.
+
+```tsx
+import { NativeButton, NativeThemeProvider } from "@ponti-studios/ui/native";
+```
+
 ## Development
 
 Common development workflows are available through the `Makefile`:

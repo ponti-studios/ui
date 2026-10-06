@@ -66,6 +66,11 @@
       "types": "./src/styles/tokens/css-vars.ts",
       "import": "./src/styles/tokens/css-vars.ts"
     },
+    "./native": {
+      "types": "./src/native/index.ts",
+      "react-native": "./src/native/index.ts",
+      "import": "./src/native/index.ts"
+    },
     "./hooks": {
       "types": "./src/hooks/index.ts",
       "import": "./src/hooks/index.ts"
@@ -86,6 +91,7 @@
     "prepack": "make check"
   },
   "dependencies": {
+    "@babel/runtime": "^7.29.7",
     "@base-ui/react": "^1.6.0",
     "@radix-ui/colors": "^3.0.0",
     "class-variance-authority": "^0.7.1",
@@ -113,6 +119,7 @@
     "playwright": "^1.61.1",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
+    "react-native": "0.87.1",
     "storybook": "10.5.6",
     "style-dictionary": "5.5.0",
     "tailwindcss": "^4.3.3",
@@ -122,10 +129,14 @@
   },
   "peerDependencies": {
     "react": "^18.2.0 || ^19.0.0",
-    "react-dom": "^18.2.0 || ^19.0.0"
+    "react-dom": "^18.2.0 || ^19.0.0",
+    "react-native": ">=0.80"
   },
   "peerDependenciesMeta": {
     "react-dom": {
+      "optional": true
+    },
+    "react-native": {
       "optional": true
     }
   },

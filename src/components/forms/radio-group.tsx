@@ -21,6 +21,7 @@ const RadioGroupItem = React.forwardRef<
 >(({ className, ...props }, ref) => {
   return (
     <RadioPrimitive.Root
+      data-slot="radio-group-item"
       ref={ref}
       className={cn(
         "border-ring bg-background flex aspect-square size-6 items-center justify-center rounded-full border",

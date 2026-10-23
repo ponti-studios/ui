@@ -1,8 +1,11 @@
+"use client";
+
 import { CalendarIcon } from "lucide-react";
 import { useId, useRef, useState } from "react";
 import type { ChangeEvent, RefObject } from "react";
 
 import { cn } from "../../lib/utils";
+import { useUiText } from "../../translations/ui-provider";
 import { formatDateInput } from "./date-utils";
 
 export interface DateRangeValue {
@@ -64,7 +67,7 @@ const FIELD_CLASS =
  * indicator is hidden, so this is the visible affordance: clicking it calls
  * the input's `showPicker()` (falling back to focus, which opens the native
  * picker on iOS). It is not a tab stop because the input itself is the
- * focusable control and opens the picker on focus.
+ * keyboard users can reach the visible affordance independently.
  */
 function DatePickerIcon({
   inputRef,
@@ -78,7 +81,7 @@ function DatePickerIcon({
   return (
     <button
       type="button"
-      tabIndex={-1}
+      data-slot="date-picker-icon"
       aria-label={ariaLabel}
       disabled={disabled}
       onClick={() => {
@@ -90,7 +93,7 @@ function DatePickerIcon({
           input.focus();
         }
       }}
-      className="border-border bg-background text-foreground flex size-10 shrink-0 items-center justify-center rounded-l-xl border"
+      className="border-input bg-background text-foreground focus-visible:outline-ring flex size-10 shrink-0 items-center justify-center rounded-l-xl border focus-visible:outline-2 focus-visible:outline-offset-2"
     >
       <CalendarIcon className="size-4" aria-hidden />
     </button>
@@ -112,6 +115,7 @@ function SingleDatePicker({
   defaultValue,
   onValueChange,
 }: SingleDatePickerProps) {
+  const openDatePickerLabel = useUiText("datePicker.open", "Open date picker");
   const generatedId = useId();
   const inputId = id ?? generatedId;
   const descriptionId = `${inputId}-description`;
@@ -137,7 +141,7 @@ function SingleDatePicker({
         </label>
       ) : null}
       <div className="flex w-full items-center">
-        <DatePickerIcon inputRef={inputRef} disabled={disabled} ariaLabel="Open date picker" />
+        <DatePickerIcon inputRef={inputRef} disabled={disabled} ariaLabel={openDatePickerLabel} />
         <input
           ref={inputRef}
           id={inputId}

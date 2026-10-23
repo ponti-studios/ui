@@ -6,6 +6,7 @@ import { XIcon } from "lucide-react";
 import * as React from "react";
 
 import { cn } from "../../lib/utils";
+import { useUiText } from "../../translations/ui-provider";
 
 /**
  * Whether the nearest ancestor `<Dialog alert>` is in alert mode. Every part
@@ -121,6 +122,7 @@ function DialogContent({
   showCloseButton?: boolean;
 }) {
   const isAlert = React.useContext(DialogAlertContext);
+  const closeLabel = useUiText("dialog.close", "Close");
   const shouldShowClose = showCloseButton ?? !isAlert;
 
   return (
@@ -138,7 +140,7 @@ function DialogContent({
             className="text-muted-foreground hover:bg-muted hover:text-muted-foreground focus-visible:outline-ring absolute top-3 right-3 inline-flex size-9 items-center justify-center rounded-md border border-transparent opacity-100 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none sm:top-4 sm:right-4 [&_svg]:pointer-events-none [&_svg]:size-4.5 [&_svg]:shrink-0"
           >
             <XIcon />
-            <span className="sr-only">Close</span>
+            <span className="sr-only">{closeLabel}</span>
           </BaseDialog.Close>
         )}
       </BaseDialog.Popup>

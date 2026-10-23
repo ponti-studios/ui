@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "empty-state",
+  "type": "registry:ui",
+  "title": "EmptyState",
+  "description": "Composable empty state with optional icon, explanation, and recovery action.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/empty-state.tsx",
+      "content": "import type { ReactNode } from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\nexport interface EmptyStateProps {\n  icon?: ReactNode;\n  title: ReactNode;\n  description?: ReactNode;\n  action?: ReactNode;\n  children?: ReactNode;\n  className?: string;\n  layout?: \"centered\" | \"inline\";\n  size?: \"md\" | \"lg\";\n  variant?: \"default\" | \"dashed\" | \"quiet\" | \"search\";\n}\n\n/**\n * EmptyState communicates an absence of content and gives the host application\n * room for an optional next action. Domain copy and recovery behavior stay with\n * the calling feature.\n */\nexport function EmptyState({\n  icon,\n  title,\n  description,\n  action,\n  children,\n  className,\n  layout = \"centered\",\n  size = \"md\",\n  variant = \"default\",\n}: EmptyStateProps) {\n  const centered = layout === \"centered\";\n  const large = size === \"lg\";\n\n  return (\n    <section\n      className={cn(\n        \"rounded-lg px-5 py-8\",\n        variant === \"default\" && \"bg-card border\",\n        variant === \"dashed\" && \"bg-card border border-dashed\",\n        variant === \"search\" && \"bg-muted border border-dashed\",\n        variant === \"quiet\" && \"bg-card\",\n        centered\n          ? cn(\n              \"flex flex-col items-center justify-center text-center\",\n              large ? \"min-h-80 px-6 py-10\" : \"min-h-64\",\n            )\n          : \"flex flex-col gap-3\",\n        className,\n      )}\n    >\n      {icon ? (\n        <div\n          className=\"text-muted-foreground mb-3 flex size-11 items-center justify-center\"\n          aria-hidden\n        >\n          {icon}\n        </div>\n      ) : null}\n      <div className={cn(\"space-y-2\", centered && \"max-w-[34ch]\")}>\n        <h2\n          className={cn(\n            \"text-foreground font-semibold tracking-tight\",\n            large ? \"text-lg\" : \"text-base\",\n          )}\n        >\n          {title}\n        </h2>\n        {description ? <p className=\"text-muted-foreground text-sm\">{description}</p> : null}\n      </div>\n      {children ? <div className=\"mt-3\">{children}</div> : null}\n      {action ? <div className=\"mt-4\">{action}</div> : null}\n    </section>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

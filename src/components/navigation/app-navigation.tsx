@@ -1,3 +1,5 @@
+"use client";
+
 import { Menu } from "lucide-react";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import * as React from "react";

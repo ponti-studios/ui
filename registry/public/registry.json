@@ -7,7 +7,7 @@
       "name": "utils",
       "type": "registry:lib",
       "title": "cn() class merger",
-      "description": "clsx + tailwind-merge class merger used by every Mono component."
+      "description": "clsx + tailwind-merge class merger used by every Ponti component."
     },
     {
       "name": "spinner",
@@ -22,7 +22,7 @@
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
-      "description": "Mono button in six variants and four sizes, with loading state.",
+      "description": "Ponti button in six variants and four sizes, with loading state.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority"
@@ -36,7 +36,7 @@
       "name": "input",
       "type": "registry:ui",
       "title": "Input",
-      "description": "Mono text input.",
+      "description": "Ponti text input.",
       "registryDependencies": [
         "utils"
       ]
@@ -45,7 +45,7 @@
       "name": "dialog",
       "type": "registry:ui",
       "title": "Dialog",
-      "description": "Mono dialog with alert mode and bottom-sheet mobile behavior.",
+      "description": "Ponti dialog with alert mode and bottom-sheet mobile behavior.",
       "dependencies": [
         "@base-ui/react",
         "lucide-react"
@@ -93,7 +93,7 @@
       "name": "checkbox",
       "type": "registry:ui",
       "title": "Checkbox",
-      "description": "Mono checkbox with checked, indeterminate, and disabled states.",
+      "description": "Ponti checkbox with checked, indeterminate, and disabled states.",
       "dependencies": [
         "@base-ui/react",
         "lucide-react"
@@ -134,6 +134,106 @@
       "registryDependencies": [
         "utils"
       ]
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "Badge",
+      "description": "Ponti badge with semantic variants and consistent compact sizing.",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "title": "Card",
+      "description": "Composable card surface with header, content, description, and footer slots.",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "progress",
+      "type": "registry:ui",
+      "title": "Progress",
+      "description": "Accessible value-driven progress indicator with determinate and indeterminate states.",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "title": "Skeleton",
+      "description": "Content-loading placeholder with configurable class names.",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "alert",
+      "type": "registry:ui",
+      "title": "Alert",
+      "description": "Inline informational and destructive message surface with title and description slots.",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "empty-state",
+      "type": "registry:ui",
+      "title": "EmptyState",
+      "description": "Composable empty state with optional icon, explanation, and recovery action.",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "section-intro",
+      "type": "registry:ui",
+      "title": "SectionIntro",
+      "description": "Reusable section heading with eyebrow, description, and action slots."
+    },
+    {
+      "name": "surface-panel",
+      "type": "registry:ui",
+      "title": "SurfacePanel",
+      "description": "Named surface container with consistent border, radius, and padding.",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "filter-chip",
+      "type": "registry:ui",
+      "title": "FilterChip",
+      "description": "Removable filter or sort chip with accessible action labels.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "active-filters-bar",
+      "type": "registry:ui",
+      "title": "ActiveFiltersBar",
+      "description": "Composable active-filter summary with clear-all behavior.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "filter-chip"
+      ]
+    },
+    {
+      "name": "ponti-theme",
+      "type": "registry:style",
+      "title": "Ponti theme",
+      "description": "Compiled Ponti tokens and component styles for projects using the registry."
     }
   ]
 }

@@ -1,3 +1,5 @@
+"use client";
+
 import { KeyRound, Plus, Trash2, X } from "lucide-react";
 import { useCallback, useState } from "react";
 

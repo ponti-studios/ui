@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "progress",
+  "type": "registry:ui",
+  "title": "Progress",
+  "description": "Accessible value-driven progress indicator with determinate and indeterminate states.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/progress.tsx",
+      "content": "import { Progress as ProgressPrimitive } from \"@base-ui/react/progress\";\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\nfunction Progress({\n  className,\n  value,\n  indicatorClassName,\n  ...props\n}: React.ComponentProps<typeof ProgressPrimitive.Root> & {\n  indicatorClassName?: string;\n}) {\n  const isFilling = typeof value === \"number\" && value > 0 && value < 100;\n  return (\n    <ProgressPrimitive.Root\n      data-slot=\"progress\"\n      className={cn(\"bg-muted relative h-2 w-full overflow-hidden rounded-full\", className)}\n      value={value}\n      {...props}\n    >\n      <ProgressPrimitive.Indicator\n        data-slot=\"progress-indicator\"\n        className={cn(\n          \"bg-primary relative h-full w-full flex-1 overflow-hidden transition-transform duration-300 ease-out\",\n          indicatorClassName,\n        )}\n        style={{ transform: `translateX(-${100 - (value ?? 0)}%)` }}\n      >\n        {isFilling && (\n          <span\n            aria-hidden\n            className=\"animate-progress-shimmer absolute inset-0 bg-[linear-gradient(90deg,transparent_35%,rgba(255,255,255,0.75)_50%,transparent_65%)]\"\n          />\n        )}\n      </ProgressPrimitive.Indicator>\n    </ProgressPrimitive.Root>\n  );\n}\n\nexport { Progress };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

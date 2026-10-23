@@ -3,7 +3,7 @@
   "name": "utils",
   "type": "registry:lib",
   "title": "cn() class merger",
-  "description": "clsx + tailwind-merge class merger used by every Mono component.",
+  "description": "clsx + tailwind-merge class merger used by every Ponti component.",
   "files": [
     {
       "path": "lib/utils.ts",

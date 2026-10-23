@@ -3,7 +3,7 @@
   "name": "checkbox",
   "type": "registry:ui",
   "title": "Checkbox",
-  "description": "Mono checkbox with checked, indeterminate, and disabled states.",
+  "description": "Ponti checkbox with checked, indeterminate, and disabled states.",
   "dependencies": [
     "@base-ui/react",
     "lucide-react"

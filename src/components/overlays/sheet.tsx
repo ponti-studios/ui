@@ -5,6 +5,7 @@ import { X } from "lucide-react";
 import * as React from "react";
 
 import { cn } from "../../lib/utils";
+import { useUiText } from "../../translations/ui-provider";
 
 const Sheet = SheetPrimitive.Root;
 
@@ -33,7 +34,7 @@ function SheetClose({
   return (
     <SheetPrimitive.Close
       {...(asChild && React.isValidElement(children)
-        ? { render: children as React.ReactElement }
+        ? { render: children as React.ReactElement, nativeButton: false }
         : {})}
       {...props}
     >
@@ -80,8 +81,9 @@ interface SheetContentProps extends React.ComponentPropsWithoutRef<typeof SheetP
 const SheetContent = React.forwardRef<
   React.ComponentRef<typeof SheetPrimitive.Popup>,
   SheetContentProps
->(({ className, closeClassName, children, ...props }, ref) => (
-  <SheetPortal>
+>(( { className, closeClassName, children, ...props }, ref) => {
+  const closeLabel = useUiText("sheet.close", "Close");
+  return <SheetPortal>
     <SheetOverlay />
     <SheetPrimitive.Popup
       ref={ref}
@@ -96,12 +98,12 @@ const SheetContent = React.forwardRef<
         )}
       >
         <X className="size-4.5" />
-        <span className="sr-only">Close</span>
+        <span className="sr-only">{closeLabel}</span>
       </SheetPrimitive.Close>
       {children}
     </SheetPrimitive.Popup>
-  </SheetPortal>
-));
+  </SheetPortal>;
+});
 SheetContent.displayName = "SheetContent";
 
 const SheetHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (

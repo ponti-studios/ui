@@ -44,3 +44,6 @@ export type {
   TextSizeToken,
   TrackingToken,
 } from "./styles/tokens/index";
+
+export { UiTextProvider, useUiText } from "./translations/ui-provider";
+export type { UiMessageKey, UiMessages } from "./translations/ui-provider";

@@ -12,75 +12,91 @@
     "create-ponti-project": "./scripts/create-project.mjs"
   },
   "files": [
-    "src",
-    "dist/styles.css",
+    "dist",
+    "src/styles/animations.css",
     "scripts/create-project.mjs",
     "templates/web-vite",
-    "THIRD_PARTY_NOTICES.md"
+    "THIRD_PARTY_NOTICES.md",
+    "!dist/styles-build.js",
+    "!dist/package-index.d.ts",
+    "!dist/storybook/**",
+    "!dist/styles/build.d.ts"
   ],
   "type": "module",
   "sideEffects": [
-    "./src/index.ts",
+    "./dist/index.js",
     "./dist/styles.css",
     "./src/styles/animations.css"
   ],
   "exports": {
     ".": {
-      "types": "./src/index.ts",
-      "import": "./src/index.ts"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
     },
     "./primitives": {
-      "types": "./src/components/primitives/index.ts",
-      "import": "./src/components/primitives/index.ts"
+      "types": "./dist/components/primitives/index.d.ts",
+      "import": "./dist/components/primitives/index.js"
     },
     "./forms": {
-      "types": "./src/components/forms/index.ts",
-      "import": "./src/components/forms/index.ts"
+      "types": "./dist/components/forms/index.d.ts",
+      "import": "./dist/components/forms/index.js"
     },
     "./feedback": {
-      "types": "./src/components/feedback/index.ts",
-      "import": "./src/components/feedback/index.ts"
+      "types": "./dist/components/feedback/index.d.ts",
+      "import": "./dist/components/feedback/index.js"
     },
     "./filters": {
-      "types": "./src/components/filters/index.ts",
-      "import": "./src/components/filters/index.ts"
+      "types": "./dist/components/filters/index.d.ts",
+      "import": "./dist/components/filters/index.js"
     },
     "./overlays": {
-      "types": "./src/components/overlays/index.ts",
-      "import": "./src/components/overlays/index.ts"
+      "types": "./dist/components/overlays/index.d.ts",
+      "import": "./dist/components/overlays/index.js"
     },
     "./navigation": {
-      "types": "./src/components/navigation/index.ts",
-      "import": "./src/components/navigation/index.ts"
+      "types": "./dist/components/navigation/index.d.ts",
+      "import": "./dist/components/navigation/index.js"
     },
     "./data-display": {
-      "types": "./src/components/data-display/index.ts",
-      "import": "./src/components/data-display/index.ts"
+      "types": "./dist/components/data-display/index.d.ts",
+      "import": "./dist/components/data-display/index.js"
     },
     "./layout": {
-      "types": "./src/components/layout/index.ts",
-      "import": "./src/components/layout/index.ts"
+      "types": "./dist/components/layout/index.d.ts",
+      "import": "./dist/components/layout/index.js"
     },
     "./utilities": {
-      "types": "./src/lib/index.ts",
-      "import": "./src/lib/index.ts"
+      "types": "./dist/lib/index.d.ts",
+      "import": "./dist/lib/index.js"
     },
     "./tokens": {
-      "types": "./src/styles/tokens/index.ts",
-      "import": "./src/styles/tokens/index.ts"
+      "types": "./dist/styles/tokens/index.d.ts",
+      "import": "./dist/styles/tokens/index.js"
     },
     "./tokens/css-vars": {
-      "types": "./src/styles/tokens/css-vars.ts",
-      "import": "./src/styles/tokens/css-vars.ts"
+      "types": "./dist/styles/tokens/css-vars.d.ts",
+      "import": "./dist/styles/tokens/css-vars.js"
     },
     "./native": {
-      "types": "./src/native/index.ts",
-      "react-native": "./src/native/index.ts",
-      "import": "./src/native/index.ts"
+      "types": "./dist/native/index.d.ts",
+      "react-native": "./dist/native/index.js",
+      "import": "./dist/native/index.js"
     },
     "./hooks": {
-      "types": "./src/hooks/index.ts",
-      "import": "./src/hooks/index.ts"
+      "types": "./dist/hooks/index.d.ts",
+      "import": "./dist/hooks/index.js"
+    },
+    "./auth": {
+      "types": "./dist/auth/index.d.ts",
+      "import": "./dist/auth/index.js"
+    },
+    "./integrations/service-worker": {
+      "types": "./dist/integrations/service-worker.d.ts",
+      "import": "./dist/integrations/service-worker.js"
+    },
+    "./translations": {
+      "types": "./dist/translations/ui-provider.d.ts",
+      "import": "./dist/translations/ui-provider.js"
     },
     "./styles.css": "./dist/styles.css",
     "./animations.css": "./src/styles/animations.css"

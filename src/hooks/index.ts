@@ -1,3 +1,5 @@
+"use client";
+
 export { useApiClient } from "./use-api-client";
 export { useDebouncedValue } from "./use-debounced-value";
 export { useDerivedFilterState } from "./use-derived-filter-state";

@@ -1,2 +1,8 @@
 @import "tailwindcss";
 @import "../src/styles/index.css";
+
+body,
+.sb-show-main {
+  background-color: var(--background);
+  color: var(--text-primary);
+}

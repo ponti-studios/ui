@@ -4,6 +4,7 @@ import { expect, userEvent, within } from "storybook/test";
 
 import { booleanControl, hiddenControl, selectControl } from "../../storybook/controls";
 import { buttonVariantOptions } from "../../storybook/options";
+import { UiTextProvider } from "../../translations/ui-provider";
 import { Button } from "./button";
 
 const meta: Meta = {
@@ -109,5 +110,17 @@ export const Loading: Story = {
     const button = canvas.getByRole("button", { name: "Saving" });
 
     await expect(button).toBeDisabled();
+  },
+};
+
+export const LocalizedLoading: Story = {
+  render: () => (
+    <UiTextProvider messages={{ "button.loading": "Chargement" }}>
+      <Button isLoading>Enregistrer</Button>
+    </UiTextProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole("button", { name: "Chargement" })).toBeDisabled();
   },
 };

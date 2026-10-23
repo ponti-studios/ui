@@ -1,3 +1,5 @@
+"use client";
+
 import { useCallback, useMemo, useState } from "react";
 
 import type { ActiveFilter } from "../components/filters/active-filters-bar";

@@ -18,16 +18,16 @@ elevation levels, or new color values inline.
   - `default` (filled `--primary`, `--primary-foreground` label)
   - `secondary` (filled `--secondary`, `--text-primary` label)
   - `destructive` (filled `--destructive`, `--destructive-foreground` label)
-  - `outline` (transparent, `--border-default` border, `--text-primary` label)
+  - `outline` (transparent, `--control-border` border, `--text-primary` label)
   - `ghost` (transparent, no border, `--text-primary` label)
   - `link` (transparent, `--primary` text, underline on hover)
 - **Sizes:**
   - `sm` (min-h-8, `--text-xs`)
   - `md` (min-h-9, `--text-sm`)
   - `lg` (min-h-10, `--text-base`)
-  - `icon` (square, size-9)
+  - `icon` (square, size-9). On coarse pointers, all Button sizes expose a minimum 44px hit area.
 - **Shape:** `--radius-md` on every variant, including `outline`. `icon` size is square.
-- **States:** default, pressed, `disabled` (reduced opacity, `cursor-not-allowed`), `aria-busy` (loading spinner overlaid, label hidden, width preserved), `focus-visible` (ring-2 with `--focus-ring`).
+- **States:** default, pressed, `disabled` (reduced opacity, `cursor-not-allowed`), `aria-busy` (loading spinner overlaid, label hidden, width preserved), `focus-visible` (ring-2 with `--focus-ring`); coarse-pointer hit areas are at least 44px.
 - **Default type:** `type="button"`. Never defaults to submit.
 - Picking a variant is a hierarchy decision: `default` for the one action the screen wants done, `secondary` or `outline` for a real but lesser action, `ghost` only when the action's location is already obvious from context, `link` for navigation that must read as a link rather than a button.
 
@@ -35,7 +35,7 @@ elevation levels, or new color values inline.
 
 - **Variants:**
   - `default` (`--primary` fill)
-  - `secondary` (`--secondary` fill, `--text-secondary-foreground` label)
+  - `secondary` (`--secondary` fill, `--text-primary` label)
   - `destructive`
   - `outline`
   - `ghost`
@@ -45,11 +45,6 @@ elevation levels, or new color values inline.
 - **Shape:** `--radius-sm`.
 - **States:** default, `aria-invalid` (destructive border + ring).
 - **Motion:** `state-settle` transition (120ms ease-out).
-
-### StatusBadge
-
-Config-driven badge. Maps a status value to `{ label, variant, icon }`.
-Falls back gracefully when the status is null or undefined.
 
 ### Label
 
@@ -86,9 +81,9 @@ Falls back gracefully when the status is null or undefined.
 ### Input
 
 - **Sizes:** single default (h-9, `--text-base md:text-sm`).
-- **Shape:** `--radius-md`, `--border-default` border, `--background` fill. Input is always a bordered box — a bottom hairline alone does not read as a typeable field.
+- **Shape:** `--radius-md`, `--control-border` border, `--background` fill. Input is always a bordered box — a bottom hairline alone does not read as a typeable field.
 - **States:** default, `disabled` (reduced opacity, `cursor-not-allowed`), `aria-invalid` (destructive border + ring), `focus-visible` (ring-2 `--focus-ring`).
-- **Contract:** accepts native HTML input types. Placeholder describes expected input; error state shows an inline message via the `Field` wrapper.
+- **Contract:** accepts native HTML input types. Placeholder describes expected input; error/help text is composed by `TextField`; there is no exported `Field` wrapper.
 
 ### Textarea
 
@@ -148,10 +143,9 @@ Falls back gracefully when the status is null or undefined.
 
 - **States:** default (dashed `--border-default` border, `--muted` background), `dragActive` (`--primary` border, `--primary` background at 5% opacity), `isImporting` (pointer-events-none).
 
-### DateMonthSelect, GroupBySelect, PasskeyManagement
+### DateMonthSelect and PasskeyManagement
 
-Utility form controls. See `@ponti-studios/ui` source for full contracts.
-Do not build a custom version when the package already exports one.
+`DateMonthSelect` is a labeled month/year selector. `PasskeyManagement` is available from `@ponti-studios/ui/auth`. The package does not currently export `GroupBySelect`.
 
 ---
 
@@ -179,10 +173,6 @@ Do not build a custom version when the package already exports one.
 - **Track:** `--primary` at 20% opacity, `h-2`, `--radius-full`.
 - **Indicator:** `--primary` fill, `h-full`, `transition-all`. Value-driven (0–100).
 
-### ProgressBar
-
-- Standalone linear bar. `h-[2px]`, `--warning` border. Width maps to progress value.
-
 ### EmptyState
 
 - **Variants:** `default` (`--card` background, `--border-default` border), `dashed` (dashed border), `quiet` (`--background`), `search` (`--muted` background, dashed border).
@@ -191,10 +181,9 @@ Do not build a custom version when the package already exports one.
 - **Slots:** `icon`, `title`, `description`, `action`, `children`.
 - States what is absent and what to do next.
 
-### FileUploadStatus, FileUploadStatusBadge, UpdateGuard
+### UpdateGuard
 
-See `@ponti-studios/ui` source. Do not rebuild uploaded file status tracking
-or service-worker lifecycle UI when the package provides them.
+Import `UpdateGuard` from `@ponti-studios/ui/integrations/service-worker`. The package does not currently export `FileUploadStatus` or `FileUploadStatusBadge`.
 
 ---
 
@@ -207,11 +196,9 @@ or service-worker lifecycle UI when the package provides them.
 - **Contract:** confirmation content; substantial content gets a screen. Never nests another overlay.
 - **Accessibility:** `role="dialog"`, `aria-modal`, focus trap, escape dismiss.
 
-### AlertDialog
+### Destructive confirmation
 
-- **Subcomponents:** `AlertDialogTrigger`, `AlertDialogContent` (`max-w-lg`, bottom sheet on mobile with `--radius-t-xl`, centered dialog on desktop with `--radius-xl`), `AlertDialogOverlay`, `AlertDialogHeader`, `AlertDialogFooter`, `AlertDialogTitle`, `AlertDialogDescription`, `AlertDialogAction` (default Button), `AlertDialogCancel` (outline Button).
-- **Contract:** destructive confirmations and irreversible actions. The action button names the result; the cancel button is always present.
-- **Accessibility:** `role="alertdialog"`, `aria-modal`, focus trap.
+Use the `Dialog` root with `alert` enabled. This switches to Base UI's alert-dialog behavior; there are no separately exported `AlertDialog*` components. Pair `DialogTitle`, `DialogDescription`, a cancel/close action, and a clearly named destructive action.
 
 ### Sheet
 

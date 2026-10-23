@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "section-intro",
+  "type": "registry:ui",
+  "title": "SectionIntro",
+  "description": "Reusable section heading with eyebrow, description, and action slots.",
+  "files": [
+    {
+      "path": "components/ui/section-intro.tsx",
+      "content": "import type { ReactNode } from \"react\";\n\nexport interface SectionIntroProps {\n  eyebrow?: ReactNode;\n  title: ReactNode;\n  description?: ReactNode;\n  actions?: ReactNode;\n}\n\n/**\n * Page-level heading composition: eyebrow label, title, description, and an\n * optional trailing actions slot.\n */\nexport function SectionIntro({ eyebrow, title, description, actions }: SectionIntroProps) {\n  return (\n    <div className=\"flex items-start justify-between gap-6\">\n      <div className=\"min-w-0 flex-1\">\n        {eyebrow ? (\n          <div className=\"text-muted-foreground mb-3 text-[11px] font-medium tracking-[0.18em] uppercase\">\n            {eyebrow}\n          </div>\n        ) : null}\n        <div className=\"space-y-3\">\n          <h1 className=\"text-2xl text-foreground font-semibold tracking-tight\">{title}</h1>\n          {description ? <p className=\"text-muted-foreground text-sm\">{description}</p> : null}\n        </div>\n      </div>\n      {actions ? <div className=\"shrink-0\">{actions}</div> : null}\n    </div>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

@@ -1,3 +1,5 @@
+"use client";
+
 import { useCallback, useEffect, useRef, useState } from "react";
 
 interface UseFilterStateOptions<T> {
@@ -11,30 +13,15 @@ export function useFilterState<T extends Record<string, unknown>>(
 ) {
   const { initialFilters, onFiltersChange, debounceMs } = options;
   const [filters, setFiltersState] = useState<T>(initialFilters);
-  const debounceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const onFiltersChangeRef = useRef(onFiltersChange);
+  const previousFiltersRef = useRef(filters);
   onFiltersChangeRef.current = onFiltersChange;
 
   const setFilters = useCallback(
     (newFilters: T | ((prev: T) => T)) => {
-      setFiltersState((prev) => {
-        const updatedFilters = typeof newFilters === "function" ? newFilters(prev) : newFilters;
-
-        if (debounceMs && debounceMs > 0) {
-          if (debounceTimerRef.current) {
-            clearTimeout(debounceTimerRef.current);
-          }
-          debounceTimerRef.current = setTimeout(() => {
-            onFiltersChangeRef.current?.(updatedFilters);
-          }, debounceMs);
-        } else {
-          onFiltersChangeRef.current?.(updatedFilters);
-        }
-
-        return updatedFilters;
-      });
+      setFiltersState(newFilters);
     },
-    [debounceMs],
+    [],
   );
 
   const updateFilter = useCallback(
@@ -46,16 +33,25 @@ export function useFilterState<T extends Record<string, unknown>>(
 
   const clearFilters = useCallback(() => {
     setFiltersState(initialFilters);
-    onFiltersChangeRef.current?.(initialFilters);
   }, [initialFilters]);
 
   useEffect(() => {
+    if (Object.is(previousFiltersRef.current, filters)) return;
+    previousFiltersRef.current = filters;
+
+    if (!debounceMs || debounceMs <= 0) {
+      onFiltersChangeRef.current?.(filters);
+      return;
+    }
+
+    const timeoutId = setTimeout(() => {
+      onFiltersChangeRef.current?.(filters);
+    }, debounceMs);
+
     return () => {
-      if (debounceTimerRef.current) {
-        clearTimeout(debounceTimerRef.current);
-      }
+      clearTimeout(timeoutId);
     };
-  }, []);
+  }, [filters, debounceMs]);
 
   return {
     filters,

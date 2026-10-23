@@ -10,7 +10,9 @@ export { DropZone } from "./drop-zone";
 export type { DropZoneProps } from "./drop-zone";
 export { Input } from "./input";
 export { Label } from "./label";
+/** @deprecated Import from `@ponti-studios/ui/auth` instead. */
 export { PasskeyManagement } from "./passkey-management";
+/** @deprecated Import from `@ponti-studios/ui/auth` instead. */
 export type { PasskeyManagementProps, PasskeyRecord } from "./passkey-management";
 export { RadioGroup, RadioGroupItem } from "./radio-group";
 export {

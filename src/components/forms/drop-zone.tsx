@@ -1,3 +1,7 @@
+"use client";
+
+/* oxlint-disable jsx-a11y/prefer-tag-over-role -- The drop target renders structured status content and optional recovery actions; a native button cannot contain this composition. */
+
 import { FileIcon, UploadIcon, XIcon } from "lucide-react";
 import {
   useCallback,

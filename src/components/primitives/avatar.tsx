@@ -1,3 +1,5 @@
+"use client";
+
 import { Avatar as AvatarPrimitive } from "@base-ui/react/avatar";
 import type { ClassValue } from "clsx";
 import * as React from "react";

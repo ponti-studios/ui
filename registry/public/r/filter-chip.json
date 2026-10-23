@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "filter-chip",
+  "type": "registry:ui",
+  "title": "FilterChip",
+  "description": "Removable filter or sort chip with accessible action labels.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/filter-chip.tsx",
+      "content": "\"use client\";\n\nimport { ArrowDown, ArrowUp, X } from \"lucide-react\";\nimport type { ReactNode } from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { useUiText } from \"../../translations/ui-provider\";\n\nexport interface FilterChipProps {\n  label: ReactNode;\n  onRemove: () => void;\n  onClick?: () => void;\n  className?: string;\n  variant?: \"default\" | \"sort\";\n  direction?: \"asc\" | \"desc\";\n  role?: string;\n}\n\nexport function FilterChip({\n  label,\n  onRemove,\n  onClick,\n  className,\n  variant = \"default\",\n  direction,\n  role,\n}: FilterChipProps) {\n  const removeFilterLabel = useUiText(\"filterChip.remove\", \"Remove filter\");\n  const isSort = variant === \"sort\";\n  const DirIcon = direction === \"asc\" ? ArrowUp : direction === \"desc\" ? ArrowDown : null;\n\n  return (\n    <span\n      role={role}\n      aria-label={typeof label === \"string\" ? `${label} filter` : \"filter\"}\n      className={cn(\n        \"border-border bg-secondary text-secondary-foreground inline-flex items-center rounded-full border text-xs font-medium\",\n        isSort && \"border-dashed\",\n        className,\n      )}\n    >\n      <button\n        type=\"button\"\n        disabled={!onClick}\n        className=\"focus-visible:ring-ring inline-flex items-center rounded-full px-3 transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-default\"\n        onClick={onClick}\n      >\n        {isSort && DirIcon ? <DirIcon className=\"mr-1 size-4\" /> : null}\n        {label}\n      </button>\n      <button\n        type=\"button\"\n        data-slot=\"filter-chip-remove\"\n        className=\"text-muted-foreground hover:text-foreground focus-visible:ring-ring mr-0.5 flex size-6 items-center justify-center rounded-full transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none\"\n        onClick={onRemove}\n        aria-label={`${removeFilterLabel}: ${typeof label === \"string\" ? label : \"selected filter\"}`}\n      >\n        <X className=\"size-4\" aria-hidden />\n      </button>\n    </span>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

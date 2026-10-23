@@ -1,8 +1,11 @@
+"use client";
+
 import { Button as BaseButton } from "@base-ui/react/button";
 import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
 import { cn } from "../../lib/utils";
+import { useUiText } from "../../translations/ui-provider";
 import { Spinner } from "../feedback/spinner";
 
 const buttonVariants = cva(
@@ -50,7 +53,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       className,
       disabled,
       isLoading = false,
-      loadingLabel = "Loading",
+      loadingLabel,
       variant,
       size,
       asChild = false,
@@ -63,6 +66,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref,
   ) => {
+    const localizedLoadingLabel = useUiText("button.loading", "Loading");
+    const resolvedLoadingLabel = loadingLabel ?? localizedLoadingLabel;
     if (asChild && React.isValidElement(children)) {
       const child = children as React.ReactElement<{ children?: React.ReactNode }>;
       const renderedChild = React.cloneElement(child, {
@@ -74,7 +79,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             <span className="absolute inset-0 inline-flex items-center justify-center">
               <Spinner size="sm" aria-hidden="true" />
             </span>
-            <span className="sr-only">{loadingLabel}</span>
+            <span className="sr-only">{resolvedLoadingLabel}</span>
           </>
         ) : (
           child.props.children
@@ -84,13 +89,14 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       return (
         <BaseButton
           {...props}
+          data-slot="button"
           type={type}
           render={renderedChild}
           nativeButton={false}
           className={cn(buttonVariants({ variant, size, className }), isLoading && "relative")}
           disabled={disabled || isLoading}
           aria-busy={isLoading}
-          aria-label={isLoading ? loadingLabel : ariaLabel}
+          aria-label={isLoading ? resolvedLoadingLabel : ariaLabel}
           ref={ref}
         />
       );
@@ -98,6 +104,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <button
         {...props}
+        data-slot="button"
         className={cn(buttonVariants({ variant, size, className }), isLoading && "relative")}
         style={{
           ...props.style,
@@ -107,7 +114,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         disabled={disabled || isLoading}
         aria-busy={isLoading}
-        aria-label={isLoading ? loadingLabel : ariaLabel}
+        aria-label={isLoading ? resolvedLoadingLabel : ariaLabel}
       >
         {isLoading ? (
           <>
@@ -117,7 +124,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             <span className="absolute inset-0 inline-flex items-center justify-center">
               <Spinner size="sm" aria-hidden="true" />
             </span>
-            <span className="sr-only">{loadingLabel}</span>
+            <span className="sr-only">{resolvedLoadingLabel}</span>
           </>
         ) : (
           children

@@ -38,8 +38,9 @@ The `pnpm run` scripts (`check`, `build`, `test`, `storybook`, `format`) delegat
 ## Start a new web project
 
 The package also ships a React + Vite starter wired to the current Ponti UI
-release. It includes Tailwind v4, the shared stylesheet and source scanning,
-strict TypeScript settings, and a first screen using the shared Button.
+release. It includes the shared theme and component styles, strict TypeScript
+settings, and a first screen using the shared Button. The starter does not need
+Tailwind installed.
 
 Create a project and install its dependencies:
 
@@ -70,7 +71,7 @@ Releases are owned by [release-please](https://github.com/googleapis/release-ple
 2. Once on `main`, find or wait for the `chore(main): release ui X.Y.Z` PR that Release Please opens or updates.
 3. Review and merge it. That merge creates the `ui-v<version>` tag; after validation succeeds, the release workflow publishes that exact tag automatically.
 
-`prepack` (`make check`) runs as part of `pnpm install`/publish tooling and is the last gate before anything reaches npm — see "Generated files" below for the failure mode that most commonly trips it.
+`prepack` (`pnpm run check`) runs before packing or publishing and is the last gate before anything reaches npm — see "Generated files" below for the failure mode that most commonly trips it.
 
 ### Generated files must never be hand-edited
 
@@ -85,14 +86,21 @@ organization token:
 pnpm add @ponti-studios/ui
 ```
 
-### Ships TypeScript source, not a bundle
+### Use the shared web styles
 
-This package has no build output — every `exports` entry resolves to a file under `src/`. Consumers are expected to transpile the package themselves (Vite, Metro, Next, etc. all do this for workspace/npm packages by default). Tailwind v4 class detection for consumers of `./styles.css` requires an `@source` directive pointing at the installed package's `src/`, e.g.
+Import the package once from your web app entry point to load the precompiled
+theme and component styles:
 
-```css
-@import "tailwindcss";
-@import "@ponti-studios/ui/styles.css";
-@source "../../../node_modules/@ponti-studios/ui/src";
+```tsx
+import "@ponti-studios/ui";
 ```
 
-**Important:** `./styles.css` uses `@reference "tailwindcss"` (it does not import Tailwind itself). Your project owns the `@import "tailwindcss"` — place it before the UI stylesheet. Omitting it will cause missing CSS variables (e.g. `--tw-shadow-color`) and unresolved utilities.
+Components remain available through their named entry points, such as
+`@ponti-studios/ui/primitives`. Consumers do not need Tailwind to use the
+components' built-in styles. Tailwind is only needed if the app itself wants to
+write Tailwind utility classes. The `/native` entry remains platform-specific
+and does not load the web stylesheet.
+
+The TypeScript entry points remain source exports for consumer bundlers to
+transpile. The package additionally publishes a precompiled web stylesheet at
+`@ponti-studios/ui/styles.css` for apps that prefer an explicit CSS import.

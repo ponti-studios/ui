@@ -1,3 +1,5 @@
+import "../dist/styles.css";
+
 export { CHART_COLORS, CHART_CSS_VARS } from "./constants/chart-colors";
 export type { SortDirection, SortField, SortOption } from "./hooks/sort.types";
 export { useApiClient } from "./hooks/use-api-client";

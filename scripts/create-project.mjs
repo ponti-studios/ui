@@ -6,6 +6,9 @@ import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
 
 const templateDirectory = fileURLToPath(new URL("../templates/web-vite/", import.meta.url));
+const packageManifest = JSON.parse(
+  await readFile(new URL("../package.json", import.meta.url), "utf8"),
+);
 const arguments_ = process.argv.slice(2);
 const noInstall = arguments_.includes("--no-install");
 const targetArgument = arguments_.find((argument) => !argument.startsWith("-"));
@@ -46,6 +49,7 @@ await cp(templateDirectory, targetDirectory, { recursive: true });
 const packageJsonPath = resolve(targetDirectory, "package.json");
 const packageJson = JSON.parse(await readFile(packageJsonPath, "utf8"));
 packageJson.name = projectName;
+packageJson.dependencies["@ponti-studios/ui"] = `^${packageManifest.version}`;
 await writeFile(packageJsonPath, `${JSON.stringify(packageJson, null, 2)}\n`);
 
 console.log(`Created ${projectName} at ${targetDirectory}`);

@@ -20,6 +20,7 @@
   ],
   "type": "module",
   "sideEffects": [
+    "./src/index.ts",
     "./dist/styles.css",
     "./src/styles/animations.css"
   ],

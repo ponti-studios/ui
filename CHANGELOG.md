@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.2](https://github.com/ponti-studios/ui/compare/ui-v2.0.1...ui-v2.0.2) (2026-10-23)
+
+
+### Bug Fixes
+
+* **ui:** preserve root stylesheet imports ([#28](https://github.com/ponti-studios/ui/issues/28)) ([0ced939](https://github.com/ponti-studios/ui/commit/0ced93991f18bbf47498b9de34c6ba39e041dbd7))
+
 ## [2.0.1](https://github.com/ponti-studios/ui/compare/ui-v2.0.0...ui-v2.0.1) (2026-10-23)
 
 

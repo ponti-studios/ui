@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.0.1](https://github.com/ponti-studios/ui/compare/ui-v2.0.0...ui-v2.0.1) (2026-10-23)
+
+
+### Bug Fixes
+
+* **ui:** align generated starter with published version ([3c51a54](https://github.com/ponti-studios/ui/commit/3c51a5456f8e2e3c20c02b10027879b3b35ee691))
+* **ui:** match starter dependency to cli release ([183a383](https://github.com/ponti-studios/ui/commit/183a38352488c9274b273ea04a04aad028f1a3d0))
+
 ## [2.0.0](https://github.com/ponti-studios/ui/compare/ui-v1.8.0...ui-v2.0.0) (2026-10-23)
 
 

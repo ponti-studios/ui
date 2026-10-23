@@ -10,12 +10,12 @@ const toPixels = (value: string) => {
 
 const toMilliseconds = (value: string) => Number.parseFloat(value);
 const toBezier = (value: number[]) => `cubic-bezier(${value.join(", ")})`;
-type NormalizedSpacingKey<Key extends string> = Key extends `${infer Whole}-${infer Fraction}`
-  ? `${Whole}.${Fraction}`
-  : Key;
-export type SpacingToken = NormalizedSpacingKey<
-  keyof (typeof foundations)["spacing-scale"] & string
->;
+type NormalizedSpacingKey<Key> = Key extends number
+  ? `${Key}`
+  : Key extends `${infer Whole}-${infer Fraction}`
+    ? `${Whole}.${Fraction}`
+    : Key;
+export type SpacingToken = NormalizedSpacingKey<keyof (typeof foundations)["spacing-scale"]>;
 
 export const colorTokenNames = Object.keys(lightTokens) as Array<keyof typeof lightTokens>;
 export type ColorToken = keyof typeof lightTokens;

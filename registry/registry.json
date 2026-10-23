@@ -1,0 +1,109 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "ponti",
+  "homepage": "https://github.com/ponti-studios/ui",
+  "items": [
+    {
+      "name": "utils",
+      "type": "registry:lib",
+      "title": "cn() class merger",
+      "description": "clsx + tailwind-merge class merger used by every Mono component.",
+      "files": [{ "source": "lib", "target": "lib/utils.ts" }]
+    },
+    {
+      "name": "spinner",
+      "type": "registry:ui",
+      "title": "Spinner",
+      "description": "Loading spinner in four sizes.",
+      "registryDependencies": ["utils"],
+      "files": [{ "source": "feedback/spinner", "target": "components/ui/spinner.tsx" }]
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "Mono button in six variants and four sizes, with loading state.",
+      "dependencies": ["@base-ui/react", "class-variance-authority"],
+      "registryDependencies": ["utils", "spinner"],
+      "files": [{ "source": "primitives/button", "target": "components/ui/button.tsx" }]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "Mono text input.",
+      "registryDependencies": ["utils"],
+      "files": [{ "source": "forms/input", "target": "components/ui/input.tsx" }]
+    },
+    {
+      "name": "dialog",
+      "type": "registry:ui",
+      "title": "Dialog",
+      "description": "Mono dialog with alert mode and bottom-sheet mobile behavior.",
+      "dependencies": ["@base-ui/react", "lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [{ "source": "overlays/dialog", "target": "components/ui/dialog.tsx" }]
+    },
+    {
+      "name": "command",
+      "type": "registry:ui",
+      "title": "Command",
+      "description": "Accessible autocomplete/command palette on Base UI Combobox.",
+      "dependencies": ["@base-ui/react", "lucide-react"],
+      "registryDependencies": ["utils", "dialog"],
+      "files": [{ "source": "overlays/command", "target": "components/ui/command.tsx" }]
+    },
+    {
+      "name": "bottom-sheet",
+      "type": "registry:ui",
+      "title": "BottomSheet",
+      "description": "Non-modal persistent bottom panel with drag-to-collapse and snap points.",
+      "registryDependencies": ["utils"],
+      "files": [{ "source": "overlays/bottom-sheet", "target": "components/ui/bottom-sheet.tsx" }]
+    },
+    {
+      "name": "segmented-control",
+      "type": "registry:ui",
+      "title": "SegmentedControl",
+      "description": "Pill-group single/multi toggle for layers, filters, and modes.",
+      "dependencies": ["@base-ui/react"],
+      "registryDependencies": ["utils"],
+      "files": [{ "source": "primitives/segmented-control", "target": "components/ui/segmented-control.tsx" }]
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "Mono checkbox with checked, indeterminate, and disabled states.",
+      "dependencies": ["@base-ui/react", "lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [{ "source": "forms/checkbox", "target": "components/ui/checkbox.tsx" }]
+    },
+    {
+      "name": "label",
+      "type": "registry:ui",
+      "title": "Label",
+      "description": "Form label with disabled-state handling.",
+      "registryDependencies": ["utils"],
+      "files": [{ "source": "forms/label", "target": "components/ui/label.tsx" }]
+    },
+    {
+      "name": "separator",
+      "type": "registry:ui",
+      "title": "Separator",
+      "description": "Horizontal/vertical hairline divider.",
+      "dependencies": ["@base-ui/react"],
+      "registryDependencies": ["utils"],
+      "files": [{ "source": "primitives/separator", "target": "components/ui/separator.tsx" }]
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "Hover tooltip with arrow and positioning.",
+      "dependencies": ["@base-ui/react"],
+      "registryDependencies": ["utils"],
+      "files": [{ "source": "overlays/tooltip", "target": "components/ui/tooltip.tsx" }]
+    }
+  ]
+}

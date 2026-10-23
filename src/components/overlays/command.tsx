@@ -169,7 +169,7 @@ function CommandItem({ className, onSelect, onClick, ...props }: CommandItemProp
     <CommandPrimitive.Item
       data-slot="command-item"
       className={cn(
-        "data-highlighted:bg-muted data-highlighted:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-md px-2 py-1.5 text-sm outline-hidden select-none",
+        "data-highlighted:bg-muted data-highlighted:text-muted-foreground relative flex cursor-pointer items-center gap-3 rounded-md px-3 py-2.5 text-sm outline-hidden select-none",
         "data-disabled:pointer-events-none data-disabled:opacity-50",
         className,
       )}

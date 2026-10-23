@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "spinner",
+  "type": "registry:ui",
+  "title": "Spinner",
+  "description": "Loading spinner in four sizes.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/spinner.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\nconst sizeClasses = {\n  sm: \"size-4\",\n  md: \"size-5\",\n  lg: \"size-8\",\n  xl: \"size-12\",\n} as const;\n\nexport interface SpinnerProps extends React.ComponentProps<\"output\"> {\n  label?: string | false;\n  presentation?: \"inline\" | \"centered\";\n  size?: keyof typeof sizeClasses;\n}\n\nexport function Spinner({\n  label = false,\n  presentation = \"inline\",\n  size = \"md\",\n  className,\n  ...props\n}: SpinnerProps) {\n  const accessibleLabel = typeof label === \"string\" ? label : \"Loading\";\n\n  return (\n    <output\n      className={cn(\n        \"inline-flex items-center justify-center gap-2\",\n        presentation === \"centered\" && \"flex w-full py-12\",\n        className,\n      )}\n      aria-label={accessibleLabel}\n      {...props}\n    >\n      <span\n        className={cn(\n          \"border-border border-t-primary rounded-full border-2 motion-safe:animate-spin\",\n          sizeClasses[size],\n        )}\n        aria-hidden=\"true\"\n      />\n      {label && <span className=\"text-muted-foreground text-xs\">{label}</span>}\n    </output>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

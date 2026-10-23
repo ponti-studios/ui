@@ -30,18 +30,14 @@ for (const file of sourceFiles) {
   const source = readFileSync(file, "utf8");
   for (const check of checks) {
     if (check.name === "legacy semantic utility classes" && file.endsWith(".css")) continue;
-    // The Colors foundation story intentionally lists token names as data;
-    // exempt only those data properties, while still checking class strings.
-    if (
-      check.name === "legacy semantic utility classes" &&
-      file.endsWith("color-systems.stories.tsx")
-    ) {
-      const utilitySource = source.replace(
-        /token:\s*"(?:bg-canvas|border-default)"/g,
-        'token: "__token-name__"',
-      );
-      if (check.pattern.test(utilitySource))
-        failures.push(`${check.name}: ${relative(sourceDirectory, file)}`);
+    // Native styles address semantic color tokens through bracket notation;
+    // these are token lookups, not the deprecated utility classes.
+    if (check.name === "legacy semantic utility classes") {
+      let tokenSource = source.replace(/\[\s*["'](?:bg-canvas|border-default)["']\s*\]/g, "__semantic_token_access__");
+      if (file.endsWith("color-systems.stories.tsx")) {
+        tokenSource = tokenSource.replace(/token:\s*"(?:bg-canvas|border-default)"/g, 'token: "__token-name__"');
+      }
+      if (check.pattern.test(tokenSource)) failures.push(`${check.name}: ${relative(sourceDirectory, file)}`);
       continue;
     }
     if (check.pattern.test(source))

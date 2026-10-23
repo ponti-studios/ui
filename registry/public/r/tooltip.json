@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tooltip",
+  "type": "registry:ui",
+  "title": "Tooltip",
+  "description": "Hover tooltip with arrow and positioning.",
+  "dependencies": [
+    "@base-ui/react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/tooltip.tsx",
+      "content": "\"use client\";\n\nimport { Tooltip as TooltipPrimitive } from \"@base-ui/react/tooltip\";\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\nconst TooltipProvider = TooltipPrimitive.Provider;\nconst Tooltip = TooltipPrimitive.Root;\nconst TooltipTrigger = TooltipPrimitive.Trigger;\nconst TooltipPortal = TooltipPrimitive.Portal;\n\nfunction TooltipContent({\n  className,\n  sideOffset = 4,\n  children,\n  ...props\n}: React.ComponentProps<typeof TooltipPrimitive.Popup> & { sideOffset?: number }) {\n  return (\n    <TooltipPrimitive.Portal>\n      <TooltipPrimitive.Positioner sideOffset={sideOffset}>\n        <TooltipPrimitive.Popup\n          data-slot=\"tooltip-content\"\n          className={cn(\n            \"bg-foreground text-background z-50 w-fit max-w-xs rounded-md px-2.5 py-1.5 text-xs text-balance\",\n            className,\n          )}\n          {...props}\n        >\n          {children}\n          <TooltipPrimitive.Arrow\n            data-slot=\"tooltip-arrow\"\n            className=\"data-[side=bottom]:top-[-8px] data-[side=left]:right-[-13px] data-[side=left]:rotate-90 data-[side=right]:left-[-13px] data-[side=right]:-rotate-90 data-[side=top]:bottom-[-8px]\"\n          />\n        </TooltipPrimitive.Popup>\n      </TooltipPrimitive.Positioner>\n    </TooltipPrimitive.Portal>\n  );\n}\n\nexport { Tooltip, TooltipContent, TooltipPortal, TooltipProvider, TooltipTrigger };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

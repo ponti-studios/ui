@@ -8,13 +8,19 @@
     "type": "git",
     "url": "git+https://github.com/ponti-studios/ui.git"
   },
+  "bin": {
+    "create-ponti-project": "./scripts/create-project.mjs"
+  },
   "files": [
     "src",
+    "dist/styles.css",
+    "scripts/create-project.mjs",
+    "templates/web-vite",
     "THIRD_PARTY_NOTICES.md"
   ],
   "type": "module",
   "sideEffects": [
-    "./src/styles/index.css",
+    "./dist/styles.css",
     "./src/styles/animations.css"
   ],
   "exports": {
@@ -66,11 +72,16 @@
       "types": "./src/styles/tokens/css-vars.ts",
       "import": "./src/styles/tokens/css-vars.ts"
     },
+    "./native": {
+      "types": "./src/native/index.ts",
+      "react-native": "./src/native/index.ts",
+      "import": "./src/native/index.ts"
+    },
     "./hooks": {
       "types": "./src/hooks/index.ts",
       "import": "./src/hooks/index.ts"
     },
-    "./styles.css": "./src/styles/index.css",
+    "./styles.css": "./dist/styles.css",
     "./animations.css": "./src/styles/animations.css"
   },
   "publishConfig": {
@@ -83,9 +94,12 @@
     "test": "make test",
     "storybook": "make storybook",
     "format": "make format",
-    "prepack": "make check"
+    "create:project": "node ./scripts/create-project.mjs",
+    "build:styles": "vite build --config vite.styles.config.ts",
+    "prepack": "pnpm run check"
   },
   "dependencies": {
+    "@babel/runtime": "^7.29.7",
     "@base-ui/react": "^1.6.0",
     "@radix-ui/colors": "^3.0.0",
     "class-variance-authority": "^0.7.1",
@@ -113,6 +127,7 @@
     "playwright": "^1.61.1",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
+    "react-native": "0.87.1",
     "storybook": "10.5.6",
     "style-dictionary": "5.5.0",
     "tailwindcss": "^4.3.3",
@@ -122,10 +137,14 @@
   },
   "peerDependencies": {
     "react": "^18.2.0 || ^19.0.0",
-    "react-dom": "^18.2.0 || ^19.0.0"
+    "react-dom": "^18.2.0 || ^19.0.0",
+    "react-native": ">=0.80"
   },
   "peerDependenciesMeta": {
     "react-dom": {
+      "optional": true
+    },
+    "react-native": {
       "optional": true
     }
   },

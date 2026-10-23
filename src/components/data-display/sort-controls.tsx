@@ -1,3 +1,5 @@
+"use client";
+
 import { ListOrdered, PlusCircle } from "lucide-react";
 
 import type { SortField, SortOption } from "../../hooks/sort.types";

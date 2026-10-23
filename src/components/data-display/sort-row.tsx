@@ -1,3 +1,5 @@
+"use client";
+
 import { ArrowDownWideNarrow, ArrowUpWideNarrow, X } from "lucide-react";
 
 import type { SortField, SortOption } from "../../hooks/sort.types";

@@ -23,8 +23,8 @@ Pass/fail rules for how primitives assemble into a screen.
 10. Dialog, Sheet, Card, and SurfacePanel are the only components allowed a
     visible container (background separation, radius, elevation). Nothing nests
     inside itself: no sheet inside a sheet, no dialog inside a dialog.
-    10a. `--border-default` is the standard border on inputs, cards, and
-    containers. A `divider` line between list rows is a named exception — used
+    10a. `--control-border` is used on interactive fields and controls;
+    `--border-default` is used on cards and containers. A `divider` line between rows is a named exception — used
     only when adjacent rows would be genuinely ambiguous without it. "It
     looked bare" is not a reason to add a border.
 11. One semantic group gets exactly one Section — never a Section inside a Section.
@@ -96,7 +96,7 @@ Pass/fail rules for how primitives assemble into a screen.
 47. A List row is either `navigational` or `actionable`, never ambiguously both.
 48. If a row has an inline action, the row itself is not tappable.
 49. Every async action prevents duplicate submission.
-50. Destructive actions require explicit confirmation via AlertDialog.
+50. Destructive actions require explicit confirmation via `Dialog` with `alert` enabled.
 51. Navigation is always reversible with the platform back gesture.
 52. A Dialog is used for confirmation only, never for content that deserves
     its own screen.

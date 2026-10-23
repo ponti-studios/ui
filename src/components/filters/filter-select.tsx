@@ -1,6 +1,9 @@
+"use client";
+
 import { useId, useMemo } from "react";
 
 import { cn } from "../../lib/utils";
+import { useUiText } from "../../translations/ui-provider";
 import { Spinner } from "../feedback/spinner";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../forms/select";
 
@@ -30,10 +33,12 @@ export function FilterSelect({
   placeholder = "All",
   disabled = false,
   isLoading = false,
-  emptyLabel = "No options available",
+  emptyLabel,
   className,
   id,
 }: FilterSelectProps) {
+  const localizedEmptyLabel = useUiText("filterSelect.empty", "No options available");
+  const resolvedEmptyLabel = emptyLabel ?? localizedEmptyLabel;
   const generatedId = useId();
   const selectId = id ?? generatedId;
   const items = useMemo(
@@ -53,7 +58,7 @@ export function FilterSelect({
           {isLoading ? (
             <Spinner presentation="centered" size="sm" />
           ) : options.length === 0 ? (
-            <div className="text-muted-foreground px-2 py-1.5 text-sm">{emptyLabel}</div>
+            <div className="text-muted-foreground px-2 py-1.5 text-sm">{resolvedEmptyLabel}</div>
           ) : (
             options.map((option) => (
               <SelectItem key={option.value} value={option.value}>

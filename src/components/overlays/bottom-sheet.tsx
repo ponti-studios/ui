@@ -3,6 +3,8 @@
 import * as React from "react";
 
 import { cn } from "../../lib/utils";
+import { useMediaQuery } from "../../hooks/use-media-query";
+import { useUiText } from "../../translations/ui-provider";
 
 // Non-modal persistent bottom panel with drag-to-collapse/expand.
 // Positioning and sizing are app-owned via className (the kit only sets
@@ -40,22 +42,23 @@ export function BottomSheet({
   defaultExpanded = false,
   onExpandedChange,
   peek = 48,
-  label = "Details panel",
+  label: providedLabel,
   className,
   scrollClassName,
   handleClassName,
 }: BottomSheetProps) {
+  const localizedLabel = useUiText("bottomSheet.label", "Details panel");
+  const label = providedLabel ?? localizedLabel;
   const sheetRef = React.useRef<HTMLElement>(null);
+  const contentRef = React.useRef<HTMLDivElement>(null);
   const [translateY, setTranslateY] = React.useState(0);
   const [dragOffset, setDragOffset] = React.useState(0);
   const [internalExpanded, setInternalExpanded] = React.useState(defaultExpanded);
   const isDragging = React.useRef(false);
   const didDrag = React.useRef(false);
   const dragRef = React.useRef<{ startY: number; startTime: number } | null>(null);
-  const reduceMotion = React.useRef(
-    typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches,
-  );
+  const reduceMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
+  const contentId = React.useId();
 
   const expanded = controlledExpanded ?? internalExpanded;
 
@@ -79,6 +82,19 @@ export function BottomSheet({
   React.useEffect(() => {
     snapTo(expanded ? 0 : closedY());
   }, [expanded, closedY, snapTo]);
+
+  React.useEffect(() => {
+    if (contentRef.current) contentRef.current.inert = !expanded;
+  }, [expanded]);
+
+  React.useEffect(() => {
+    const element = sheetRef.current;
+    if (!element || expanded || typeof ResizeObserver === "undefined") return;
+
+    const resizeObserver = new ResizeObserver(() => snapTo(closedY()));
+    resizeObserver.observe(element);
+    return () => resizeObserver.disconnect();
+  }, [closedY, expanded, snapTo]);
 
   const open = React.useCallback(() => setExpanded(true), [setExpanded]);
   const close = React.useCallback(() => setExpanded(false), [setExpanded]);
@@ -138,20 +154,23 @@ export function BottomSheet({
       ref={sheetRef}
       data-slot="bottom-sheet"
       aria-label={label}
-      className={cn("flex touch-none flex-col overflow-hidden", className)}
+      className={cn("flex flex-col overflow-hidden", className)}
       style={{
-        transform: `translateY(${currentY}px)`,
+        transform: expanded
+          ? `translateY(${currentY}px)`
+          : `translateY(calc(100% - ${peek}px))`,
         transition: isDragging.current
           ? "none"
-          : reduceMotion.current
+          : reduceMotion
             ? "none"
             : "transform 0.35s cubic-bezier(0.32, 0.72, 0, 1)",
       }}
     >
       <button
         type="button"
-        data-slot="bottom-sheet-handle"
+        data-slot="button bottom-sheet-handle"
         aria-expanded={expanded}
+        aria-controls={contentId}
         aria-label={expanded ? "Collapse panel" : "Expand panel"}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
@@ -162,14 +181,17 @@ export function BottomSheet({
           if (e.key === "Escape") close();
         }}
         className={cn(
-          "flex w-full shrink-0 cursor-grab touch-none justify-center py-3.5 active:cursor-grabbing",
+          "ui-bottom-sheet-handle flex w-full shrink-0 cursor-grab justify-center py-3.5 active:cursor-grabbing",
           handleClassName,
         )}
       >
         <span aria-hidden="true" className="bg-border h-1 w-9 rounded-full" />
       </button>
       <div
+        ref={contentRef}
         data-slot="bottom-sheet-scroll"
+        id={contentId}
+        aria-hidden={!expanded || undefined}
         className={cn("flex-1 overflow-y-auto", scrollClassName)}
       >
         {children}

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, userEvent, within } from "storybook/test";
 
 import { BottomSheet } from "./bottom-sheet";
 
@@ -49,4 +50,25 @@ export const Collapsed: Story = {
       </BottomSheet>
     </div>
   ),
+};
+
+export const CollapseRemovesContentFromTabOrder: Story = {
+  args: { label: "Accessible panel", children: "Panel action" },
+  render: () => (
+    <div className="bg-muted relative h-105 w-120 overflow-hidden rounded-xl border">
+      <BottomSheet
+        label="Accessible panel"
+        defaultExpanded
+        className="bg-card absolute inset-x-4 bottom-4 max-h-[70%] rounded-2xl border shadow-lg"
+      >
+        <button type="button">Panel action</button>
+      </BottomSheet>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: "Collapse panel" }));
+    await expect(canvas.getByRole("button", { name: "Expand panel" })).toHaveAttribute("aria-expanded", "false");
+    await expect(canvas.getByText("Panel action").parentElement).toHaveAttribute("inert");
+  },
 };

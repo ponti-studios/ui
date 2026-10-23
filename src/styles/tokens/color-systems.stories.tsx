@@ -61,7 +61,8 @@ const actions: Role[] = [
 ];
 
 const system: Role[] = [
-  { token: "border-default", purpose: "Default borders, inputs, and dividers." },
+  { token: "border-default", purpose: "Low-emphasis decorative borders and dividers." },
+  { token: "control-border", purpose: "Higher-contrast boundaries for interactive controls." },
   { token: "focus-ring", purpose: "Keyboard focus indication." },
   { token: "overlay-scrim", purpose: "Backdrop behind modal surfaces." },
 ];

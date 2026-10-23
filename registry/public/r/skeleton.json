@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "skeleton",
+  "type": "registry:ui",
+  "title": "Skeleton",
+  "description": "Content-loading placeholder with configurable class names.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/skeleton.tsx",
+      "content": "import type { ComponentProps } from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\nexport function Skeleton({ className, ...props }: ComponentProps<\"div\">) {\n  return <div className={cn(\"bg-muted animate-pulse rounded-md\", className)} {...props} />;\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

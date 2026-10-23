@@ -1,25 +1,25 @@
-/*
- * DESIGN SYSTEM STYLESHEET — @ponti-studios/ui
- *
- * This file provides the design tokens and shared component styles consumed
- * by your project. It does NOT import Tailwind CSS — your project owns that.
- *
- * Required in your project's entry CSS BEFORE this import:
- *
- *   @import "tailwindcss";
- *   @import "@ponti-studios/ui/styles.css";
- *
- * If you omit the Tailwind import you may see missing CSS variables
- * (e.g., --tw-shadow-color) or utilities that fail to resolve.
- */
+/* Component styles and design tokens for @ponti-studios/ui. */
 
 @reference "tailwindcss";
 @import "./tokens/generated/foundations.css";
 @import "./tokens/generated/light.css";
 @import "./tokens/generated/dark.css" (prefers-color-scheme: dark);
 @import "./tokens/generated/dark-class.css";
+@import "./tokens/generated/light-class.css";
 @import "./animations.css";
 @import "./nokia.css";
+
+:root {
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    color-scheme: dark;
+  }
+}
+:root.dark {
+  color-scheme: dark;
+}
 
 @theme {
   --animate-accordion-down: accordion-down 200ms ease-out;
@@ -82,7 +82,7 @@
   --color-warning-foreground: var(--warning-foreground);
   --color-warning-text: var(--text-warning);
   --color-border: var(--border-default);
-  --color-input: var(--border-default);
+  --color-input: var(--control-border);
   --color-ring: var(--focus-ring);
 }
 
@@ -354,70 +354,42 @@
   opacity: 1;
 }
 
-@layer base {
-  :root {
-    color-scheme: light;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      color-scheme: dark;
-    }
-  }
-  /* Manual override: toggling `.dark` on <html> beats the OS preference. */
-  :root.dark {
-    color-scheme: dark;
-  }
-  html,
-  body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
-    font-family: var(--font-sans);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  * {
-    border-color: var(--color-border, currentColor);
-  }
-  *:focus {
-    outline: none;
-  }
-  *:focus-visible {
-    outline: 2px solid var(--color-ring);
+@media (forced-colors: active) {
+  :focus-visible {
+    outline: 2px solid Highlight !important;
     outline-offset: 2px;
-    border-radius: inherit;
   }
-  button {
-    cursor: pointer;
-    font-family: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where([data-slot], [data-slot] *) {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
-  label {
-    color: var(--color-foreground);
-    font-size: var(--text-sm);
-    font-weight: var(--font-weight-medium);
-    line-height: 1;
+}
+
+@media (pointer: coarse) {
+  :where([data-slot~="button"], [data-slot="date-picker-icon"], [data-slot="filter-chip-remove"]) {
+    min-block-size: var(--spacing-scale-11);
+    min-inline-size: var(--spacing-scale-11);
   }
-  :where(.peer:disabled) ~ label {
-    cursor: not-allowed;
-    opacity: 0.7;
+
+  :where([data-slot="input"], [data-slot="select-trigger"], [data-slot="textarea"]) {
+    min-block-size: var(--spacing-scale-11);
   }
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: var(--font-sans);
-    font-weight: 600;
-    letter-spacing: var(--tracking-tight);
+
+  :where([data-slot="checkbox"], [data-slot="radio-group-item"], [data-slot="switch"]) {
+    min-block-size: var(--spacing-scale-11);
+    min-inline-size: var(--spacing-scale-11);
   }
-  @media (prefers-reduced-motion: reduce) {
-    *,
-    ::before,
-    ::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
-  }
+}
+
+.ui-bottom-sheet-handle {
+  touch-action: pan-x pinch-zoom;
+}
+
+:where([data-slot~="button"], [data-slot="date-picker-icon"]) {
+  font-family: inherit;
 }

@@ -26,6 +26,7 @@ export default {
   "text-destructive": "#fca5a5",
   "text-accent": "#60a5fa",
   "border-default": "#262626",
+  "control-border": "#707070",
   "focus-ring": "#3b82f6",
   "chart-1": "#3b82f6",
   "chart-2": "#ededed",

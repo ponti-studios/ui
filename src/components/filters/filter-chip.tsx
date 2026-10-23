@@ -1,7 +1,10 @@
+"use client";
+
 import { ArrowDown, ArrowUp, X } from "lucide-react";
 import type { ReactNode } from "react";
 
 import { cn } from "../../lib/utils";
+import { useUiText } from "../../translations/ui-provider";
 
 export interface FilterChipProps {
   label: ReactNode;
@@ -22,6 +25,7 @@ export function FilterChip({
   direction,
   role,
 }: FilterChipProps) {
+  const removeFilterLabel = useUiText("filterChip.remove", "Remove filter");
   const isSort = variant === "sort";
   const DirIcon = direction === "asc" ? ArrowUp : direction === "desc" ? ArrowDown : null;
 
@@ -46,9 +50,10 @@ export function FilterChip({
       </button>
       <button
         type="button"
+        data-slot="filter-chip-remove"
         className="text-muted-foreground hover:text-foreground focus-visible:ring-ring mr-0.5 flex size-6 items-center justify-center rounded-full transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
         onClick={onRemove}
-        aria-label={`Remove filter: ${typeof label === "string" ? label : "selected filter"}`}
+        aria-label={`${removeFilterLabel}: ${typeof label === "string" ? label : "selected filter"}`}
       >
         <X className="size-4" aria-hidden />
       </button>

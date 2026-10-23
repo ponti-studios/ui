@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "surface-panel",
+  "type": "registry:ui",
+  "title": "SurfacePanel",
+  "description": "Named surface container with consistent border, radius, and padding.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/surface-panel.tsx",
+      "content": "import type { ComponentPropsWithoutRef, ElementType } from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\ntype SurfacePanelProps<T extends ElementType = \"div\"> = { as?: T } & Omit<\n  ComponentPropsWithoutRef<T>,\n  \"as\"\n>;\n\n/** Rounded, bordered surface panel — a generic content container. */\nexport function SurfacePanel<T extends ElementType = \"div\">({\n  as,\n  className,\n  ...props\n}: SurfacePanelProps<T>) {\n  const Component = as ?? \"div\";\n  return (\n    <Component\n      className={cn(\"border-border bg-card rounded-3xl border p-5\", className)}\n      {...props}\n    />\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

@@ -22,6 +22,38 @@ The base package remains usable by web consumers that do not install React Nativ
 import { NativeButton, NativeThemeProvider } from "@ponti-studios/ui/native";
 ```
 
+## Localization
+
+Built-in accessibility labels can be localized once with `UiTextProvider`.
+Component props such as `loadingLabel`, `emptyLabel`, and visible labels remain
+available and take precedence over provider defaults. Feature-specific copy stays
+owned by the consuming application.
+
+```tsx
+import { UiTextProvider } from "@ponti-studios/ui";
+
+<UiTextProvider messages={{
+  "button.loading": "Chargement",
+  "pagination.previous": "Page précédente",
+  "pagination.next": "Page suivante",
+}}>
+  <App />
+</UiTextProvider>
+```
+
+## API client
+
+`useApiClient` uses same-origin requests by default. Pass `baseUrl` for an API
+origin and set `credentials` explicitly when cross-origin cookies are required;
+it does not read build-tool environment variables.
+
+## Component registry
+
+The shadcn-compatible registry is a curated set of independently installable
+components plus the compiled Ponti theme. It is generated from source and
+validated during `pnpm run check`; use the npm package for the complete,
+maintained component library.
+
 ## Development
 
 Common development workflows are available through the `Makefile`:
@@ -101,6 +133,7 @@ components' built-in styles. Tailwind is only needed if the app itself wants to
 write Tailwind utility classes. The `/native` entry remains platform-specific
 and does not load the web stylesheet.
 
-The TypeScript entry points remain source exports for consumer bundlers to
-transpile. The package additionally publishes a precompiled web stylesheet at
-`@ponti-studios/ui/styles.css` for apps that prefer an explicit CSS import.
+The package publishes compiled ESM and TypeScript declarations, so consumer
+bundlers do not need to transpile the library source. The root import loads the
+precompiled stylesheet; explicit CSS consumers can use
+`@ponti-studios/ui/styles.css`.

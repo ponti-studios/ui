@@ -95,6 +95,10 @@
     "$type": "color",
     "$value": "rgb(229, 229, 229)"
   },
+  "control-border": {
+    "$type": "color",
+    "$value": "rgb(118, 118, 118)"
+  },
   "focus-ring": {
     "$type": "color",
     "$value": "rgb(37, 99, 235)"

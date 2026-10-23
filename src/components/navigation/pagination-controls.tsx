@@ -1,6 +1,9 @@
+"use client";
+
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { Button } from "../primitives/button";
+import { useUiText } from "../../translations/ui-provider";
 
 export interface PaginationControlsProps {
   currentPage: number;
@@ -14,6 +17,8 @@ export function PaginationControls({
   totalPages,
   onPageChange,
 }: PaginationControlsProps) {
+  const previousLabel = useUiText("pagination.previous", "Previous page");
+  const nextLabel = useUiText("pagination.next", "Next page");
   return (
     <div className="border-border bg-background text-foreground inline-flex w-fit shrink-0 items-center self-start overflow-hidden rounded-full border text-sm">
       <Button
@@ -23,7 +28,7 @@ export function PaginationControls({
         className="rounded-none border-0 border-r bg-transparent shadow-none"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 0}
-        aria-label="Previous page"
+        aria-label={previousLabel}
       >
         <ChevronLeft className="size-4" aria-hidden />
       </Button>
@@ -37,7 +42,7 @@ export function PaginationControls({
         className="rounded-none border-0 border-l bg-transparent shadow-none"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage >= totalPages - 1}
-        aria-label="Next page"
+        aria-label={nextLabel}
       >
         <ChevronRight className="size-4" aria-hidden />
       </Button>

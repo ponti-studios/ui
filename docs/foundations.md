@@ -21,7 +21,8 @@ This means:
 
 - Cards and panels exist as named components with defined uses. They are
   not a default wrapper for every section of content.
-- Borders use `--border-default`. Divider lines between list rows remain a
+- Decorative borders use `--border-default`; interactive controls use the
+  higher-contrast `--control-border`. Divider lines between list rows remain a
   rare, named exception — not a habit.
 - Radius is chosen from a fixed scale. Components pick from the scale
   consistently; a component never invents an ad-hoc value.
@@ -68,7 +69,8 @@ Screen code references the token name, never a hex value.
 - `--warning` — Warning state. Caution indicators, attention flags.
 - `--text-success` — Standalone success text and icons. AA-compliant per theme.
 - `--text-warning` — Standalone warning text and icons. AA-compliant per theme.
-- `--border-default` — The single border color. Inputs, card edges, table dividers.
+- `--border-default` — Low emphasis borders for cards, separators, and table dividers.
+- `--control-border` — Higher contrast boundary for inputs and controls, designed to remain perceivable against the field background.
 - `--focus-ring` — Keyboard focus indicator. Always appears, never the sole state indicator.
 - `--overlay-scrim` — Modal, sheet, and dialog backdrop. Always `#000` at reduced opacity.
 
@@ -110,7 +112,7 @@ second palette. The mapping is:
 - `--color-warning` ← `--warning`
 - `--color-warning-text` ← `--text-warning`
 - `--color-border` ← `--border-default`
-- `--color-input` ← `--border-default`
+- `--color-input` ← `--control-border`
 - `--color-ring` ← `--focus-ring`
 
 ### Color rules
@@ -124,9 +126,9 @@ second palette. The mapping is:
   reserve `--success` and `--warning` for filled indicators and controls.
 - Text hierarchy is `--text-primary`, `--text-secondary`, or `--tertiary`.
   Do not invent a new text color by hand-picking a hue.
-- `--border-default` is the default border. A `divider` line between rows is
-  the one exception (List row in Primitives) — used only when adjacent rows
-  would be genuinely ambiguous without it.
+- `--border-default` is for decorative boundaries; `--control-border` is for
+  interactive fields and controls. A `divider` line between rows remains a
+  named exception, used only when adjacent rows would be ambiguous without it.
 - Chart colors are reserved for data visualization. They do not appear in
   navigation, forms, or general-purpose UI.
 

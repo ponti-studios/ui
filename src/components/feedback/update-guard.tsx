@@ -1,4 +1,7 @@
+"use client";
+
 import { LucideRefreshCcw, LucideX } from "lucide-react";
+import { useUiText } from "../../translations/ui-provider";
 
 export interface UpdateGuardCopy {
   newContentAvailable?: string;
@@ -21,6 +24,7 @@ export function UpdateGuard({
   copyText = "New content available",
   refreshText = "Refresh",
 }: UpdateGuardProps) {
+  const closeLabel = useUiText("dialog.close", "Close");
   if (!needRefresh) {
     return null;
   }
@@ -43,7 +47,7 @@ export function UpdateGuard({
         </button>
         {onDismiss ? (
           <button
-            aria-label="Close"
+            aria-label={closeLabel}
             type="button"
             onClick={onDismiss}
             className="text-accent-text font-semibold border-muted-foreground rounded-md border px-2 py-1 hover:bg-accent hover:text-accent-foreground"

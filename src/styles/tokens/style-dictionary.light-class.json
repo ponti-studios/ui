@@ -1,0 +1,16 @@
+{
+  "source": ["src/styles/tokens/source/light.tokens.json"],
+  "platforms": {
+    "css": {
+      "transformGroup": "css",
+      "buildPath": "src/styles/tokens/generated/",
+      "files": [
+        {
+          "destination": "light-class.css",
+          "format": "css/variables",
+          "options": { "selector": ":root.light" }
+        }
+      ]
+    }
+  }
+}

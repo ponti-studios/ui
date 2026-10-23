@@ -7,103 +7,371 @@
       "name": "utils",
       "type": "registry:lib",
       "title": "cn() class merger",
-      "description": "clsx + tailwind-merge class merger used by every Mono component.",
-      "files": [{ "source": "lib", "target": "lib/utils.ts" }]
+      "description": "clsx + tailwind-merge class merger used by every Ponti component.",
+      "files": [
+        {
+          "source": "lib",
+          "target": "lib/utils.ts"
+        }
+      ]
     },
     {
       "name": "spinner",
       "type": "registry:ui",
       "title": "Spinner",
       "description": "Loading spinner in four sizes.",
-      "registryDependencies": ["utils"],
-      "files": [{ "source": "feedback/spinner", "target": "components/ui/spinner.tsx" }]
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "source": "feedback/spinner",
+          "target": "components/ui/spinner.tsx"
+        }
+      ]
     },
     {
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
-      "description": "Mono button in six variants and four sizes, with loading state.",
-      "dependencies": ["@base-ui/react", "class-variance-authority"],
-      "registryDependencies": ["utils", "spinner"],
-      "files": [{ "source": "primitives/button", "target": "components/ui/button.tsx" }]
+      "description": "Ponti button in six variants and four sizes, with loading state.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "utils",
+        "spinner"
+      ],
+      "files": [
+        {
+          "source": "primitives/button",
+          "target": "components/ui/button.tsx"
+        }
+      ]
     },
     {
       "name": "input",
       "type": "registry:ui",
       "title": "Input",
-      "description": "Mono text input.",
-      "registryDependencies": ["utils"],
-      "files": [{ "source": "forms/input", "target": "components/ui/input.tsx" }]
+      "description": "Ponti text input.",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "source": "forms/input",
+          "target": "components/ui/input.tsx"
+        }
+      ]
     },
     {
       "name": "dialog",
       "type": "registry:ui",
       "title": "Dialog",
-      "description": "Mono dialog with alert mode and bottom-sheet mobile behavior.",
-      "dependencies": ["@base-ui/react", "lucide-react"],
-      "registryDependencies": ["utils"],
-      "files": [{ "source": "overlays/dialog", "target": "components/ui/dialog.tsx" }]
+      "description": "Ponti dialog with alert mode and bottom-sheet mobile behavior.",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "source": "overlays/dialog",
+          "target": "components/ui/dialog.tsx"
+        }
+      ]
     },
     {
       "name": "command",
       "type": "registry:ui",
       "title": "Command",
       "description": "Accessible autocomplete/command palette on Base UI Combobox.",
-      "dependencies": ["@base-ui/react", "lucide-react"],
-      "registryDependencies": ["utils", "dialog"],
-      "files": [{ "source": "overlays/command", "target": "components/ui/command.tsx" }]
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "dialog"
+      ],
+      "files": [
+        {
+          "source": "overlays/command",
+          "target": "components/ui/command.tsx"
+        }
+      ]
     },
     {
       "name": "bottom-sheet",
       "type": "registry:ui",
       "title": "BottomSheet",
       "description": "Non-modal persistent bottom panel with drag-to-collapse and snap points.",
-      "registryDependencies": ["utils"],
-      "files": [{ "source": "overlays/bottom-sheet", "target": "components/ui/bottom-sheet.tsx" }]
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "source": "overlays/bottom-sheet",
+          "target": "components/ui/bottom-sheet.tsx"
+        }
+      ]
     },
     {
       "name": "segmented-control",
       "type": "registry:ui",
       "title": "SegmentedControl",
       "description": "Pill-group single/multi toggle for layers, filters, and modes.",
-      "dependencies": ["@base-ui/react"],
-      "registryDependencies": ["utils"],
-      "files": [{ "source": "primitives/segmented-control", "target": "components/ui/segmented-control.tsx" }]
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "source": "primitives/segmented-control",
+          "target": "components/ui/segmented-control.tsx"
+        }
+      ]
     },
     {
       "name": "checkbox",
       "type": "registry:ui",
       "title": "Checkbox",
-      "description": "Mono checkbox with checked, indeterminate, and disabled states.",
-      "dependencies": ["@base-ui/react", "lucide-react"],
-      "registryDependencies": ["utils"],
-      "files": [{ "source": "forms/checkbox", "target": "components/ui/checkbox.tsx" }]
+      "description": "Ponti checkbox with checked, indeterminate, and disabled states.",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "source": "forms/checkbox",
+          "target": "components/ui/checkbox.tsx"
+        }
+      ]
     },
     {
       "name": "label",
       "type": "registry:ui",
       "title": "Label",
       "description": "Form label with disabled-state handling.",
-      "registryDependencies": ["utils"],
-      "files": [{ "source": "forms/label", "target": "components/ui/label.tsx" }]
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "source": "forms/label",
+          "target": "components/ui/label.tsx"
+        }
+      ]
     },
     {
       "name": "separator",
       "type": "registry:ui",
       "title": "Separator",
       "description": "Horizontal/vertical hairline divider.",
-      "dependencies": ["@base-ui/react"],
-      "registryDependencies": ["utils"],
-      "files": [{ "source": "primitives/separator", "target": "components/ui/separator.tsx" }]
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "source": "primitives/separator",
+          "target": "components/ui/separator.tsx"
+        }
+      ]
     },
     {
       "name": "tooltip",
       "type": "registry:ui",
       "title": "Tooltip",
       "description": "Hover tooltip with arrow and positioning.",
-      "dependencies": ["@base-ui/react"],
-      "registryDependencies": ["utils"],
-      "files": [{ "source": "overlays/tooltip", "target": "components/ui/tooltip.tsx" }]
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "source": "overlays/tooltip",
+          "target": "components/ui/tooltip.tsx"
+        }
+      ]
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "Badge",
+      "description": "Ponti badge with semantic variants and consistent compact sizing.",
+      "files": [
+        {
+          "source": "primitives/badge",
+          "target": "components/ui/badge.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "title": "Card",
+      "description": "Composable card surface with header, content, description, and footer slots.",
+      "files": [
+        {
+          "source": "primitives/card",
+          "target": "components/ui/card.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "progress",
+      "type": "registry:ui",
+      "title": "Progress",
+      "description": "Accessible value-driven progress indicator with determinate and indeterminate states.",
+      "files": [
+        {
+          "source": "feedback/progress",
+          "target": "components/ui/progress.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "title": "Skeleton",
+      "description": "Content-loading placeholder with configurable class names.",
+      "files": [
+        {
+          "source": "feedback/skeleton",
+          "target": "components/ui/skeleton.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "alert",
+      "type": "registry:ui",
+      "title": "Alert",
+      "description": "Inline informational and destructive message surface with title and description slots.",
+      "files": [
+        {
+          "source": "feedback/alert",
+          "target": "components/ui/alert.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "empty-state",
+      "type": "registry:ui",
+      "title": "EmptyState",
+      "description": "Composable empty state with optional icon, explanation, and recovery action.",
+      "files": [
+        {
+          "source": "feedback/empty-state",
+          "target": "components/ui/empty-state.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "section-intro",
+      "type": "registry:ui",
+      "title": "SectionIntro",
+      "description": "Reusable section heading with eyebrow, description, and action slots.",
+      "files": [
+        {
+          "source": "layout/section-intro",
+          "target": "components/ui/section-intro.tsx"
+        }
+      ]
+    },
+    {
+      "name": "surface-panel",
+      "type": "registry:ui",
+      "title": "SurfacePanel",
+      "description": "Named surface container with consistent border, radius, and padding.",
+      "files": [
+        {
+          "source": "layout/surface-panel",
+          "target": "components/ui/surface-panel.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "filter-chip",
+      "type": "registry:ui",
+      "title": "FilterChip",
+      "description": "Removable filter or sort chip with accessible action labels.",
+      "files": [
+        {
+          "source": "filters/filter-chip",
+          "target": "components/ui/filter-chip.tsx"
+        }
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "active-filters-bar",
+      "type": "registry:ui",
+      "title": "ActiveFiltersBar",
+      "description": "Composable active-filter summary with clear-all behavior.",
+      "files": [
+        {
+          "source": "filters/active-filters-bar",
+          "target": "components/ui/active-filters-bar.tsx"
+        }
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "filter-chip"
+      ]
+    },
+    {
+      "name": "ponti-theme",
+      "type": "registry:style",
+      "title": "Ponti theme",
+      "description": "Compiled Ponti tokens and component styles for projects using the registry.",
+      "files": [
+        {
+          "source": "ponti-theme",
+          "target": "src/ponti-theme.css"
+        }
+      ]
     }
   ]
 }

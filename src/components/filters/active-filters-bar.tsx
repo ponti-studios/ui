@@ -1,6 +1,9 @@
+"use client";
+
 import { X } from "lucide-react";
 
 import { cn } from "../../lib/utils";
+import { useUiText } from "../../translations/ui-provider";
 import { FilterChip } from "./filter-chip";
 
 export interface ActiveFilter {
@@ -19,6 +22,7 @@ export interface ActiveFiltersBarProps {
 }
 
 export function ActiveFiltersBar({ filters, className, onClearAll }: ActiveFiltersBarProps) {
+  const clearAllLabel = useUiText("filters.clearAll", "Clear all");
   if (filters.length === 0) {
     return null;
   }
@@ -51,7 +55,7 @@ export function ActiveFiltersBar({ filters, className, onClearAll }: ActiveFilte
           type="button"
           onClick={onClearAll}
           className="hover:bg-muted text-muted-foreground hover:text-foreground focus-visible:ring-ring inline-flex shrink-0 items-center justify-center self-stretch aspect-square rounded-r-lg border-l border-border transition-colors focus-visible:ring-2 focus-visible:outline-none"
-          aria-label="Clear all"
+          aria-label={clearAllLabel}
         >
           <X className="size-4" aria-hidden />
         </button>

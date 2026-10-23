@@ -3,14 +3,14 @@
   "name": "input",
   "type": "registry:ui",
   "title": "Input",
-  "description": "Mono text input.",
+  "description": "Ponti text input.",
   "registryDependencies": [
     "utils"
   ],
   "files": [
     {
       "path": "components/ui/input.tsx",
-      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\nfunction Input({ className, type, ...props }: React.ComponentProps<\"input\">) {\n  return (\n    <input\n      type={type}\n      data-slot=\"input\"\n      className={cn(\n        \"bg-background text-foreground border-input h-9 w-full min-w-0 rounded-md border px-3 py-1 text-base transition-colors md:text-sm\",\n        \"file:text-foreground file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium\",\n        \"placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground\",\n        \"focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none\",\n        \"disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50\",\n        \"aria-invalid:ring-destructive/20 aria-invalid:border-destructive\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nexport { Input };\n",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\nfunction Input({ className, type, ...props }: React.ComponentProps<\"input\">) {\n  return (\n    <input\n      type={type}\n      data-slot=\"input\"\n      className={cn(\n        \"bg-background text-foreground border-input h-9 w-full min-w-0 rounded-md border px-3 py-1 text-base transition-colors md:text-sm\",\n        \"file:text-foreground file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium\",\n        \"placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground\",\n        \"focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none\",\n        \"disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50\",\n        \"aria-invalid:ring-destructive/20 aria-invalid:border-destructive\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nexport { Input };\n",
       "type": "registry:ui"
     }
   ]

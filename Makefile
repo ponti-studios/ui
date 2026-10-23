@@ -11,16 +11,20 @@ build:
 	$(STYLE_DICTIONARY) build --config src/styles/tokens/style-dictionary.light.json
 	$(STYLE_DICTIONARY) build --config src/styles/tokens/style-dictionary.dark.json
 	$(STYLE_DICTIONARY) build --config src/styles/tokens/style-dictionary.dark-class.json
+	$(STYLE_DICTIONARY) build --config src/styles/tokens/style-dictionary.light-class.json
 	$(STYLE_DICTIONARY) build --config src/styles/tokens/style-dictionary.light-storybook.json
 	$(STYLE_DICTIONARY) build --config src/styles/tokens/style-dictionary.dark-storybook.json
 	$(PNPM) run build:styles
+	$(PNPM) exec vite build --config vite.library.config.ts
 	$(PNPM) exec tsc --noEmit
+	$(PNPM) exec tsc --project tsconfig.build.json
+	$(PNPM) exec node registry/scripts/build-registry.mjs
 
 check: build
 	$(PNPM) exec node src/styles/tokens/scripts/check-foundations.mjs
-	git diff --exit-code -- src/styles/tokens/generated .storybook/generated
 	$(PNPM) exec node src/styles/tokens/scripts/check-source.mjs
 	$(PNPM) exec oxlint src
+	$(PNPM) exec node registry/scripts/build-registry.mjs --check
 
 test: build
 	$(VITEST)

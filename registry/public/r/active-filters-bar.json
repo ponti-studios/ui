@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "active-filters-bar",
+  "type": "registry:ui",
+  "title": "ActiveFiltersBar",
+  "description": "Composable active-filter summary with clear-all behavior.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils",
+    "filter-chip"
+  ],
+  "files": [
+    {
+      "path": "components/ui/active-filters-bar.tsx",
+      "content": "\"use client\";\n\nimport { X } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { useUiText } from \"../../translations/ui-provider\";\nimport { FilterChip } from \"@/components/ui/filter-chip\";\n\nexport interface ActiveFilter {\n  id: string;\n  label: string;\n  onRemove: () => void;\n  onClick?: () => void;\n  variant?: \"filter\" | \"sort\";\n  direction?: \"asc\" | \"desc\";\n}\n\nexport interface ActiveFiltersBarProps {\n  filters: ActiveFilter[];\n  className?: string;\n  onClearAll?: () => void;\n}\n\nexport function ActiveFiltersBar({ filters, className, onClearAll }: ActiveFiltersBarProps) {\n  const clearAllLabel = useUiText(\"filters.clearAll\", \"Clear all\");\n  if (filters.length === 0) {\n    return null;\n  }\n\n  return (\n    <div\n      className={cn(\n        \"flex w-full items-center h-10 gap-2 rounded-lg border border-border pr-0\",\n        className,\n      )}\n    >\n      <span className=\"text-muted-foreground shrink-0 self-stretch flex items-center text-sm border-r px-4\">\n        Filters\n      </span>\n      <ul className=\"flex flex-1 min-w-0 items-center gap-2 overflow-x-auto scroll-fade-x pl-4 py-1.5\">\n        {filters.map((filter) => (\n          <li key={filter.id} className=\"shrink-0\">\n            <FilterChip\n              label={filter.label}\n              onRemove={filter.onRemove}\n              onClick={filter.onClick}\n              variant={filter.variant === \"sort\" ? \"sort\" : \"default\"}\n              direction={filter.direction}\n            />\n          </li>\n        ))}\n      </ul>\n      {onClearAll ? (\n        <button\n          type=\"button\"\n          onClick={onClearAll}\n          className=\"hover:bg-muted text-muted-foreground hover:text-foreground focus-visible:ring-ring inline-flex shrink-0 items-center justify-center self-stretch aspect-square rounded-r-lg border-l border-border transition-colors focus-visible:ring-2 focus-visible:outline-none\"\n          aria-label={clearAllLabel}\n        >\n          <X className=\"size-4\" aria-hidden />\n        </button>\n      ) : null}\n    </div>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

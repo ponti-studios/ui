@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0](https://github.com/ponti-studios/ui/compare/ui-v2.0.2...ui-v3.0.0) (2026-10-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* **ui:** useApiClient no longer reads Vite environment configuration for the API origin or credentials. Configure baseUrl and credentials explicitly when using a cross-origin API.
+
+### Features
+
+* **ui:** harden library distribution and accessibility ([#30](https://github.com/ponti-studios/ui/issues/30)) ([70a90c1](https://github.com/ponti-studios/ui/commit/70a90c1d87b858f996b83852cea49000e4fddc41))
+
 ## [2.0.2](https://github.com/ponti-studios/ui/compare/ui-v2.0.1...ui-v2.0.2) (2026-10-23)
 
 

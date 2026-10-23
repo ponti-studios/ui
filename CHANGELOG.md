@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.0.0](https://github.com/ponti-studios/ui/compare/ui-v1.8.0...ui-v2.0.0) (2026-10-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* default theme values are replaced (Ink & Docket is gone); tertiary now references text-secondary; light success/warning foregrounds are dark-on-fill; dark destructive matches light.
+
+### Features
+
+* add Checkbox, Label, Separator, and Tooltip with registry items ([a9b629c](https://github.com/ponti-studios/ui/commit/a9b629ce4d73ef5d4a50b8bd74bc677b2b01c27a))
+* Enhance mobile UI components with new styles and native support ([8b2298f](https://github.com/ponti-studios/ui/commit/8b2298f757f239813ef2ba8b739ce90b367e38dc))
+* Mono identity system with shadcn registry and new components ([6a35740](https://github.com/ponti-studios/ui/commit/6a357409748d17d7f5deec9ddc8d9ce1fe9942f7))
+* **ui:** add reusable web project starter ([dee39d5](https://github.com/ponti-studios/ui/commit/dee39d5c844e3fbb1332d0b6f32396099e597d22))
+* **ui:** load compiled styles from the package entry ([80798db](https://github.com/ponti-studios/ui/commit/80798db534e2576b2336fca0e10bf50e06aef8b8))
+* **ui:** ship precompiled styles with the web entry ([3fd0072](https://github.com/ponti-studios/ui/commit/3fd0072e5f661ea67c6dabd3f709427818a3ed67))
+
+
+### Bug Fixes
+
+* **tokens:** address semantic color review ([41667fd](https://github.com/ponti-studios/ui/commit/41667fdc1e6002d8d4e5cedff6535065ad4ccccc))
+
 ## [1.8.0](https://github.com/ponti-studios/ui/compare/ui-v1.7.0...ui-v1.8.0) (2026-09-17)
 
 

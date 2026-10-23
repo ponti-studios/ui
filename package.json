@@ -8,8 +8,13 @@
     "type": "git",
     "url": "git+https://github.com/ponti-studios/ui.git"
   },
+  "bin": {
+    "create-ponti-project": "./scripts/create-project.mjs"
+  },
   "files": [
     "src",
+    "scripts/create-project.mjs",
+    "templates/web-vite",
     "THIRD_PARTY_NOTICES.md"
   ],
   "type": "module",
@@ -88,6 +93,7 @@
     "test": "make test",
     "storybook": "make storybook",
     "format": "make format",
+    "create:project": "node ./scripts/create-project.mjs",
     "prepack": "make check"
   },
   "dependencies": {

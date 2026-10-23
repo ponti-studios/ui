@@ -1,6 +1,6 @@
 # @ponti-studios/ui
 
-The canonical Ponti Studios UI package. It is published from this repository to GitHub Packages.
+The canonical Ponti Studios UI package. It is published from this repository to npm.
 
 ## Design
 
@@ -35,12 +35,34 @@ make storybook  # build tokens and start Storybook
 
 The `pnpm run` scripts (`check`, `build`, `test`, `storybook`, `format`) delegate to these targets for compatibility.
 
+## Start a new web project
+
+The package also ships a React + Vite starter wired to the current Ponti UI
+release. It includes Tailwind v4, the shared stylesheet and source scanning,
+strict TypeScript settings, and a first screen using the shared Button.
+
+Create a project and install its dependencies:
+
+```bash
+pnpm dlx --package @ponti-studios/ui create-ponti-project my-new-project
+cd my-new-project
+pnpm dev
+```
+
+The command refuses to write into a non-empty directory. Pass `--no-install`
+to create the files without running `pnpm install`. From a local checkout, use
+`pnpm run create:project <directory>`.
+
+This starter is intentionally focused on web apps. Native apps use the same
+token sources through the package's `/native` entry point and should keep their
+platform-specific app setup in their own starter.
+
 ## Release
 
 Releases are owned by [release-please](https://github.com/googleapis/release-please), not by hand-edited version numbers or manually pushed tags. The `.github/workflows/publish.yml` workflow runs after a successful `validate` push to `main`:
 
 1. **`release-please`** — maintains a root-package release PR, updating `package.json`, `.release-please-manifest.json`, and `CHANGELOG.md` from Conventional Commit history.
-2. **`publish`** — when that release PR is merged, checks out the exact release tag and publishes it to GitHub Packages. `workflow_dispatch` is the break-glass recovery path for a previously created release tag.
+2. **`publish`** — when that release PR is merged, checks out the exact release tag and publishes it to npm. `workflow_dispatch` is the break-glass recovery path for a previously created release tag.
 
 **So the actual release flow is:**
 
@@ -56,19 +78,12 @@ Releases are owned by [release-please](https://github.com/googleapis/release-ple
 
 ## Consumers
 
-Configure the npm registry in the consumer repository:
-
-```ini
-@ponti-studios:registry=https://npm.pkg.github.com
-```
-
-Consumers that need authentication should configure a token outside the committed project `.npmrc`:
+The package is public on npm, so consumers can install it without an
+organization token:
 
 ```bash
-pnpm config set --location=user //npm.pkg.github.com/:_authToken "$NODE_AUTH_TOKEN"
+pnpm add @ponti-studios/ui
 ```
-
-CI consumers should use a secret-backed npm token with read access.
 
 ### Ships TypeScript source, not a bundle
 

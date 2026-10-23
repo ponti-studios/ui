@@ -1,0 +1,24 @@
+@import "tailwindcss";
+@import "@ponti-studios/ui/styles.css";
+@source '../node_modules/@ponti-studios/ui/src';
+
+:root {
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  background: var(--background);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

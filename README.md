@@ -41,12 +41,6 @@ import { UiTextProvider } from "@ponti-studios/ui";
 </UiTextProvider>
 ```
 
-## API client
-
-`useApiClient` uses same-origin requests by default. Pass `baseUrl` for an API
-origin and set `credentials` explicitly when cross-origin cookies are required;
-it does not read build-tool environment variables.
-
 ## Component registry
 
 The shadcn-compatible registry is a curated set of independently installable

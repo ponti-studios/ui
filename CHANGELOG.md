@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.1](https://github.com/ponti-studios/ui/compare/ui-v3.0.0...ui-v3.0.1) (2026-11-04)
+
+
+### Bug Fixes
+
+* **overlays:** compose alert dialog with matching primitives ([#18](https://github.com/ponti-studios/ui/issues/18)) ([e5bc165](https://github.com/ponti-studios/ui/commit/e5bc16504842273c8085ae990d621a589c73cdd2))
+
 ## [3.0.0](https://github.com/ponti-studios/ui/compare/ui-v2.0.2...ui-v3.0.0) (2026-10-23)
 
 

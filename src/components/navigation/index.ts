@@ -9,3 +9,5 @@ export type {
 export { PaginationControls } from "./pagination-controls";
 export type { PaginationControlsProps } from "./pagination-controls";
 export { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs";
+export { DockNav } from "./dock-nav";
+export type { DockNavItem, DockNavLinkProps, DockNavProps, RenderNavLink } from "./dock-nav";

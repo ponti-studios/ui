@@ -25,6 +25,14 @@
       "matchUpdateTypes": ["major"],
       "automerge": false,
       "labels": ["design-system", "breaking"]
+    },
+    {
+      "description": "Below 1.0 a minor bump can break things (0.4 to 0.8 did), so a human merges those too.",
+      "matchPackageNames": ["@ponti-studios/ui"],
+      "matchCurrentVersion": "/^0\\./",
+      "matchUpdateTypes": ["minor"],
+      "automerge": false,
+      "labels": ["design-system", "breaking"]
     }
   ]
 }

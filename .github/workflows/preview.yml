@@ -1,0 +1,34 @@
+name: preview
+
+# Every PR gets an installable build, so a consumer repo can try a component
+# change before it's released:  pnpm add https://pkg.pr.new/@ponti-studios/ui@<pr-number>
+# Needs the pkg.pr.new GitHub app installed on this repo (https://github.com/apps/pkg-pr-new).
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: preview-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v6
+        with:
+          run_install: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          cache: "pnpm"
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run build
+      - run: pnpm dlx pkg-pr-new@0.0.93 publish --pnpm --compact

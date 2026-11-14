@@ -1,0 +1,30 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Keeps @ponti-studios/ui current in consumer repos. Extend with: github>ponti-studios/ui:ponti-ui",
+  "packageRules": [
+    {
+      "description": "This preset only manages the design system. Everything else is left alone.",
+      "matchPackageNames": ["!@ponti-studios/ui"],
+      "enabled": false
+    },
+    {
+      "description": "Our own package: no waiting period, merge minor and patch once CI is green.",
+      "matchPackageNames": ["@ponti-studios/ui"],
+      "minimumReleaseAge": null,
+      "internalChecksFilter": "none",
+      "prCreation": "immediate",
+      "labels": ["design-system"],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true,
+      "matchUpdateTypes": ["minor", "patch"]
+    },
+    {
+      "description": "Majors are breaking by definition, so a human merges them.",
+      "matchPackageNames": ["@ponti-studios/ui"],
+      "matchUpdateTypes": ["major"],
+      "automerge": false,
+      "labels": ["design-system", "breaking"]
+    }
+  ]
+}

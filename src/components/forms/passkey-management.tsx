@@ -3,6 +3,7 @@
 import { KeyRound, Plus, Trash2, X } from "lucide-react";
 import { useCallback, useState } from "react";
 
+import { useUiText } from "../../translations/ui-provider";
 import { Spinner } from "../feedback/spinner";
 import { Button } from "../primitives/button";
 import { Card, CardHeader } from "../primitives/card";
@@ -34,6 +35,9 @@ export function PasskeyManagement({
   onAdd,
   onDelete,
 }: PasskeyManagementProps) {
+  const addLabel = useUiText("passkey.add", "Add a passkey");
+  const listLabel = useUiText("passkey.list", "Registered passkeys");
+  const dismissErrorLabel = useUiText("passkey.dismissError", "Dismiss passkey error");
   const [adding, setAdding] = useState(false);
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [actionError, setActionError] = useState<PasskeyActionError | null>(null);
@@ -89,7 +93,7 @@ export function PasskeyManagement({
           onClick={() => void handleAdd()}
           isLoading={adding}
           loadingLabel="Adding passkey"
-          aria-label="Add a passkey"
+          aria-label={addLabel}
           className="ml-auto"
         >
           <Plus className="size-4" aria-hidden />
@@ -110,7 +114,7 @@ export function PasskeyManagement({
           <span>No passkeys registered. Add one to sign in faster.</span>
         </div>
       ) : (
-        <ul className="divide-border divide-y" aria-label="Registered passkeys">
+        <ul className="divide-border divide-y" aria-label={listLabel}>
           {passkeys.map((pk) => {
             const rowError = actionError?.passkeyId === pk.id ? actionError.message : null;
 
@@ -152,8 +156,8 @@ export function PasskeyManagement({
                     <button
                       type="button"
                       onClick={() => setActionError(null)}
-                      aria-label="Dismiss passkey error"
-                      title="Dismiss error"
+                      aria-label={dismissErrorLabel}
+                      title={dismissErrorLabel}
                       className="hover:text-destructive focus-visible:ring-ring -m-1 shrink-0 rounded-sm p-1 focus-visible:ring-2 focus-visible:outline-none"
                     >
                       <X className="size-4" aria-hidden />

@@ -9,6 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../overlays/dropdown-menu";
+import { useUiText } from "../../translations/ui-provider";
 import { Button } from "../primitives/button";
 
 export interface SortRowProps {
@@ -32,6 +33,7 @@ export function SortRow({
   updateSortOption,
   removeSortOption,
 }: SortRowProps) {
+  const removeLabel = useUiText("sort.removeCriterion", "Remove sort criterion");
   const availableFieldsForCurrentSelect = sortableFields.filter(
     (field) => !usedFields.includes(field) || field === sortOption.field,
   );
@@ -81,7 +83,7 @@ export function SortRow({
         size="sm"
         onClick={() => removeSortOption(index)}
         className="size-8 p-0"
-        aria-label="Remove sort criterion"
+        aria-label={removeLabel}
       >
         <X className="text-muted-foreground size-4" />
       </Button>

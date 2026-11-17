@@ -1,5 +1,3 @@
-import "../dist/styles.css";
-
 export { CHART_COLORS, CHART_CSS_VARS } from "./constants/chart-colors";
 export type { SortDirection, SortField, SortOption } from "./hooks/sort.types";
 export { useDebouncedValue } from "./hooks/use-debounced-value";

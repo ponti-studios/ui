@@ -5,6 +5,7 @@ import { SearchIcon } from "lucide-react";
 import * as React from "react";
 
 import { cn } from "../../lib/utils";
+import { useUiText } from "../../translations/ui-provider";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "./dialog";
 
 function Command({
@@ -60,9 +61,11 @@ function CommandInput({
   className,
   onValueChange,
   onChange,
-  "aria-label": ariaLabel = "Search commands",
+  "aria-label": ariaLabelProp,
   ...props
 }: CommandInputProps) {
+  const defaultLabel = useUiText("command.search", "Search commands");
+  const ariaLabel = ariaLabelProp ?? defaultLabel;
   return (
     <div data-slot="command-input-wrapper" className="flex h-9 items-center gap-2 border-b px-3">
       <SearchIcon className="size-4 shrink-0 opacity-50" />
@@ -89,11 +92,12 @@ function CommandList({
   className,
   ...props
 }: React.ComponentProps<typeof CommandPrimitive.List>) {
+  const resultsLabel = useUiText("command.results", "Command results");
   if (typeof children === "function") {
     return (
       <CommandPrimitive.List
         data-slot="command-list"
-        aria-label="Command results"
+        aria-label={resultsLabel}
         tabIndex={0}
         className={cn("max-h-75 scroll-py-1 overflow-x-hidden overflow-y-auto", className)}
         {...props}
@@ -115,7 +119,7 @@ function CommandList({
     <div data-slot="command-list-container" className="relative">
       <CommandPrimitive.List
         data-slot="command-list"
-        aria-label="Command results"
+        aria-label={resultsLabel}
         tabIndex={0}
         className={cn("max-h-75 scroll-py-1 overflow-x-hidden overflow-y-auto", className)}
         {...props}

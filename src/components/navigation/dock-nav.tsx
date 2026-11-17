@@ -59,9 +59,9 @@ export function DockNav({
           renderLink(
             {
               className: cn(
-                "group focus-visible:ring-ring relative flex min-h-12 min-w-14 flex-1 flex-col items-center justify-center rounded-full no-underline outline-none transition-[color,background-color] duration-200 focus-visible:bg-black/[.05] focus-visible:ring-2",
+                "group focus-visible:ring-ring relative flex min-h-12 min-w-14 flex-1 flex-col items-center justify-center rounded-full no-underline outline-none transition-[color,background-color] duration-200 focus-visible:bg-foreground/5 focus-visible:ring-2",
                 item.active
-                  ? "text-foreground bg-black/[.07] dark:bg-white/10"
+                  ? "text-foreground bg-foreground/[.08]"
                   : "text-muted-foreground hover:text-foreground focus-visible:text-foreground active:text-foreground",
               ),
               "aria-current": item.active ? "page" : undefined,
@@ -70,7 +70,7 @@ export function DockNav({
                 <span className="flex flex-col items-center">
                   <span
                     className={cn(
-                      "transition-transform duration-300 group-focus-visible:scale-110 group-active:scale-95",
+                      "transition-transform duration-200 group-focus-visible:scale-110 group-active:scale-95",
                       ease,
                     )}
                   >
@@ -78,7 +78,7 @@ export function DockNav({
                   </span>
                   <span
                     className={cn(
-                      "grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-300 group-focus-visible:grid-rows-[1fr] group-focus-visible:opacity-100 group-active:grid-rows-[1fr] group-active:opacity-100",
+                      "grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-200 group-focus-visible:grid-rows-[1fr] group-focus-visible:opacity-100 group-active:grid-rows-[1fr] group-active:opacity-100",
                       ease,
                     )}
                   >

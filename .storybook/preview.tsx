@@ -52,24 +52,6 @@ const preview: Preview = {
       sort: "requiredFirst",
       expanded: true,
     },
-    options: {
-      storySort: {
-        order: [
-          "Audit",
-          "Tokens",
-          "Primitives",
-          "Forms",
-          "Feedback",
-          "Filters",
-          "Navigation",
-          "Patterns",
-          "Surfaces",
-          "Layouts",
-          "Motion",
-          "Internal",
-        ],
-      },
-    },
   },
 };
 

@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useEffect, useState } from "react";
 
-import { booleanControl, hiddenControl } from "../../storybook/controls";
 import { Button } from "../primitives/button";
 import {
   Dialog,
@@ -19,10 +18,18 @@ const meta = {
   component: Dialog,
   tags: ["autodocs"],
   argTypes: {
-    open: booleanControl("Controls whether the dialog is open", true),
-    modal: booleanControl("Whether interaction outside the dialog is disabled when open", true),
-    defaultOpen: hiddenControl,
-    onOpenChange: hiddenControl,
+    open: {
+      control: "boolean",
+      description: "Controls whether the dialog is open",
+      table: { defaultValue: { summary: "true" } },
+    },
+    modal: {
+      control: "boolean",
+      description: "Whether interaction outside the dialog is disabled when open",
+      table: { defaultValue: { summary: "true" } },
+    },
+    defaultOpen: { control: false, table: { disable: true } },
+    onOpenChange: { control: false, table: { disable: true } },
   },
 } satisfies Meta<typeof Dialog>;
 

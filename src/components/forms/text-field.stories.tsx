@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, userEvent, within } from "storybook/test";
 
-import { booleanControl, selectControl, textControl } from "../../storybook/controls";
 import { textFieldTypeOptions } from "../../storybook/options";
 import { TextField } from "./text-field";
 
@@ -10,15 +9,26 @@ const meta = {
   component: TextField,
   tags: ["autodocs"],
   argTypes: {
-    label: textControl("Label displayed above the field"),
-    type: selectControl(textFieldTypeOptions, "Input type used by the field", {
-      defaultValue: "text",
-    }),
-    placeholder: textControl("Placeholder text shown when the field is empty"),
-    helpText: textControl("Supporting text shown below the field"),
-    error: textControl("Validation error text shown below the field"),
-    disabled: booleanControl("Prevents user interaction and applies disabled styling", false),
-    required: booleanControl("Marks the field as required for form submission", false),
+    label: { control: "text", description: "Label displayed above the field" },
+    type: {
+      control: { type: "select" },
+      description: "Input type used by the field",
+      options: textFieldTypeOptions,
+      table: { defaultValue: { summary: "text" } },
+    },
+    placeholder: { control: "text", description: "Placeholder text shown when the field is empty" },
+    helpText: { control: "text", description: "Supporting text shown below the field" },
+    error: { control: "text", description: "Validation error text shown below the field" },
+    disabled: {
+      control: "boolean",
+      description: "Prevents user interaction and applies disabled styling",
+      table: { defaultValue: { summary: "false" } },
+    },
+    required: {
+      control: "boolean",
+      description: "Marks the field as required for form submission",
+      table: { defaultValue: { summary: "false" } },
+    },
   },
 } satisfies Meta<typeof TextField>;
 

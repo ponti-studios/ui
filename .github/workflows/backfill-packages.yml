@@ -29,6 +29,11 @@ jobs:
           dest="$RUNNER_TEMP/backfill"
           mkdir -p "$dest"
           versions=$(npm view @ponti-studios/ui versions --json | jq -r '.[]')
+          # npm refuses to move the "latest" dist-tag backwards, and the old
+          # GH-era history stops at 0.6.0 — so historical versions publish
+          # under a "backfill" tag and only the newest version applies
+          # "latest" (which can only move forward).
+          max=$(echo "$versions" | tail -1)
           for v in $versions; do
             if npm view "@ponti-studios/ui@$v" version --registry https://npm.pkg.github.com >/dev/null 2>&1; then
               echo "skip $v (already on GitHub Packages)"
@@ -36,7 +41,10 @@ jobs:
             fi
             echo "backfilling $v"
             npm pack "@ponti-studios/ui@$v" --pack-destination "$dest" >/dev/null
-            npm publish "$dest/ponti-studios-ui-$v.tgz" --registry https://npm.pkg.github.com
+            tag=backfill
+            [[ "$v" == "$max" ]] && tag=latest
+            npm publish "$dest/ponti-studios-ui-$v.tgz" --registry https://npm.pkg.github.com --tag "$tag"
             sleep 1
           done
+          echo "latest dist-tag: $(npm view @ponti-studios/ui dist-tags --json --registry https://npm.pkg.github.com | jq -r '.latest')"
           echo "done: $(npm view @ponti-studios/ui versions --json --registry https://npm.pkg.github.com | jq '. | length') versions on GitHub Packages"

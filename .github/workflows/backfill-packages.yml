@@ -1,0 +1,40 @@
+# One-off: backfill GitHub Packages with the versions that were published to
+# npmjs before the registry switch. Idempotent — versions already on GitHub
+# Packages are skipped, so re-running is safe. Delete once the registry has
+# the full history.
+name: backfill-packages
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+      - name: Authenticate to GitHub Packages
+        run: echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" >> ~/.npmrc
+      - name: Republish npmjs tarballs that GitHub Packages is missing
+        run: |
+          set -euo pipefail
+          dest="$RUNNER_TEMP/backfill"
+          mkdir -p "$dest"
+          versions=$(npm view @ponti-studios/ui versions --json | jq -r '.[]')
+          for v in $versions; do
+            if npm view "@ponti-studios/ui@$v" version --registry https://npm.pkg.github.com >/dev/null 2>&1; then
+              echo "skip $v (already on GitHub Packages)"
+              continue
+            fi
+            echo "backfilling $v"
+            npm pack "@ponti-studios/ui@$v" --pack-destination "$dest" >/dev/null
+            npm publish "$dest/ponti-studios-ui-$v.tgz" --registry https://npm.pkg.github.com
+            sleep 1
+          done
+          echo "done: $(npm view @ponti-studios/ui versions --json --registry https://npm.pkg.github.com | jq '. | length') versions on GitHub Packages"

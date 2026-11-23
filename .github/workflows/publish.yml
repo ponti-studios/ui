@@ -67,7 +67,9 @@ jobs:
       # The repo's GITHUB_TOKEN publishes to the org's GitHub Packages; no npm
       # account or token exists for this package anymore.
       - name: Authenticate to GitHub Packages
-        run: echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" >> ~/.npmrc
+        env:
+          GH_PACKAGES_TOKEN: ${{ github.token }}
+        run: echo "//npm.pkg.github.com/:_authToken=${GH_PACKAGES_TOKEN}" >> ~/.npmrc
       # Re-running a release (or a workflow_dispatch on an old tag) shouldn't blow up on a version the registry already has.
       - name: Publish to GitHub Packages
         run: |

@@ -20,7 +20,9 @@ jobs:
         with:
           node-version: "24"
       - name: Authenticate to GitHub Packages
-        run: echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" >> ~/.npmrc
+        env:
+          GH_PACKAGES_TOKEN: ${{ github.token }}
+        run: echo "//npm.pkg.github.com/:_authToken=${GH_PACKAGES_TOKEN}" >> ~/.npmrc
       - name: Republish npmjs tarballs that GitHub Packages is missing
         run: |
           set -euo pipefail

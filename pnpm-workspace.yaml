@@ -12,4 +12,4 @@ minimumReleaseAgeExclude:
   - '@storybook/react-dom-shim@10.6.5'
   - '@storybook/react-vite@10.6.5'
   - '@storybook/react@10.6.5'
-  - storybook@10.6.5
+  - storybook@10.6.5 || 11.0.0-rc.0

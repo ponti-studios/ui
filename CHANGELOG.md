@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.0](https://github.com/ponti-studios/ui/compare/ui-v3.1.0...ui-v3.2.0) (2026-11-28)
+
+
+### Features
+
+* **ui:** add a Tailwind entry so apps can [@import](https://github.com/import) "@ponti-studios/ui" ([#56](https://github.com/ponti-studios/ui/issues/56)) ([eff980f](https://github.com/ponti-studios/ui/commit/eff980f9b25948d03021ca85d23a230f3578fc74))
+
 ## [3.1.0](https://github.com/ponti-studios/ui/compare/ui-v3.0.1...ui-v3.1.0) (2026-11-27)
 
 

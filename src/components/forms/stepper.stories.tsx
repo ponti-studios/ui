@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 
-import { booleanControl, hiddenControl, numberControl } from "../../storybook/controls";
 import { Stepper } from "./stepper";
 
 const meta = {
@@ -9,12 +8,32 @@ const meta = {
   component: Stepper,
   tags: ["autodocs"],
   argTypes: {
-    value: numberControl("Current value", { defaultValue: 1 }),
-    min: numberControl("Minimum allowed value", { defaultValue: 0 }),
-    max: numberControl("Maximum allowed value", { defaultValue: 100 }),
-    step: numberControl("Amount to change per click", { defaultValue: 1 }),
-    disabled: booleanControl("Prevents user interaction", false),
-    onChange: hiddenControl,
+    value: {
+      control: { type: "number" },
+      description: "Current value",
+      table: { defaultValue: { summary: "1" } },
+    },
+    min: {
+      control: { type: "number" },
+      description: "Minimum allowed value",
+      table: { defaultValue: { summary: "0" } },
+    },
+    max: {
+      control: { type: "number" },
+      description: "Maximum allowed value",
+      table: { defaultValue: { summary: "100" } },
+    },
+    step: {
+      control: { type: "number" },
+      description: "Amount to change per click",
+      table: { defaultValue: { summary: "1" } },
+    },
+    disabled: {
+      control: "boolean",
+      description: "Prevents user interaction",
+      table: { defaultValue: { summary: "false" } },
+    },
+    onChange: { control: false, table: { disable: true } },
   },
 } satisfies Meta<typeof Stepper>;
 

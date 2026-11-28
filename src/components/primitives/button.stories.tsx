@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Plus, Trash2 } from "lucide-react";
 import { expect, userEvent, within } from "storybook/test";
 
-import { booleanControl, hiddenControl, selectControl } from "../../storybook/controls";
 import { buttonVariantOptions } from "../../storybook/options";
 import { UiTextProvider } from "../../translations/ui-provider";
 import { Button } from "./button";
@@ -12,11 +11,18 @@ const meta: Meta = {
   component: Button,
   tags: ["autodocs"],
   argTypes: {
-    variant: selectControl(buttonVariantOptions, "Visual style variant of the button", {
-      defaultValue: "default",
-    }),
-    disabled: booleanControl("Prevents user interaction and applies disabled styling", false),
-    asChild: hiddenControl,
+    variant: {
+      control: { type: "select" },
+      description: "Visual style variant of the button",
+      options: buttonVariantOptions,
+      table: { defaultValue: { summary: "default" } },
+    },
+    disabled: {
+      control: "boolean",
+      description: "Prevents user interaction and applies disabled styling",
+      table: { defaultValue: { summary: "false" } },
+    },
+    asChild: { control: false, table: { disable: true } },
   },
 };
 

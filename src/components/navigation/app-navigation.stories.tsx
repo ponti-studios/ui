@@ -182,9 +182,9 @@ export const WithExtraContent: Story = {
  */
 export const Nokia: Story = {
   parameters: {
-    viewport: { defaultViewport: "mobile1" },
     chromatic: { viewports: [375] },
   },
+  globals: { viewport: { value: "mobile1", isRotated: false } },
   render: () => (
     <>
       <Navigation variant="nokia">

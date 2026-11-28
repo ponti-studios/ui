@@ -29,6 +29,7 @@ const config: StorybookConfig = {
       build: { target: "esnext" },
     });
   },
+  storySorts: [{ order: ["Audit", "Tokens", "Primitives", "Forms", "Feedback", "Filters", "Navigation", "Patterns", "Surfaces", "Layouts", "Motion", "Internal"] }],
 };
 export default config;
 

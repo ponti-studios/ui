@@ -14,7 +14,14 @@ export type UiMessageKey =
   | "pagination.previous"
   | "pagination.next"
   | "dialog.close"
-  | "sheet.close";
+  | "sheet.close"
+  | "dropZone.label"
+  | "passkey.add"
+  | "passkey.list"
+  | "passkey.dismissError"
+  | "command.search"
+  | "command.results"
+  | "sort.removeCriterion";
 
 const UiMessagesContext = createContext<UiMessages>({});
 

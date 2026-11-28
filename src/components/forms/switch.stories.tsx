@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useEffect, useState } from "react";
 
-import { booleanControl, selectControl } from "../../storybook/controls";
 import { switchSizeOptions } from "../../storybook/options";
 import { Switch } from "./switch";
 
@@ -10,11 +9,22 @@ const meta = {
   component: Switch,
   tags: ["autodocs"],
   argTypes: {
-    checked: booleanControl("Controlled on/off state of the switch", false),
-    disabled: booleanControl("Prevents user interaction and applies disabled styling", false),
-    size: selectControl(switchSizeOptions, "Size variant of the switch", {
-      defaultValue: "default",
-    }),
+    checked: {
+      control: "boolean",
+      description: "Controlled on/off state of the switch",
+      table: { defaultValue: { summary: "false" } },
+    },
+    disabled: {
+      control: "boolean",
+      description: "Prevents user interaction and applies disabled styling",
+      table: { defaultValue: { summary: "false" } },
+    },
+    size: {
+      control: { type: "select" },
+      description: "Size variant of the switch",
+      options: switchSizeOptions,
+      table: { defaultValue: { summary: "default" } },
+    },
   },
 } satisfies Meta<typeof Switch>;
 

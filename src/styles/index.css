@@ -12,6 +12,14 @@
 :root {
   color-scheme: light;
 }
+
+/* Tailwind's ring-offset defaults to white, which shows as a bright halo around
+   focus rings in dark mode. Match the offset to the page background instead. */
+*,
+::before,
+::after {
+  --tw-ring-offset-color: var(--background);
+}
 @media (prefers-color-scheme: dark) {
   :root:not(.light) {
     color-scheme: dark;
@@ -380,9 +388,19 @@
     min-block-size: var(--spacing-scale-11);
   }
 
+  /* Grow the tap area with a pseudo-element so the control keeps its shape. */
   :where([data-slot="checkbox"], [data-slot="radio-group-item"], [data-slot="switch"]) {
-    min-block-size: var(--spacing-scale-11);
-    min-inline-size: var(--spacing-scale-11);
+    position: relative;
+  }
+
+  :where([data-slot="checkbox"], [data-slot="radio-group-item"], [data-slot="switch"])::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    inline-size: max(100%, var(--spacing-scale-11));
+    block-size: max(100%, var(--spacing-scale-11));
+    transform: translate(-50%, -50%);
   }
 }
 

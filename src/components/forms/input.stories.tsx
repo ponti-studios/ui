@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import { booleanControl, selectControl, textControl } from "../../storybook/controls";
 import { inputTypeOptions } from "../../storybook/options";
 import { Input } from "./input";
 
@@ -9,12 +8,23 @@ const meta = {
   component: Input,
   tags: ["autodocs"],
   argTypes: {
-    type: selectControl(inputTypeOptions, "HTML input type attribute", {
-      defaultValue: "text",
-    }),
-    placeholder: textControl("Placeholder text shown when the input is empty"),
-    disabled: booleanControl("Prevents user interaction and applies disabled styling", false),
-    required: booleanControl("Marks the input as required for form submission", false),
+    type: {
+      control: { type: "select" },
+      description: "HTML input type attribute",
+      options: inputTypeOptions,
+      table: { defaultValue: { summary: "text" } },
+    },
+    placeholder: { control: "text", description: "Placeholder text shown when the input is empty" },
+    disabled: {
+      control: "boolean",
+      description: "Prevents user interaction and applies disabled styling",
+      table: { defaultValue: { summary: "false" } },
+    },
+    required: {
+      control: "boolean",
+      description: "Marks the input as required for form submission",
+      table: { defaultValue: { summary: "false" } },
+    },
   },
 } satisfies Meta<typeof Input>;
 

@@ -10,7 +10,7 @@ import { Spinner } from "../feedback/spinner";
 
 const buttonVariants = cva(
   [
-    "inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-md border border-transparent font-medium transition-colors outline-none",
+    "inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-md border border-transparent font-medium transition-[color,background-color,border-color,transform] duration-150 outline-none",
     "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
     "disabled:pointer-events-none disabled:opacity-50",
     "[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
@@ -18,11 +18,11 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline: "border-input bg-background hover:bg-muted hover:text-muted-foreground",
-        secondary: "border-input bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "border-transparent bg-transparent hover:bg-muted hover:text-muted-foreground",
+        default: "bg-primary text-primary-foreground hover:bg-primary/90 active:scale-[0.97]",
+        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 active:scale-[0.97]",
+        outline: "border-input bg-background hover:bg-muted hover:text-muted-foreground active:scale-[0.97]",
+        secondary: "border-input bg-secondary text-secondary-foreground hover:bg-secondary/80 active:scale-[0.97]",
+        ghost: "border-transparent bg-transparent hover:bg-muted hover:text-muted-foreground active:scale-[0.97]",
         link: "border-transparent bg-transparent px-0 text-accent-text underline-offset-4 hover:underline",
       },
       size: {

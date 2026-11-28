@@ -15,6 +15,7 @@ import {
 } from "react";
 
 import { cn } from "../../lib/utils";
+import { useUiText } from "../../translations/ui-provider";
 import { Progress } from "../feedback/progress";
 import { Button } from "../primitives/button";
 
@@ -96,6 +97,7 @@ export function DropZone({
   onCancel,
   onRetry,
 }: DropZoneProps) {
+  const dropZoneLabel = useUiText("dropZone.label", "File upload drop zone");
   const inputId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
   const zoneRef = useRef<HTMLDivElement>(null);
@@ -189,7 +191,7 @@ export function DropZone({
         tabIndex={isInteractive ? 0 : -1}
         aria-disabled={!isInteractive}
         aria-busy={isBusy}
-        aria-label="File upload drop zone"
+        aria-label={dropZoneLabel}
         className={cn(
           "relative flex min-h-44 w-full flex-col items-center justify-center overflow-hidden rounded-2xl border border-dashed p-6 text-center outline-none",
           "focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-2",

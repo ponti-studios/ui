@@ -50,7 +50,7 @@ jobs:
     timeout-minutes: 10
     permissions:
       contents: read
-      id-token: write
+      packages: write
     steps:
       - uses: actions/checkout@v6
         with:
@@ -64,13 +64,19 @@ jobs:
           node-version: "24"
           cache: "pnpm"
       - run: pnpm install --frozen-lockfile
-      # Re-running a release (or a workflow_dispatch on an old tag) shouldn't blow up on a version npm already has.
-      - name: Publish to npm
+      # The repo's GITHUB_TOKEN publishes to the org's GitHub Packages; no npm
+      # account or token exists for this package anymore.
+      - name: Authenticate to GitHub Packages
+        env:
+          GH_PACKAGES_TOKEN: ${{ github.token }}
+        run: echo "//npm.pkg.github.com/:_authToken=${GH_PACKAGES_TOKEN}" >> ~/.npmrc
+      # Re-running a release (or a workflow_dispatch on an old tag) shouldn't blow up on a version the registry already has.
+      - name: Publish to GitHub Packages
         run: |
           name=$(node -p "require('./package.json').name")
           version=$(node -p "require('./package.json').version")
-          if npm view "$name@$version" version >/dev/null 2>&1; then
-            echo "$name@$version is already on npm, skipping."
+          if npm view "$name@$version" version --registry https://npm.pkg.github.com >/dev/null 2>&1; then
+            echo "$name@$version is already on GitHub Packages, skipping."
           else
-            npm publish --provenance --access public
+            npm publish
           fi

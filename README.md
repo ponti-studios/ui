@@ -55,7 +55,8 @@ Common development workflows are available through the `Makefile`:
 ```bash
 make build      # regenerate token artifacts and typecheck
 make check      # build, then verify tokens/source contracts/lint
-make test       # run light and dark Storybook/vitest tests (implies build)
+make test       # consumer app checks, then light and dark Storybook/vitest tests
+make test-consumers  # just build a Tailwind app and a plain app against the packed tarball
 make storybook  # build tokens and start Storybook
 ```
 
@@ -65,8 +66,8 @@ The `pnpm run` scripts (`check`, `build`, `test`, `storybook`, `format`) delegat
 
 The package also ships a React + Vite starter wired to the current Ponti UI
 release. It includes the shared theme and component styles, strict TypeScript
-settings, and a first screen using the shared Button. The starter does not need
-Tailwind installed.
+settings, and a first screen using the shared Button. The starter imports the
+precompiled stylesheet, so it doesn't need Tailwind.
 
 Create a project and install its dependencies:
 
@@ -89,7 +90,7 @@ platform-specific app setup in their own starter.
 Releases are owned by [release-please](https://github.com/googleapis/release-please), not by hand-edited version numbers or manually pushed tags. The `.github/workflows/publish.yml` workflow runs after a successful `validate` push to `main`:
 
 1. **`release-please`** — maintains a root-package release PR, updating `package.json`, `.release-please-manifest.json`, and `CHANGELOG.md` from Conventional Commit history.
-2. **`publish`** — when that release PR is merged, checks out the exact release tag and publishes it to npm. `workflow_dispatch` is the break-glass recovery path for a previously created release tag.
+2. **`publish`** — when that release PR is merged, checks out the exact release tag and publishes it to GitHub Packages. `workflow_dispatch` is the break-glass recovery path for a previously created release tag.
 
 **So the actual release flow is:**
 
@@ -97,7 +98,7 @@ Releases are owned by [release-please](https://github.com/googleapis/release-ple
 2. Once on `main`, find or wait for the `chore(main): release ui X.Y.Z` PR that Release Please opens or updates.
 3. Review and merge it. That merge creates the `ui-v<version>` tag; after validation succeeds, the release workflow publishes that exact tag automatically.
 
-`prepack` (`pnpm run check`) runs before packing or publishing and is the last gate before anything reaches npm — see "Generated files" below for the failure mode that most commonly trips it.
+`prepack` (`pnpm run check`) runs before packing or publishing and is the last gate before anything gets published — see "Generated files" below for the failure mode that most commonly trips it.
 
 ### Generated files must never be hand-edited
 
@@ -105,8 +106,15 @@ Releases are owned by [release-please](https://github.com/googleapis/release-ple
 
 ## Consumers
 
-The package is public on npm, so consumers can install it without an
-organization token:
+The package lives on GitHub Packages, which wants a token even for reads. Map
+the scope in your project's `.npmrc` and keep the token in your user `~/.npmrc`:
+
+```bash
+# project .npmrc
+@ponti-studios:registry=https://npm.pkg.github.com
+# ~/.npmrc
+//npm.pkg.github.com/:_authToken=YOUR_TOKEN
+```
 
 ```bash
 pnpm add @ponti-studios/ui
@@ -114,20 +122,24 @@ pnpm add @ponti-studios/ui
 
 ### Use the shared web styles
 
-Import the package once from your web app entry point to load the precompiled
-theme and component styles:
+Importing components never loads CSS for you, so server rendering works under
+plain Node. Pick one of these in your app's stylesheet.
 
-```tsx
-import "@ponti-studios/ui";
+**With Tailwind v4** — your build generates the component classes along with
+yours, once:
+
+```css
+@import "tailwindcss";
+@import "@ponti-studios/ui";
+```
+
+**Without Tailwind** — load the precompiled theme and component styles:
+
+```css
+@import "@ponti-studios/ui/styles.css";
 ```
 
 Components remain available through their named entry points, such as
-`@ponti-studios/ui/primitives`. Consumers do not need Tailwind to use the
-components' built-in styles. Tailwind is only needed if the app itself wants to
-write Tailwind utility classes. The `/native` entry remains platform-specific
-and does not load the web stylesheet.
-
-The package publishes compiled ESM and TypeScript declarations, so consumer
-bundlers do not need to transpile the library source. The root import loads the
-precompiled stylesheet; explicit CSS consumers can use
-`@ponti-studios/ui/styles.css`.
+`@ponti-studios/ui/primitives`. The `/native` entry is platform-specific and
+doesn't use the web stylesheet. The package publishes compiled ESM and
+TypeScript declarations, so your bundler doesn't need to transpile the source.

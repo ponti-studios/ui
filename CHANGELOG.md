@@ -1,5 +1,28 @@
 # Changelog
 
+## [3.2.0](https://github.com/ponti-studios/ui/compare/ui-v3.1.0...ui-v3.2.0) (2026-11-28)
+
+
+### Features
+
+* **ui:** add a Tailwind entry so apps can [@import](https://github.com/import) "@ponti-studios/ui" ([#56](https://github.com/ponti-studios/ui/issues/56)) ([eff980f](https://github.com/ponti-studios/ui/commit/eff980f9b25948d03021ca85d23a230f3578fc74))
+
+## [3.1.0](https://github.com/ponti-studios/ui/compare/ui-v3.0.1...ui-v3.1.0) (2026-11-27)
+
+
+### Features
+
+* **navigation:** add DockNav, a floating glass pill nav ([#39](https://github.com/ponti-studios/ui/issues/39)) ([4d7fe00](https://github.com/ponti-studios/ui/commit/4d7fe007cb85eccd46c11a593f625a88038d5f88))
+
+
+### Bug Fixes
+
+* **ci:** backfill historical versions under a non-latest dist-tag ([f980ed4](https://github.com/ponti-studios/ui/commit/f980ed49b8062db897cdb80d5286f5afd30b498b))
+* **ci:** pass GITHUB_TOKEN via env so npmrc auth interpolates ([8b917f3](https://github.com/ponti-studios/ui/commit/8b917f392a8b07edaed8d4105ad77200cacba0e6))
+* **navigation:** rework DockNav per design review ([#47](https://github.com/ponti-studios/ui/issues/47)) ([97acba5](https://github.com/ponti-studios/ui/commit/97acba5b4ba610d7a05d5cf3d81ae6553f3fd2f9))
+* **renovate:** make 0.x minor bumps manual in the preset ([#37](https://github.com/ponti-studios/ui/issues/37)) ([1a0930b](https://github.com/ponti-studios/ui/commit/1a0930b76a5cb7face4cbb4968c407b4788ce6b8))
+* **ui:** stop the JS entries importing the stylesheet ([#55](https://github.com/ponti-studios/ui/issues/55)) ([7d6d203](https://github.com/ponti-studios/ui/commit/7d6d203e5773ed420e4a06316bf6ce8d4e9af47c))
+
 ## [3.0.1](https://github.com/ponti-studios/ui/compare/ui-v3.0.0...ui-v3.0.1) (2026-11-04)
 
 

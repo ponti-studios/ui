@@ -4,7 +4,7 @@ PNPM ?= pnpm
 STYLE_DICTIONARY := $(PNPM) exec style-dictionary
 VITEST := $(PNPM) exec vitest --run --config vitest.config.ts
 
-.PHONY: check build test storybook format
+.PHONY: check build test test-consumers storybook format
 
 build:
 	$(STYLE_DICTIONARY) build --config src/styles/tokens/style-dictionary.foundations.json
@@ -26,7 +26,10 @@ check: build
 	$(PNPM) exec oxlint src
 	$(PNPM) exec node registry/scripts/build-registry.mjs --check
 
-test: build
+test-consumers: build
+	$(PNPM) exec node test/consumers/check.mjs
+
+test: test-consumers
 	$(VITEST)
 	VITE_STORYBOOK_THEME=dark $(VITEST)
 

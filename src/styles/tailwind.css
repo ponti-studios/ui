@@ -1,0 +1,11 @@
+/*
+ * The entry for apps that run Tailwind v4:
+ *
+ *   @import "tailwindcss";
+ *   @import "@ponti-studios/ui";
+ *
+ * You get our tokens and theme, and your Tailwind build generates the component
+ * classes along with yours. No Tailwind? Import "@ponti-studios/ui/styles.css".
+ */
+@import "./index.css";
+@source "../../dist/**/*.js";

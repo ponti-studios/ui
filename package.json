@@ -13,7 +13,9 @@
   },
   "files": [
     "dist",
-    "src/styles/animations.css",
+    "src/styles/*.css",
+    "!src/styles/package.css",
+    "src/styles/tokens/generated/*.css",
     "scripts/create-project.mjs",
     "templates/web-vite",
     "THIRD_PARTY_NOTICES.md",
@@ -26,11 +28,12 @@
   "sideEffects": [
     "./dist/index.js",
     "./dist/styles.css",
-    "./src/styles/animations.css"
+    "./src/styles/**/*.css"
   ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
+      "style": "./src/styles/tailwind.css",
       "import": "./dist/index.js"
     },
     "./primitives": {
@@ -155,13 +158,17 @@
   "peerDependencies": {
     "react": "^18.2.0 || ^19.0.0",
     "react-dom": "^18.2.0 || ^19.0.0",
-    "react-native": ">=0.80"
+    "react-native": ">=0.80",
+    "tailwindcss": ">=4"
   },
   "peerDependenciesMeta": {
     "react-dom": {
       "optional": true
     },
     "react-native": {
+      "optional": true
+    },
+    "tailwindcss": {
       "optional": true
     }
   },
